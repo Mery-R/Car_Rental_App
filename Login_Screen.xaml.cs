@@ -26,6 +26,14 @@ namespace Car_Rental
             InitializeComponent();
         }
 
+        private void Login_Screen_Mouse_Down(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DragMove();
+            }
+        }
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -42,6 +50,16 @@ namespace Car_Rental
             adminMenu.Show();
             this.Close();
 
+        }
+
+        private void Minimize_Button_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void Close_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown(); 
         }
     }
 }

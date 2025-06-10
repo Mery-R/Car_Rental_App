@@ -8,16 +8,16 @@
         Title="Admin_Menu" Height="400" Width="500">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Views/4.jpg"/>
+            <ImageBrush ImageSource="/Images/4.jpg"/>
         </Grid.Background>
         <Label Content="Admin Menu" Background="{x:Null}" HorizontalAlignment="Center" FontSize="48" FontWeight="Bold" VerticalAlignment="Top" Foreground="White"/>
         <Grid HorizontalAlignment="Center" Height="265" Margin="0,99,0,0" VerticalAlignment="Top" Width="140">
-            <Button Content="Show cars" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click" FontSize="20" Width="130" Height="30" Background="{x:Null}" Foreground="White" BorderBrush="White" RenderTransformOrigin="0.496,-0.668" Margin="0,85,0,0"/>
-            <Button Content="Pick up a car" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click" FontSize="20" Height="30" Background="{x:Null}" Foreground="White" BorderBrush="White" Margin="0,45,0,0" Width="130"/>
-            <Button Content="Manage fleet" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click" FontSize="20" Width="130" Height="30" Background="{x:Null}" Foreground="White" BorderBrush="White" Margin="0,125,0,0"/>
-            <Button Content="Log out" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click" FontSize="20" Width="100" Height="30" Background="{x:Null}" Foreground="White" BorderBrush="White" Margin="13,225,0,0"/>
-            <Button Content="Rent a car" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click" FontSize="20" Width="130" Height="30" Background="{x:Null}" Foreground="White" BorderBrush="White" Margin="0,5,0,0"/>
-            <Button Content="Raport" VerticalAlignment="Top" Click="Button_Click" FontSize="20" Width="130" Height="30" Background="{x:Null}" Foreground="White" BorderBrush="White" Margin="0,165,0,0"/>
+            <Button Content="Show cars" HorizontalAlignment="Center" VerticalAlignment="Top" Click="ShowCarsButton_Click" FontSize="20" Width="130" Height="30" Background="{x:Null}" Foreground="White" BorderBrush="White" RenderTransformOrigin="0.496,-0.668" Margin="0,85,0,0"/>
+            <Button Content="Pick up a car" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click2" FontSize="20" Height="30" Background="{x:Null}" Foreground="White" BorderBrush="White" Margin="0,45,0,0" Width="130"/>
+            <Button Content="Manage fleet" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click3" FontSize="20" Width="130" Height="30" Background="{x:Null}" Foreground="White" BorderBrush="White" Margin="0,125,0,0"/>
+            <Button Content="Log out" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click4" FontSize="20" Width="100" Height="30" Background="{x:Null}" Foreground="White" BorderBrush="White" Margin="13,225,0,0"/>
+            <Button Content="Rent a car" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Clic5" FontSize="20" Width="130" Height="30" Background="{x:Null}" Foreground="White" BorderBrush="White" Margin="0,5,0,0"/>
+            <Button Content="Raport" VerticalAlignment="Top" Click="Button_Clic6" FontSize="20" Width="130" Height="30" Background="{x:Null}" Foreground="White" BorderBrush="White" Margin="0,165,0,0"/>
 
         </Grid>
 

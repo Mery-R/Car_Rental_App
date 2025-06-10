@@ -5,20 +5,108 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Car_Rental"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Title="MainWindow" Height="450" Width="800" MouseDown="Login_Screen_Mouse_Down">
+
     <Grid MinWidth="200" MinHeight="300">
-        <Grid.Background>
-            <ImageBrush ImageSource="/1.jpg"/>
-        </Grid.Background>
+        <Border CornerRadius="10" BorderThickness="5">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="Red" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Border.BorderBrush>
+                <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                    <GradientStop Color="Violet" Offset="0.5"/>
+                    <GradientStop Color="Blue" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+        </Border>
+
+        <Border CornerRadius="10" BorderThickness="5" Opacity="0.5">
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/1.jpg"/>
+            </Border.Background>
+        </Border>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="5"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Log In" FontSize="15" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="White"/>
+
+                <Button x:Name="Button_Minimize" Grid.Column="1" Content="-" Click="Minimize_Button_Click" FontSize="16" Foreground="Black" BorderThickness="0" Margin="0,5,0,0">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="White"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Gray"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="18" Height="18" Background="{TemplateBinding Background}" CornerRadius="9">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Cursor="Arrow" Margin="0,-5,0,0"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button x:Name="Button_Close" Grid.Column="2" Click="Close_Button_Click" FontSize="16" Foreground="Black" Margin="0,5,5,0" Content="x" BorderThickness="1,1,1,1" Cursor="Arrow" RenderTransformOrigin="0.5,0">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="White"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Gray"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="18" Height="18" Background="{TemplateBinding Background}" CornerRadius="9">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Cursor="Arrow" Margin="0,-5,0,0"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+            </Grid>
+
+            <StackPanel Width="250" Grid.Row="2" Orientation="Vertical" Margin="0,35,0,0">
+                <Image Source="/Images/3.png" Width="100" Height="100"/>
+
+            </StackPanel>
+            
+        </Grid>
+
         <Grid HorizontalAlignment="Center" Height="210" Width="180" VerticalAlignment="Center">
             <Button x:Name="Login" Content="Login" HorizontalAlignment="Center" Margin="0,168,0,0" VerticalAlignment="Top" Height="33" Width="160" Click="Login_Button_Click" FontSize="20" FontWeight="Bold" Foreground="White" Background="{x:Null}" BorderBrush="White"/>
             <CheckBox Content="Show Password" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Foreground="White"/>
             <TextBox x:Name="Username" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" TextChanged="TextBox_TextChanged" Height="25" Margin="0,78,0,0"/>
             <PasswordBox HorizontalAlignment="Center" Margin="0,111,0,0" VerticalAlignment="Top" Width="160" Height="25"/>
-            <Label Content="Log In" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" Background="{x:Null}" FontSize="36" FontWeight="Bold" Foreground="White"/>
 
         </Grid>
-        <Border CornerRadius="50" BorderBrush="Black" BorderThickness="1"/>
 
     </Grid>
 </Window>

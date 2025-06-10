@@ -19,3 +19,7 @@ C:\Users\Mery\Desktop\Car_Rental\obj\Debug\Views\User_Menu.g.cs
 C:\Users\Mery\Desktop\Car_Rental\obj\Debug\Views\Admin_Menu.baml
 C:\Users\Mery\Desktop\Car_Rental\obj\Debug\Views\User_Menu.baml
 C:\Users\Mery\Desktop\Car_Rental\obj\Debug\Car_Rental.Form1.resources
+C:\Users\Mery\Desktop\Car_Rental\obj\Debug\Window1.g.cs
+C:\Users\Mery\Desktop\Car_Rental\obj\Debug\Window1.baml
+C:\Users\Mery\Desktop\Car_Rental\obj\Debug\ShowCars.baml
+C:\Users\Mery\Desktop\Car_Rental\obj\Debug\ShowCars.g.cs

@@ -24,9 +24,37 @@ namespace Car_Rental.Views
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ShowCarsButton_Click(object sender, RoutedEventArgs e)
         {
+            this.Hide();
+            ShowCars showCarsWindow = new ShowCars();
+            showCarsWindow.Closed += (s, args) => this.Show();
+            showCarsWindow.Show();
+        }
 
+        private void Button_Click2(object sender, RoutedEventArgs e)
+        {
+            // Implementacja logiki dla przycisku "Pick up a car"
+        }
+
+        private void Button_Click3(object sender, RoutedEventArgs e)
+        {
+            // Implementacja logiki dla przycisku "Manage fleet"
+        }
+
+        private void Button_Click4(object sender, RoutedEventArgs e)
+        {
+            // Implementacja logiki dla przycisku "Log out"
+        }
+
+        private void Button_Clic5(object sender, RoutedEventArgs e)
+        {
+            // Implementacja logiki dla przycisku "Rent a car"
+        }
+
+        private void Button_Clic6(object sender, RoutedEventArgs e)
+        {
+            // Implementacja logiki dla przycisku "Raport"
         }
     }
 }
