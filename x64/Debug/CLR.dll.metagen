@@ -1,0 +1,44 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly CLR, Version=1.0.*, Culture=Język niezmienny (kraj niezmienny): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Class Car: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(Int32, System.String, System.String, Int32, System.String, Boolean): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Boolean Availability 'get set' : 
+    System.String PlateNumber 'get set' : 
+    Int32 ProductionYear 'get set' : 
+    System.String Model 'get set' : 
+    System.String Brand 'get set' : 
+    Int32 Id   'get set' : 
+  Methods:
+    get_Id(): PrivateScope, Public, HideBySig, SpecialName
+    set_Id(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_Brand(): PrivateScope, Public, HideBySig, SpecialName
+    set_Brand(String): PrivateScope, Public, HideBySig, SpecialName
+    get_Model(): PrivateScope, Public, HideBySig, SpecialName
+    set_Model(String): PrivateScope, Public, HideBySig, SpecialName
+    get_ProductionYear(): PrivateScope, Public, HideBySig, SpecialName
+    set_ProductionYear(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_PlateNumber(): PrivateScope, Public, HideBySig, SpecialName
+    set_PlateNumber(String): PrivateScope, Public, HideBySig, SpecialName
+    get_Availability(): PrivateScope, Public, HideBySig, SpecialName
+    set_Availability(Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+Class CarManager: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.Collections.Generic.List`1[Car] Cars 'get ' : 
+  Methods:
+    AddCar(Car): PrivateScope, Public, HideBySig
+    RemoveCar(Int32): PrivateScope, Public, HideBySig
+    EditCar(Int32, String, String, Int32, String, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig
+    get_Cars(): PrivateScope, Public, HideBySig, SpecialName
+Class CLR.Class1: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName

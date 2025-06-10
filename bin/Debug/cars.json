@@ -1,0 +1,114 @@
+[
+  {
+    "Id": 1,
+    "Brand": "sdaf",
+    "Model": "wdsfs",
+    "ProductionYear": 2000,
+    "PlateNumber": "sdfg",
+    "Availability": true
+  },
+  {
+    "Id": 2,
+    "Brand": "wdtg",
+    "Model": "f",
+    "ProductionYear": 2000,
+    "PlateNumber": "dsfgdf",
+    "Availability": true
+  },
+  {
+    "Id": 3,
+    "Brand": "dfghdf",
+    "Model": "hd",
+    "ProductionYear": 2000,
+    "PlateNumber": "df",
+    "Availability": false
+  },
+  {
+    "Id": 4,
+    "Brand": "wdtg",
+    "Model": "f",
+    "ProductionYear": 2000,
+    "PlateNumber": "dsfgdf",
+    "Availability": true
+  },
+  {
+    "Id": 5,
+    "Brand": "wdtg",
+    "Model": "f",
+    "ProductionYear": 2000,
+    "PlateNumber": "dsfgdf",
+    "Availability": true
+  },
+  {
+    "Id": 6,
+    "Brand": "wdtg",
+    "Model": "f",
+    "ProductionYear": 2000,
+    "PlateNumber": "dsfgdf",
+    "Availability": true
+  },
+  {
+    "Id": 7,
+    "Brand": "wdtg",
+    "Model": "f",
+    "ProductionYear": 2000,
+    "PlateNumber": "dsfgdf",
+    "Availability": true
+  },
+  {
+    "Id": 9,
+    "Brand": "wdtg",
+    "Model": "f",
+    "ProductionYear": 2000,
+    "PlateNumber": "dsfgdf",
+    "Availability": true
+  },
+  {
+    "Id": 11,
+    "Brand": "wdtg",
+    "Model": "f",
+    "ProductionYear": 2000,
+    "PlateNumber": "dsfgdf",
+    "Availability": true
+  },
+  {
+    "Id": 12,
+    "Brand": "dsfdf",
+    "Model": "sdafsd",
+    "ProductionYear": 2000,
+    "PlateNumber": "werg",
+    "Availability": true
+  },
+  {
+    "Id": 13,
+    "Brand": "asdfs",
+    "Model": "dfg",
+    "ProductionYear": 2000,
+    "PlateNumber": "dsf",
+    "Availability": true
+  },
+  {
+    "Id": 14,
+    "Brand": "asdf",
+    "Model": "asdf",
+    "ProductionYear": 2000,
+    "PlateNumber": "dasf",
+    "Availability": true
+  },
+  {
+    "Id": 15,
+    "Brand": "asdf",
+    "Model": "af",
+    "ProductionYear": 2000,
+    "PlateNumber": "dasf",
+    "Availability": true
+  },
+  {
+    "Id": 16,
+    "Brand": "dsfg",
+    "Model": "sdg",
+    "ProductionYear": 2000,
+    "PlateNumber": "sdagf",
+    "Availability": true
+  }
+]

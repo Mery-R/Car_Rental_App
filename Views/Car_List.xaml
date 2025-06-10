@@ -1,0 +1,25 @@
+﻿<Window x:Class="Car_Rental.Views.Car_List"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Lista samochodów" Height="450" Width="800">
+    <Grid Margin="10">
+        <!-- DataGrid do wyświetlania samochodów -->
+        <DataGrid x:Name="CarDataGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="300">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Brand" Binding="{Binding Brand}" />
+                <DataGridTextColumn Header="Model" Binding="{Binding Model}" />
+                <DataGridTextColumn Header="Production Year" Binding="{Binding ProductionYear}" />
+                <DataGridTextColumn Header="Plate Number" Binding="{Binding PlateNumber}" />
+                <DataGridCheckBoxColumn Header="Available" Binding="{Binding Availability}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Przyciski do operacji na samochodach -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10">
+            <Button Content="Dodaj samochód" Width="120" Click="AddCarButton_Click" Margin="5"/>
+            <Button Content="Usuń samochód" Width="120" Click="RemoveCarButton_Click" Margin="5"/>
+            <Button Content="Edytuj samochód" Width="120" Click="EditCarButton_Click" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Window>

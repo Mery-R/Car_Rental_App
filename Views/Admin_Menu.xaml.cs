@@ -27,9 +27,8 @@ namespace Car_Rental.Views
         private void ShowCarsButton_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
-            ShowCars showCarsWindow = new ShowCars();
-            showCarsWindow.Closed += (s, args) => this.Show();
-            showCarsWindow.Show();
+            Car_List carListWindow = new Car_List(); // Zmiana z CarListWindow na Car_List
+            carListWindow.Show();
         }
 
         private void Button_Click2(object sender, RoutedEventArgs e)

@@ -9,12 +9,12 @@ Car_Rental
 none
 false
 DEBUG;TRACE
-C:\Users\Mery\Desktop\Car_Rental\App.xaml
-5-880513201
+C:\Users\Mery\Desktop\Car_Rental\App\App.xaml
+6568231010
 
-12188269960
-15765232419
-Login_Screen.xaml;ShowCars.xaml;Views\Admin_Menu.xaml;Views\User_Menu.xaml;Window1.xaml;
+16-1859871809
+26-509778560
+Views\Edit_Car_Window.xaml;Views\Login_Screen.xaml;Views\Car_List.xaml;Views\Admin_Menu.xaml;Views\User_Menu.xaml;Views\Add_Car_Window.xaml;
 
 False
 
