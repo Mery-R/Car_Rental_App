@@ -45,3 +45,17 @@ C:\Users\Mery\Desktop\Car_Rental\bin\Debug\System.Text.Json.xml
 C:\Users\Mery\Desktop\Car_Rental\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\Mery\Desktop\Car_Rental\bin\Debug\System.ValueTuple.xml
 C:\Users\Mery\Desktop\Car_Rental\obj\Debug\Car_Rental.csproj.Up2Date
+C:\Users\Mery\Desktop\Car_Rental\obj\Debug\Car_Rental_Content.g.cs
+C:\Users\Mery\Desktop\Car_Rental\obj\Debug\CustomControls\BindablePasswordBox.g.cs
+C:\Users\Mery\Desktop\Car_Rental\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Mery\Desktop\Car_Rental\obj\Debug\CustomControls\BindablePasswordBox.baml
+C:\Users\Mery\Desktop\Car_Rental\bin\Debug\ControlzEx.dll
+C:\Users\Mery\Desktop\Car_Rental\bin\Debug\MahApps.Metro.dll
+C:\Users\Mery\Desktop\Car_Rental\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\Mery\Desktop\Car_Rental\bin\Debug\ControlzEx.pdb
+C:\Users\Mery\Desktop\Car_Rental\bin\Debug\ControlzEx.xml
+C:\Users\Mery\Desktop\Car_Rental\bin\Debug\MahApps.Metro.pdb
+C:\Users\Mery\Desktop\Car_Rental\bin\Debug\MahApps.Metro.xml
+C:\Users\Mery\Desktop\Car_Rental\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\Mery\Desktop\Car_Rental\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\Users\Mery\Desktop\Car_Rental\bin\Debug\de\MahApps.Metro.resources.dll

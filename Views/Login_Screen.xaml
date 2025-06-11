@@ -3,12 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Car_Rental"
+        xmlns:local="clr-namespace:Car_Rental" 
+        xmlns:customcontrols="clr-namespace:Car_Rental.CustomControls"
+        xmlns:viewModel="clr-namespace:Car_Rental.ViewModels"
         mc:Ignorable="d"
         Background="Transparent"
         AllowsTransparency="True"
         WindowStyle="None"
         Title="MainWindow" Height="450" Width="800" MouseDown="Login_Screen_Mouse_Down">
+
+    <Window.DataContext>
+        <viewModel:LoginViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
+    
+    <Window.Visibility>
+        <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibilityConverter}"/>
+    </Window.Visibility>
 
     <Grid MinWidth="200" MinHeight="300">
         <Border CornerRadius="10" BorderThickness="5">
@@ -93,15 +107,24 @@
 
             </Grid>
 
-            <StackPanel Width="250" Grid.Row="2" Orientation="Vertical" Margin="0,0,0,0">
-                <Image Source="/Images/3.png" Width="200" Height="200"/>
-                <TextBlock Text="Welcome to Car Rental" Margin="0,-60,0,0" FontSize="20" FontWeight="Bold" Foreground="LightGray" Height="30" HorizontalAlignment="Center"/>
+            <StackPanel Width="250" Grid.Row="2" Orientation="Vertical" Margin="0,-60,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="/Images/3.png" Width="150" Height="150"/>
+                <TextBlock Text="Welcome to Car Rental" Margin="0,-20,0,0" FontSize="20" FontWeight="Bold" Foreground="LightGray" Height="30" HorizontalAlignment="Center"/>
                 <TextBlock Text="Username" FontSize="14" Foreground="LightGray"/>
-                <TextBox x:Name="Username" FontSize="16" BorderThickness="0,0,0,1" BorderBrush="Gray" Foreground="White" Background="Transparent" HorizontalAlignment="Center" TextWrapping="Wrap" Width="250" TextChanged="TextBox_TextChanged" Height="30" Margin="0,0,0,0"/>
-                <TextBlock Text="Password" FontSize="14" Foreground="LightGray"/>
-                <PasswordBox FontSize="16" BorderThickness="0,0,0,1" BorderBrush="Gray" Foreground="White" Background="Transparent" HorizontalAlignment="Center" Margin="0,0,0,0"  Width="250" Height="30"/>
-                <CheckBox Content="Show Password" Foreground="LightGray" HorizontalAlignment="Left" Margin="0,10,0,0"  Checked="CheckBox_Checked"/>
-                <Button x:Name="Login" Content="Login" HorizontalAlignment="Center" Margin="0,10,0,0" Height="33" Width="160" Click="Login_Button_Click" FontSize="20" FontWeight="Bold" Foreground="LightGray" Background="{x:Null}" BorderBrush="White"/>
+                
+                <TextBox x:Name="Username" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Padding="25,0,0,0" FontSize="14" BorderThickness="0,0,0,1" BorderBrush="Gray" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap" Width="250" Height="25" Margin="0,5,0,0">
+                    <TextBox.Background>
+                        <ImageBrush ImageSource="/Images/user_icon.png" Stretch="None" AlignmentX="Left"/>
+                    </TextBox.Background>
+                </TextBox>
+
+                <TextBlock Text="Password" Margin="0,5,0,0" FontSize="14" Foreground="LightGray"/>
+
+                <customcontrols:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="0,5,0,0"/>
+
+                <TextBlock Text="{Binding ErrorMessage}" HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="12" Foreground="Red" TextWrapping="Wrap"/>
+
+                <Button x:Name="Login" Command="{Binding LoginCommand}" Content="LOG IN" HorizontalAlignment="Center" Margin="0,10,0,0" Height="35" Width="150" FontSize="20" FontWeight="Bold" Foreground="LightGray" Background="{x:Null}" BorderBrush="White" IsDefault="True"/>
             </StackPanel>
 
         </Grid> 

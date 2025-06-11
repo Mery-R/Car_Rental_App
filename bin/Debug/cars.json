@@ -56,14 +56,6 @@
     "Availability": true
   },
   {
-    "Id": 9,
-    "Brand": "wdtg",
-    "Model": "f",
-    "ProductionYear": 2000,
-    "PlateNumber": "dsfgdf",
-    "Availability": true
-  },
-  {
     "Id": 11,
     "Brand": "wdtg",
     "Model": "f",

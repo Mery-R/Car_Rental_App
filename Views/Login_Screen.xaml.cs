@@ -34,24 +34,6 @@ namespace Car_Rental
             }
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Login_Button_Click(object sender, RoutedEventArgs e)
-        {
-            var adminMenu = new Admin_Menu();
-            adminMenu.Show();
-            this.Close();
-
-        }
-
         private void Minimize_Button_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
