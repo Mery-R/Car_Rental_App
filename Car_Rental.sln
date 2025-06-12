@@ -5,8 +5,6 @@ VisualStudioVersion = 17.14.36202.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Car_Rental", "Car_Rental.csproj", "{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}"
 EndProject
-Project("{42EA0DBD-9CF1-443E-919E-BE9C484E4577}") = "LoginDataBase", "LoginDataBase\LoginDataBase.sqlproj", "{1E4E93BB-500C-4126-996C-6476EF7FF24E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

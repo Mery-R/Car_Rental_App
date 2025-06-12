@@ -6,12 +6,12 @@ namespace Car_Rental.Views
 {
     public partial class AddCarWindow : Window
     {
-        public Car AddedCar { get; private set; }
+        public CarModel AddedCar { get; private set; }
 
         public AddCarWindow(int newId)
         {
             InitializeComponent();
-            AddedCar = new Car(newId, "", "", 2000, "", true);
+            AddedCar = new CarModel(newId, "", "", 2000, "", true);
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)

@@ -88,14 +88,6 @@
     "Availability": true
   },
   {
-    "Id": 15,
-    "Brand": "asdf",
-    "Model": "af",
-    "ProductionYear": 2000,
-    "PlateNumber": "dasf",
-    "Availability": true
-  },
-  {
     "Id": 16,
     "Brand": "dsfg",
     "Model": "sdg",

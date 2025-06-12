@@ -11,20 +11,20 @@ namespace Car_Rental.Services
     {
         private static string FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "cars.json"); // Ścieżka do pliku JSON w folderze aplikacji
 
-        public static void SaveCars(List<Car> cars)
+        public static void SaveCars(List<CarModel> cars)
         {
             // Zapisz Cars do pliku
             var json = JsonSerializer.Serialize(cars, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(FilePath, json);
         }
 
-        public static (List<Car> Cars, int NextId) LoadCars()
+        public static (List<CarModel> Cars, int NextId) LoadCars()
         {
             if (!File.Exists(FilePath))
-                return (new List<Car>(), 1);  // Jeśli plik nie istnieje, rozpocznij od 1
+                return (new List<CarModel>(), 1);  // Jeśli plik nie istnieje, rozpocznij od 1
 
             var json = File.ReadAllText(FilePath);
-            var cars = JsonSerializer.Deserialize<List<Car>>(json) ?? new List<Car>();
+            var cars = JsonSerializer.Deserialize<List<CarModel>>(json) ?? new List<CarModel>();
 
             // Wydobycie nextId z ostatniego samochodu
             int nextId = cars.Count > 0 ? cars.Max(c => c.Id) + 1 : 1;

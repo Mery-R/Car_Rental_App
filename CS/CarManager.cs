@@ -7,16 +7,16 @@ namespace Car_Rental.Services
 {
     public class CarManager
     {
-        private List<Car> cars = new List<Car>(); // Lista przechowująca samochody
+        private List<CarModel> cars = new List<CarModel>(); // Lista przechowująca samochody
 
-        public List<Car> Cars
+        public List<CarModel> Cars
         {
             get { return cars; }
             set { cars = value; }
         }
 
         // Metoda do dodawania samochodu
-        public void AddCar(Car car)
+        public void AddCar(CarModel car)
         {
             cars.Add(car);
         }
@@ -31,7 +31,7 @@ namespace Car_Rental.Services
             }
         }
 
-        public void UpdateCar(Car updatedCar)
+        public void UpdateCar(CarModel updatedCar)
         {
             // Znajdź istniejący samochód w kolekcji
             var existingCar = cars.FirstOrDefault(c => c.Id == updatedCar.Id);

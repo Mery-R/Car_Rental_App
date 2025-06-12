@@ -23,5 +23,20 @@ namespace Car_Rental.Views
         {
             InitializeComponent();
         }
+
+        private void ShowVehicles_Click(object sender, RoutedEventArgs e)
+        {
+           //
+        }
+
+        private void History_Click(object sender, RoutedEventArgs e)
+        {
+            //
+        }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            //
+        }
     }
 }

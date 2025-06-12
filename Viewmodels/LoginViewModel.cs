@@ -2,13 +2,8 @@
 using Car_Rental.Repositories;
 using Car_Rental.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Security;
-using System.Security.Principal;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -16,7 +11,7 @@ namespace Car_Rental.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        //Fields
+        // Fields
         private string _username;
         private SecureString _password;
         private string _errorMessage;
@@ -25,14 +20,10 @@ namespace Car_Rental.ViewModels
 
         private IUserRepository userRepository;
 
-        //Properties
+        // Properties
         public string Username
         {
-            get
-            {
-                return _username;
-            }
-
+            get { return _username; }
             set
             {
                 _username = value;
@@ -42,11 +33,7 @@ namespace Car_Rental.ViewModels
 
         public SecureString Password
         {
-            get
-            {
-                return _password;
-            }
-
+            get { return _password; }
             set
             {
                 _password = value;
@@ -56,11 +43,7 @@ namespace Car_Rental.ViewModels
 
         public string ErrorMessage
         {
-            get
-            {
-                return _errorMessage;
-            }
-
+            get { return _errorMessage; }
             set
             {
                 _errorMessage = value;
@@ -70,11 +53,7 @@ namespace Car_Rental.ViewModels
 
         public bool IsViewVisible
         {
-            get
-            {
-                return _isViewVisible;
-            }
-
+            get { return _isViewVisible; }
             set
             {
                 _isViewVisible = value;
@@ -92,13 +71,13 @@ namespace Car_Rental.ViewModels
             }
         }
 
-        //-> Commands
+        // Commands
         public ICommand LoginCommand { get; }
         public ICommand RecoverPasswordCommand { get; }
         public ICommand ShowPasswordCommand { get; }
         public ICommand RememberPasswordCommand { get; }
 
-        //Constructor
+        // Constructor
         public LoginViewModel()
         {
             userRepository = new UserRepository();
@@ -106,25 +85,31 @@ namespace Car_Rental.ViewModels
             RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverPassCommand("", ""));
         }
 
+        // Command logic to determine if login is valid
         private bool CanExecuteLoginCommand(object obj)
         {
-            bool validData;
-            if (string.IsNullOrWhiteSpace(Username) || Username.Length < 3 ||
-                Password == null || Password.Length < 3)
-                validData = false;
-            else
-                validData = true;
+            bool validData = !string.IsNullOrWhiteSpace(Username) && Username.Length >= 3 &&
+                             Password != null && Password.Length >= 3;
             return validData;
         }
 
+        // Logic to execute the login command
         private void ExecuteLoginCommand(object obj)
         {
-            var isValidUser = userRepository.AuthenticateUser(new NetworkCredential(Username, Password));
+            // Konwersja SecureString do string
+            var password = Password;
+            Console.WriteLine($"Attempting login with username: {Username} and password: {password}"); // Dodajemy logowanie
+
+            // Autentykacja użytkownika
+            var isValidUser = userRepository.AuthenticateUser(new NetworkCredential(Username, password));
+            Console.WriteLine($"Is valid user: {isValidUser}"); // Logowanie wyniku autentykacji
+
             if (isValidUser)
             {
-                // Pobierz uprawnienia użytkownika (przykład)
-                IsAccess = userRepository.IsUserAdmin(Username); // Dodaj taką metodę w repozytorium
+                // Po zalogowaniu - sprawdzenie uprawnień
+                IsAccess = userRepository.IsAccess(Username);
 
+                // Otwórz odpowiednie menu
                 if (IsAccess)
                 {
                     var adminMenu = new Admin_Menu();
@@ -136,14 +121,17 @@ namespace Car_Rental.ViewModels
                     userMenu.Show();
                 }
 
+                // Ukryj widok logowania
                 IsViewVisible = false;
             }
             else
             {
+                // Wyświetlenie błędu logowania
                 ErrorMessage = "* Invalid username or password";
             }
         }
 
+        // Logic for password recovery
         private void ExecuteRecoverPassCommand(string username, string email)
         {
             throw new NotImplementedException();

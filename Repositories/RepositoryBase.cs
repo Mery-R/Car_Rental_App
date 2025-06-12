@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
-
+﻿using System.Data;
+using System.Data.SQLite;
 namespace Car_Rental.Repositories
+
 {
-    public abstract class RepositoryBase
+    public class RepositoryBase
     {
-        private readonly string _connectionString;
-        public RepositoryBase()
+        public SQLiteConnection GetConnection()
         {
-            _connectionString = "Server=(local); Database=Users; Integrated Security=true";
+            return new SQLiteConnection("Data Source=Data/users.db;Version=3;");
         }
-        protected SqlConnection GetConnection()
+
+        public SQLiteConnection TestConnection()
         {
-            return new SqlConnection(_connectionString);
+            return new SQLiteConnection("Data Source=Data/users.db;Version=3;");
         }
+
     }
 }

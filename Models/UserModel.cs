@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Car_Rental.Models
+﻿namespace Car_Rental.Models
 {
     public class UserModel
     {
-        public string Id { get; set; }
+        public string Id { get; set; }       // Możesz rozważyć typ GUID, jeśli Id jest unikalnym identyfikatorem
         public string Username { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string Access { get; set; }
+        public bool Access { get; set; }      // Zmiana z string na bool
     }
 }

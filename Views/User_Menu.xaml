@@ -3,10 +3,41 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Car_Rental.Views"
+        xmlns:local="clr-namespace:Car_Rental" 
+        xmlns:customcontrols="clr-namespace:Car_Rental.CustomControls"
+        xmlns:viewModel="clr-namespace:Car_Rental.ViewModels"
         mc:Ignorable="d"
-        Title="User_Menu" Height="450" Width="800">
-    <Grid>
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Title="User Menu" Height="350" Width="525">
+
+    <Grid MinWidth="200" MinHeight="300">
+        <Border CornerRadius="10" BorderThickness="5">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="BlueViolet" Offset="1.5"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Border.BorderBrush>
+                <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                    <GradientStop Color="Violet" Offset="0.2"/>
+                    <GradientStop Color="Blue" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+        </Border>
+
+        <Border CornerRadius="10" BorderThickness="5" Opacity="0.5">
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/flinstones.png"/>
+            </Border.Background>
+        </Border>
+        <Label Content="User Menu" Background="{x:Null}" HorizontalAlignment="Center" FontSize="48" Margin="0,20,0,0" FontWeight="Bold" VerticalAlignment="Top" Foreground="White"/>
+        <Button Content="Show Vehicles" HorizontalAlignment="Center" Height="50" Margin="0,150,0,0" VerticalAlignment="Top" Width="160" Opacity="0.8" FontSize="20" Background="{x:Null}" Foreground="White" BorderBrush="White" Click="ShowVehicles_Click"/>
+        <Button Content="History" HorizontalAlignment="Center" Height="50" Margin="0,215,0,0" VerticalAlignment="Top" Width="160" Opacity="0.8" FontSize="20" Background="{x:Null}" Foreground="White" BorderBrush="White" Click="History_Click"/>
+        <Button Content="Log Out" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="15" Height="30"  Background="{x:Null}" Foreground="White" BorderBrush="White" Margin="0,290,0,0" Width="130" Opacity="0.8" Click="LogOut_Click"/>
         
     </Grid>
 </Window>

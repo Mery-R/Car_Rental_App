@@ -62,7 +62,7 @@ namespace Car_Rental.CustomControls
                 txtPassword.Password = passwordTxtBox.Text;
                 passwordTxtBox.Visibility = Visibility.Collapsed;
                 txtPassword.Visibility = Visibility.Visible;
-                txtPassword.Password = passwordTxtBox.Text;
+                passwordTxtBox.Text = txtPassword.Password;
             }
         }
 

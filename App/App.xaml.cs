@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Car_Rental.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,11 @@ namespace Car_Rental
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            // Inicjalizacja bazy danych przy starcie aplikacji
+            var userRepository = new UserRepository();
+            userRepository.InitializeDatabase(); // Tworzenie bazy i tabeli
+        }
     }
 }

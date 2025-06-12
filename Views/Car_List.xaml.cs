@@ -50,7 +50,7 @@ namespace Car_Rental.Views
         // Obsługuje usuwanie samochodu
         private void RemoveCarButton_Click(object sender, RoutedEventArgs e)
         {
-            if (CarDataGrid.SelectedItem is Car selectedCar)
+            if (CarDataGrid.SelectedItem is CarModel selectedCar)
             {
                 carManager.RemoveCar(selectedCar.Id);
 
@@ -70,7 +70,7 @@ namespace Car_Rental.Views
         // Obsługuje edytowanie danych samochodu
         private void EditCarButton_Click(object sender, RoutedEventArgs e)
         {
-            if (CarDataGrid.SelectedItem is Car selectedCar)
+            if (CarDataGrid.SelectedItem is CarModel selectedCar)
             {
                 var editWindow = new EditCarWindow(selectedCar);
                 if (editWindow.ShowDialog() == true)

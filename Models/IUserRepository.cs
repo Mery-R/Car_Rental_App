@@ -13,7 +13,7 @@ namespace Car_Rental.Models
         void Add(UserModel userModel);
         void Edit(UserModel userModel);
         void Remove(int id);
-        bool IsUserAdmin(string username);
+        bool IsAccess(string username);
         UserModel GetById(int id);
         UserModel GetByUsername(string username);
         IEnumerable<UserModel> GetByAll();

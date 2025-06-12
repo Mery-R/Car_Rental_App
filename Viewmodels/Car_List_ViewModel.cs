@@ -9,12 +9,12 @@ namespace Car_Rental.ViewModels
 {
     public class Car_List_ViewModel
     {
-        public ObservableCollection<Car> Cars { get; set; }
+        public ObservableCollection<CarModel> Cars { get; set; }
 
         public Car_List_ViewModel()
         {
             var (loadedCars, _) = CarDataService.LoadCars(); // Rozpakowanie krotki
-            Cars = new ObservableCollection<Car>(loadedCars);
+            Cars = new ObservableCollection<CarModel>(loadedCars);
         }
 
         public void AddCar()
@@ -42,7 +42,7 @@ namespace Car_Rental.ViewModels
             }
         }
 
-        public void UpdateCar(Car updatedCar)
+        public void UpdateCar(CarModel updatedCar)
         {
             var existingCar = Cars.FirstOrDefault(c => c.Id == updatedCar.Id);
             if (existingCar != null)

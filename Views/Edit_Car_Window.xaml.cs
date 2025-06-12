@@ -6,9 +6,9 @@ namespace Car_Rental.Views
 {
     public partial class EditCarWindow : Window
     {
-        public Car EditedCar { get; private set; }
+        public CarModel EditedCar { get; private set; }
 
-        public EditCarWindow(Car car)
+        public EditCarWindow(CarModel car)
         {
             InitializeComponent();
 
@@ -19,7 +19,7 @@ namespace Car_Rental.Views
             PlateTextBox.Text = car.PlateNumber;
             AvailabilityCheckBox.IsChecked = car.Availability;
 
-            EditedCar = new Car(car.Id, car.Brand, car.Model, car.ProductionYear, car.PlateNumber, car.Availability);
+            EditedCar = new CarModel(car.Id, car.Brand, car.Model, car.ProductionYear, car.PlateNumber, car.Availability);
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
