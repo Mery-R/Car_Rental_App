@@ -34,15 +34,7 @@
   {
     "Id": 5,
     "Brand": "wdtg",
-    "Model": "f",
-    "ProductionYear": 2000,
-    "PlateNumber": "dsfgdf",
-    "Availability": true
-  },
-  {
-    "Id": 6,
-    "Brand": "wdtg",
-    "Model": "f",
+    "Model": "fasdasd",
     "ProductionYear": 2000,
     "PlateNumber": "dsfgdf",
     "Availability": true
@@ -56,27 +48,11 @@
     "Availability": true
   },
   {
-    "Id": 11,
-    "Brand": "wdtg",
-    "Model": "f",
-    "ProductionYear": 2000,
-    "PlateNumber": "dsfgdf",
-    "Availability": true
-  },
-  {
     "Id": 12,
     "Brand": "dsfdf",
-    "Model": "sdafsd",
+    "Model": "sad",
     "ProductionYear": 2000,
     "PlateNumber": "werg",
-    "Availability": true
-  },
-  {
-    "Id": 13,
-    "Brand": "asdfs",
-    "Model": "dfg",
-    "ProductionYear": 2000,
-    "PlateNumber": "dsf",
     "Availability": true
   },
   {
@@ -93,6 +69,14 @@
     "Model": "sdg",
     "ProductionYear": 2000,
     "PlateNumber": "sdagf",
+    "Availability": true
+  },
+  {
+    "Id": 17,
+    "Brand": "sdfgsd",
+    "Model": "gsdf",
+    "ProductionYear": 2000,
+    "PlateNumber": "sdag",
     "Availability": true
   }
 ]

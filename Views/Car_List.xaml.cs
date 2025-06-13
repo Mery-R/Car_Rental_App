@@ -5,10 +5,16 @@ using System.Windows;
 
 namespace Car_Rental.Views
 {
+    /// <summary>
+    /// Klasa Car_List odpowiada za logikę zarządzania listą samochodów.
+    /// </summary>
     public partial class Car_List : Window
     {
         private CarManager carManager;
 
+        /// <summary>
+        /// Konstruktor inicjalizujący okno oraz wczytujący samochody z pliku.
+        /// </summary>
         public Car_List()
         {
             InitializeComponent();
@@ -22,10 +28,12 @@ namespace Car_Rental.Views
             CarDataGrid.ItemsSource = carManager.Cars;
         }
 
-        // Obsługuje dodawanie samochodu
+        /// <summary>
+        /// Obsługuje dodawanie nowego samochodu do listy.
+        /// </summary>
         private void AddCarButton_Click(object sender, RoutedEventArgs e)
         {
-            var newCarId = GenerateNewCarId(); // Zmieniono sposób generowania ID
+            var newCarId = GenerateNewCarId();
             var addWindow = new AddCarWindow(newCarId);
             if (addWindow.ShowDialog() == true)
             {
@@ -41,13 +49,17 @@ namespace Car_Rental.Views
             }
         }
 
-        // Metoda pomocnicza do generowania nowego ID
+        /// <summary>
+        /// Generuje nowe unikalne ID dla samochodu.
+        /// </summary>
         private int GenerateNewCarId()
         {
             return carManager.Cars.Any() ? carManager.Cars.Max(c => c.Id) + 1 : 1;
         }
 
-        // Obsługuje usuwanie samochodu
+        /// <summary>
+        /// Obsługuje usuwanie wybranego samochodu z listy.
+        /// </summary>
         private void RemoveCarButton_Click(object sender, RoutedEventArgs e)
         {
             if (CarDataGrid.SelectedItem is CarModel selectedCar)
@@ -67,7 +79,9 @@ namespace Car_Rental.Views
             }
         }
 
-        // Obsługuje edytowanie danych samochodu
+        /// <summary>
+        /// Obsługuje edytowanie danych wybranego samochodu.
+        /// </summary>
         private void EditCarButton_Click(object sender, RoutedEventArgs e)
         {
             if (CarDataGrid.SelectedItem is CarModel selectedCar)

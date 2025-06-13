@@ -1,0 +1,45 @@
+﻿<Window x:Class="Car_Rental.Views.Show_Cars_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Car_Rental.Views"
+        mc:Ignorable="d"
+        Height="450" Width="800">
+
+    <Window.Resources>
+        <Style x:Key="GridViewHeaderStyle" TargetType="GridViewColumnHeader">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#0A003A"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="2"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <!-- DataGrid do wyświetlania samochodów -->
+        <DataGrid x:Name="CarDataGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="380" SelectionChanged="CarDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Class" Binding="{Binding VehicleClass}" />
+                <DataGridTextColumn Header="Brand" Binding="{Binding Brand}" />
+                <DataGridTextColumn Header="Model" Binding="{Binding Model}" />
+                <DataGridTextColumn Header="Production Year" Binding="{Binding ProductionYear}" />
+                <DataGridTextColumn Header="LicensePlate" Binding="{Binding LicensePlate}" />
+                <DataGridCheckBoxColumn Header="Fuel type" Binding="{Binding FuelType}" />
+                <DataGridCheckBoxColumn Header="Gearbox" Binding="{Binding Gearbox}" />
+                <DataGridCheckBoxColumn Header="Color" Binding="{Binding Color}" />
+                <DataGridCheckBoxColumn Header="Mileage" Binding="{Binding Mileage}" />
+                <DataGridCheckBoxColumn Header="Status" Binding="{Binding StatusCar}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Przyciski do operacji na samochodach -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <Button Content="Wypożycz" Width="120" Height="30" Click="RentCarButton_Click" Margin="0,0,5,0"/>
+            <Button Content="Odbierz" Width="120" Height="30" Click="PickCarButton_Click" Margin="0,0,5,0"/>
+            <Button Content="Zarezerwuj" Width="120" Height="30" Click="ReserveCarButton_Click" Margin="0,0,5,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

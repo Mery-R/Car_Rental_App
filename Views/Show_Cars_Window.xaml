@@ -1,0 +1,52 @@
+﻿<Window x:Class="Car_Rental.Views.Show_Cars_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Car_Rental.Views"
+        xmlns:conv="clr-namespace:Car_Rental.Converters"
+        mc:Ignorable="d"
+        Height="400" Width="760">
+
+    <Window.Resources>
+        <Style x:Key="GridViewHeaderStyle" TargetType="GridViewColumnHeader">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#0A003A"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="2"/>
+        </Style>
+        
+        <conv:FuelTypeConverter x:Key="FuelTypeConverter" />
+        <conv:GearboxConverter x:Key="GearboxConverter" />
+        <conv:StatusCarConverter x:Key="StatusCarConverter" />
+
+        </Window.Resources>
+
+    <Grid Margin="10">
+
+        <!-- DataGrid do wyświetlania samochodów -->
+        <DataGrid x:Name="CarDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding}" IsReadOnly="True" SelectionMode="Single" HorizontalAlignment="Stretch" VerticalAlignment="Top" MaxHeight="500" SelectionChanged="CarDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Class" Binding="{Binding VehicleClass}" Width="40" />
+                <DataGridTextColumn Header="Brand" Binding="{Binding Brand}" Width="60"/>
+                <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="60" />
+                <DataGridTextColumn Header="Production Year" Binding="{Binding ProductionYear}" Width="100" />
+                <DataGridTextColumn Header="LicensePlate" Binding="{Binding LicensePlate}" Width="80" />
+                <DataGridTextColumn Header="Fuel Type" Binding="{Binding FuelType, Converter={StaticResource FuelTypeConverter}}" Width="80" />
+                <DataGridTextColumn Header="Gearbox" Binding="{Binding Gearbox, Converter={StaticResource GearboxConverter}}" Width="100" />
+                <DataGridTextColumn Header="Color" Binding="{Binding Color}" Width="60"/>
+                <DataGridTextColumn Header="Mileage" Binding="{Binding Mileage}" Width="80" />
+                <DataGridTextColumn Header="Status" Binding="{Binding StatusCar, Converter={StaticResource StatusCarConverter}}" Width="80" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Przyciski do operacji na samochodach -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,20">
+            <Button Content="Wypożycz" Width="120" Height="30" Click="RentCarButton_Click" Margin="0,0,5,0"/>
+            <Button Content="Odbierz" Width="120" Height="30" Click="PickCarButton_Click" Margin="0,0,5,0"/>
+            <Button Content="Zarezerwuj" Width="120" Height="30" Click="ReserveCarButton_Click" Margin="0,0,5,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

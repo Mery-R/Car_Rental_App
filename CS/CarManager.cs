@@ -1,27 +1,40 @@
-﻿using Car_Rental.Models;
+﻿// Plik: CarManager.cs
+// Przeznaczenie: Klasa zarządzająca kolekcją samochodów. Umożliwia dodawanie, usuwanie i aktualizowanie pojazdów w aplikacji Car_Rental.
+
+using Car_Rental.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 
 namespace Car_Rental.Services
 {
+    /// <summary>
+    /// Klasa CarManager zarządza listą samochodów i operacjami na niej.
+    /// </summary>
     public class CarManager
     {
         private List<CarModel> cars = new List<CarModel>(); // Lista przechowująca samochody
 
+        /// <summary>
+        /// Właściwość przechowująca kolekcję samochodów.
+        /// </summary>
         public List<CarModel> Cars
         {
             get { return cars; }
             set { cars = value; }
         }
 
-        // Metoda do dodawania samochodu
+        /// <summary>
+        /// Dodaje nowy samochód do kolekcji.
+        /// </summary>
         public void AddCar(CarModel car)
         {
             cars.Add(car);
         }
 
-        // Metoda do usuwania samochodu
+        /// <summary>
+        /// Usuwa samochód o podanym ID z kolekcji.
+        /// </summary>
         public void RemoveCar(int carId)
         {
             var carToRemove = cars.FirstOrDefault(c => c.Id == carId);
@@ -31,13 +44,14 @@ namespace Car_Rental.Services
             }
         }
 
+        /// <summary>
+        /// Aktualizuje dane istniejącego samochodu na podstawie przekazanego modelu.
+        /// </summary>
         public void UpdateCar(CarModel updatedCar)
         {
-            // Znajdź istniejący samochód w kolekcji
             var existingCar = cars.FirstOrDefault(c => c.Id == updatedCar.Id);
             if (existingCar != null)
             {
-                // Zaktualizuj dane samochodu
                 existingCar.Brand = updatedCar.Brand;
                 existingCar.Model = updatedCar.Model;
                 existingCar.ProductionYear = updatedCar.ProductionYear;

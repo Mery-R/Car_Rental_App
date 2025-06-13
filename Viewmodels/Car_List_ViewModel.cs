@@ -1,5 +1,5 @@
 ﻿using Car_Rental.Models;
-using Car_Rental.Services;
+using Car_Rental.Repositories;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -10,11 +10,13 @@ namespace Car_Rental.ViewModels
     public class Car_List_ViewModel
     {
         public ObservableCollection<CarModel> Cars { get; set; }
+        private CarRepository carRepo;
 
         public Car_List_ViewModel()
         {
-            var (loadedCars, _) = CarDataService.LoadCars(); // Rozpakowanie krotki
-            Cars = new ObservableCollection<CarModel>(loadedCars);
+            carRepo = new CarRepository();
+            var carsFromDb = carRepo.GetAllCars();
+            Cars = new ObservableCollection<CarModel>(carsFromDb);
         }
 
         public void AddCar()
@@ -23,8 +25,8 @@ namespace Car_Rental.ViewModels
             var addWindow = new AddCarWindow(newId);
             if (addWindow.ShowDialog() == true)
             {
+                carRepo.AddCar(addWindow.AddedCar);
                 Cars.Add(addWindow.AddedCar);
-                // Zapisz do pliku, jeśli trzeba
             }
         }
 
@@ -33,8 +35,8 @@ namespace Car_Rental.ViewModels
             var carToRemove = Cars.FirstOrDefault(c => c.Id == carId);
             if (carToRemove != null)
             {
+                carRepo.DeleteCar(carId);
                 Cars.Remove(carToRemove);
-                CarDataService.SaveCars(Cars.ToList());  // Zapisz zmiany w pliku
             }
             else
             {
@@ -47,15 +49,13 @@ namespace Car_Rental.ViewModels
             var existingCar = Cars.FirstOrDefault(c => c.Id == updatedCar.Id);
             if (existingCar != null)
             {
-                // Zaktualizuj dane istniejącego samochodu
                 existingCar.Brand = updatedCar.Brand;
                 existingCar.Model = updatedCar.Model;
                 existingCar.ProductionYear = updatedCar.ProductionYear;
                 existingCar.PlateNumber = updatedCar.PlateNumber;
                 existingCar.Availability = updatedCar.Availability;
 
-                // Zapisz zmiany
-                CarDataService.SaveCars(Cars.ToList());  // Zapisz zmiany w pliku
+                carRepo.UpdateCar(existingCar);
             }
             else
             {

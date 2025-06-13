@@ -98,12 +98,10 @@ namespace Car_Rental.ViewModels
         {
             // Konwersja SecureString do string
             var password = Password;
-            Console.WriteLine($"Attempting login with username: {Username} and password: {password}"); // Dodajemy logowanie
 
             // Autentykacja użytkownika
             var isValidUser = userRepository.AuthenticateUser(new NetworkCredential(Username, password));
-            Console.WriteLine($"Is valid user: {isValidUser}"); // Logowanie wyniku autentykacji
-
+            
             if (isValidUser)
             {
                 // Po zalogowaniu - sprawdzenie uprawnień

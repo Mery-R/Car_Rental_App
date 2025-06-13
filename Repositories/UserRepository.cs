@@ -10,9 +10,14 @@ using System.Text;
 
 namespace Car_Rental.Repositories
 {
+    /// <summary>
+    /// Klasa UserRepository implementuje operacje na użytkownikach w bazie danych.
+    /// </summary>
     public class UserRepository : RepositoryBase, IUserRepository
     {
-
+        /// <summary>
+        /// Dodaje nowego użytkownika do bazy danych.
+        /// </summary>
         public void Add(UserModel userModel)
         {
             using (var connection = GetConnection())
@@ -31,6 +36,9 @@ namespace Car_Rental.Repositories
             }
         }
 
+        /// <summary>
+        /// Sprawdza poprawność danych logowania użytkownika.
+        /// </summary>
         public bool AuthenticateUser(NetworkCredential credential)
         {
             bool validUser = false;
@@ -71,6 +79,9 @@ namespace Car_Rental.Repositories
             return validUser;
         }
 
+        /// <summary>
+        /// Aktualizuje dane użytkownika w bazie.
+        /// </summary>
         public void Edit(UserModel userModel)
         {
             using (var connection = GetConnection())
@@ -89,6 +100,9 @@ namespace Car_Rental.Repositories
             }
         }
 
+        /// <summary>
+        /// Pobiera wszystkich użytkowników z bazy.
+        /// </summary>
         public IEnumerable<UserModel> GetByAll()
         {
             List<UserModel> users = new List<UserModel>();
@@ -118,6 +132,9 @@ namespace Car_Rental.Repositories
             return users;
         }
 
+        /// <summary>
+        /// Pobiera użytkownika po ID.
+        /// </summary>
         public UserModel GetById(int id)
         {
             UserModel user = null;
@@ -148,6 +165,9 @@ namespace Car_Rental.Repositories
             return user;
         }
 
+        /// <summary>
+        /// Pobiera użytkownika po nazwie użytkownika.
+        /// </summary>
         public UserModel GetByUsername(string username)
         {
             UserModel user = null;
@@ -178,6 +198,9 @@ namespace Car_Rental.Repositories
             return user;
         }
 
+        /// <summary>
+        /// Sprawdza, czy użytkownik ma uprawnienia administracyjne.
+        /// </summary>
         public bool IsAccess(string username)
         {
             using (var connection = GetConnection())
@@ -193,6 +216,9 @@ namespace Car_Rental.Repositories
             }
         }
 
+        /// <summary>
+        /// Usuwa użytkownika z bazy po ID.
+        /// </summary>
         public void Remove(int id)
         {
             using (var connection = GetConnection())
@@ -203,75 +229,6 @@ namespace Car_Rental.Repositories
                 command.CommandText = "DELETE FROM User WHERE Id = @id";
                 command.Parameters.AddWithValue("@id", id);
                 command.ExecuteNonQuery();
-            }
-        }
-
-        public UserRepository()
-        {
-            InitializeDatabase(); // Tworzenie bazy i tabeli przy inicjalizacji repozytorium
-        }
-
-        public void InitializeDatabase()
-        {
-            // Testowanie połączenia
-            bool isDatabaseConnected = TestDatabaseConnection();
-            if (isDatabaseConnected)
-            {
-                Console.WriteLine("Połączenie z bazą danych powiodło się.");
-            }
-            else
-            {
-                Console.WriteLine("Błąd połączenia z bazą danych.");
-            }
-
-            if (!Directory.Exists("Data"))
-                Directory.CreateDirectory("Data");
-
-            if (!File.Exists("Data/users.db"))
-            {
-                SQLiteConnection.CreateFile("Data/users.db");
-
-                using (var connection = new SQLiteConnection("Data Source=Data/users.db;Version=3;"))
-                {
-                    connection.Open();
-
-                    string createTableQuery = @"CREATE TABLE IF NOT EXISTS User (
-                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        Username TEXT NOT NULL,
-                        Password TEXT NOT NULL,
-                        Name TEXT,
-                        LastName TEXT,
-                        Email TEXT,
-                        Access BIT NOT NULL DEFAULT 0
-                    );";
-
-                    using (var command = new SQLiteCommand(createTableQuery, connection))
-                    {
-                        command.ExecuteNonQuery();
-                    }
-                }
-            }
-        }
-
-        public bool TestDatabaseConnection()
-        {
-            try
-            {
-                using (var connection = TestConnection())
-                {
-                    connection.Open(); // Otwieramy połączenie
-
-                    using (var command = new SQLiteCommand("SELECT 1", connection))
-                    {
-                        var result = command.ExecuteScalar();
-                        return result != null;
-                    }
-                }
-            }
-            catch (SQLiteException ex)
-            {
-                Console.WriteLine($"Błąd połączenia z bazą danych: {ex.Message}");
-                return false;
             }
         }
 

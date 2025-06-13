@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("users.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("schema.sql")]
 
 

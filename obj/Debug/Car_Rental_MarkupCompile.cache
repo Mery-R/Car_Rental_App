@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Mery\Desktop\Car_Rental\App\App.xaml
-7981712938
-1252680320
-25-280659041
+91450777314
+178374781
+271999929124
 371541233929
-CustomControls\BindablePasswordBox.xaml;Views\Edit_Car_Window.xaml;Views\Login_Screen.xaml;Views\Car_List.xaml;Views\Admin_Menu.xaml;Views\User_Menu.xaml;Views\Add_Car_Window.xaml;
+CustomControls\BindablePasswordBox.xaml;Views\Add_Car_Window.xaml;Views\Fleet_Management_Window.xaml;Views\Login_Screen.xaml;Views\Admin_Menu.xaml;Views\Price_List_Control.xaml;Views\Show_Cars_Window.xaml;Views\User_Management_Window.xaml;Views\User_Menu.xaml;
 
 False
 
