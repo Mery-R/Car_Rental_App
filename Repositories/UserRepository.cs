@@ -25,7 +25,7 @@ namespace Car_Rental.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "INSERT INTO User (Username, Password, Name, LastName, Email, Access) VALUES (@username, @password, @name, @lastName, @email, @access)";
+                command.CommandText = "INSERT INTO User (Username, Password, FirstName, LastName, Email, Access) VALUES (@username, @password, @name, @lastName, @email, @access)";
                 command.Parameters.AddWithValue("@username", userModel.Username);
                 command.Parameters.AddWithValue("@password", userModel.Password); 
                 command.Parameters.AddWithValue("@name", userModel.Name);
@@ -89,13 +89,13 @@ namespace Car_Rental.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "UPDATE User SET Username = @username, Name = @name, LastName = @lastName, Email = @email, Access = @access WHERE Id = @id";
+                command.CommandText = "UPDATE User SET Username = @username, FirstName = @name, LastName = @lastName, Email = @email, Access = @access WHERE UserId = @UserId";
                 command.Parameters.AddWithValue("@username", userModel.Username);
                 command.Parameters.AddWithValue("@name", userModel.Name);
                 command.Parameters.AddWithValue("@lastName", userModel.LastName);
                 command.Parameters.AddWithValue("@email", userModel.Email);
                 command.Parameters.AddWithValue("@access", userModel.Access);
-                command.Parameters.AddWithValue("@id", userModel.Id);
+                command.Parameters.AddWithValue("@UserId", userModel.UserId);
                 command.ExecuteNonQuery();
             }
         }
@@ -118,10 +118,10 @@ namespace Car_Rental.Repositories
                     {
                         users.Add(new UserModel()
                         {
-                            Id = reader["Id"].ToString(),
+                            UserId = reader["UserId"].ToString(),
                             Username = reader["Username"].ToString(),
                             Password = string.Empty, // Hasło nie jest wyświetlane
-                            Name = reader["Name"].ToString(),
+                            Name = reader["FirstName"].ToString(),
                             LastName = reader["LastName"].ToString(),
                             Email = reader["Email"].ToString(),
                             Access = Convert.ToBoolean(reader["Access"]),
@@ -135,7 +135,7 @@ namespace Car_Rental.Repositories
         /// <summary>
         /// Pobiera użytkownika po ID.
         /// </summary>
-        public UserModel GetById(int id)
+        public UserModel GetById(int UserId)
         {
             UserModel user = null;
             using (var connection = GetConnection())
@@ -143,18 +143,19 @@ namespace Car_Rental.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "SELECT * FROM User WHERE Id = @id";
-                command.Parameters.AddWithValue("@id", id);
+                command.CommandText = "SELECT * FROM User WHERE UserId = @UserId";
+                command.Parameters.AddWithValue("@UserId", UserId);
                 using (var reader = command.ExecuteReader())
                 {
                     if (reader.Read())
                     {
                         user = new UserModel()
                         {
-                            Id = reader["Id"].ToString(),
+                            UserId = reader["UserId"]?.ToString(),
+
                             Username = reader["Username"].ToString(),
                             Password = string.Empty, // Hasło nie jest wyświetlane
-                            Name = reader["Name"].ToString(),
+                            Name = reader["FirstName"].ToString(),
                             LastName = reader["LastName"].ToString(),
                             Email = reader["Email"].ToString(),
                             Access = Convert.ToBoolean(reader["Access"]),
@@ -184,10 +185,10 @@ namespace Car_Rental.Repositories
                     {
                         user = new UserModel()
                         {
-                            Id = reader["Id"].ToString(),
+                            UserId = reader["UserId"]?.ToString(),
                             Username = reader["Username"].ToString(),
                             Password = string.Empty, // Hasło nie jest wyświetlane
-                            Name = reader["Name"].ToString(),
+                            Name = reader["FirstName"].ToString(),
                             LastName = reader["LastName"].ToString(),
                             Email = reader["Email"].ToString(),
                             Access = Convert.ToBoolean(reader["Access"]),
@@ -219,15 +220,15 @@ namespace Car_Rental.Repositories
         /// <summary>
         /// Usuwa użytkownika z bazy po ID.
         /// </summary>
-        public void Remove(int id)
+        public void Remove(int UserId)
         {
             using (var connection = GetConnection())
             using (var command = new SQLiteCommand())
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "DELETE FROM User WHERE Id = @id";
-                command.Parameters.AddWithValue("@id", id);
+                command.CommandText = "DELETE FROM User WHERE UserId = @UserId";
+                command.Parameters.AddWithValue("@UserId", UserId);
                 command.ExecuteNonQuery();
             }
         }

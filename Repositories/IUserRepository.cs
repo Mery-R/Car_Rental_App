@@ -12,9 +12,9 @@ namespace Car_Rental.Models
         bool AuthenticateUser(NetworkCredential credential);
         void Add(UserModel userModel);
         void Edit(UserModel userModel);
-        void Remove(int id);
+        void Remove(int Userid);
         bool IsAccess(string username);
-        UserModel GetById(int id);
+        UserModel GetById(int Userid);
         UserModel GetByUsername(string username);
         IEnumerable<UserModel> GetByAll();
         

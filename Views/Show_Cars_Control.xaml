@@ -1,0 +1,192 @@
+﻿<UserControl x:Class="Car_Rental.Views.Show_Cars_Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:local="clr-namespace:Car_Rental.Views" 
+             xmlns:conv="clr-namespace:Car_Rental.Converters"
+             mc:Ignorable="d" 
+             MinWidth="750"
+             MinHeight="300"
+             d:DesignHeight="450" d:DesignWidth="750">
+
+    <UserControl.Resources>
+        <conv:FuelTypeConverter x:Key="FuelTypeConverter" />
+        <conv:GearboxConverter x:Key="GearboxConverter" />
+        <conv:StatusCarConverter x:Key="StatusCarConverter" />
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        Grid.Column="0">
+                <fa:IconImage Icon="Search" Height="30" Width="30" Foreground="Black"/>
+
+                <TextBox Text="Search..."   
+                             FontSize="13"
+                             Height="24"
+                             Width="250"
+                             Background="Transparent"
+                             FontWeight="Medium"
+                             FontFamily="Montserrat"                            
+                             Foreground="Black"
+                             CaretBrush="Black"
+                             BorderBrush="Black"
+                             BorderThickness="0,0,0,1"                             
+                             VerticalContentAlignment="Center"
+                             Margin="5,5,0,0"></TextBox>
+
+                <Button Command="{Binding LoginCommand}" Content="Search" FontSize="12" FontFamily="Montserrat" Cursor="Hand"
+                        BorderThickness="0" Foreground="Black" VerticalAlignment="Top" Margin="5,0,0,0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#773DFF"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Height="30" Width="100" CornerRadius="15" Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#836EFB"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5" >
+                <Button Content="Rent" Width="100" Height="30" Click="RentCarButton_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#773DFF"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Height="30" Width="100" CornerRadius="15" Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#836EFB"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Content="Return" Width="100" Height="30" Click="ReturnCarButton_Click" Margin="15,0,15,0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#773DFF"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Height="30" Width="100" CornerRadius="15" Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#836EFB"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Content="Reserve" Width="100" Height="30" Click="ReserveCarButton_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#773DFF"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Height="30" Width="100" CornerRadius="15" Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#836EFB"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+            
+        </Grid>
+        <Border Grid.Row="1"
+                Background="#200F53"
+                CornerRadius="10" 
+                Padding="10"
+                >
+
+            <DataGrid ColumnWidth="*"
+                  Background="#200F53"
+                  x:Name="CarDataGrid"
+                  ItemsSource="{Binding}"
+                  SelectionChanged="CarDataGrid_SelectionChanged"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  AutoGenerateColumns="False"
+                  RowBackground ="DarkGray"
+                  AlternatingRowBackground="Gray"
+                  HeadersVisibility="Column"
+                  GridLinesVisibility="None"
+                  BorderThickness="0"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  >
+
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="Gray"/>
+                        <Setter Property="Padding" Value="0,0,0,0"/>
+                        <Setter Property="FontFamily" Value="Montserrat"/>
+                        <Setter Property="FontSize" Value="15"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Class" Binding="{Binding VehicleClass}" Width="Auto" MinWidth="50" />
+                    <DataGridTextColumn Header="Brand" Binding="{Binding Brand}" Width="Auto" MinWidth="60"/>
+                    <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="Auto" MinWidth="60"/>
+                    <DataGridTextColumn Header="Year" Binding="{Binding ProductionYear}" Width="Auto" MinWidth="50"/>
+                    <DataGridTextColumn Header="LicensePlate" Binding="{Binding LicensePlate}" Width="Auto" MinWidth="100"/>
+                    <DataGridTextColumn Header="Fuel Type" Binding="{Binding FuelType, Converter={StaticResource FuelTypeConverter}}" Width="Auto" MinWidth="80"/>
+                    <DataGridTextColumn Header="Gearbox" Binding="{Binding Gearbox, Converter={StaticResource GearboxConverter}}" Width="Auto" MinWidth="100"/>
+                    <DataGridTextColumn Header="Color" Binding="{Binding Color}" Width="Auto" MinWidth="70"/>
+                    <DataGridTextColumn Header="Mileage" Binding="{Binding Mileage}" Width="Auto" MinWidth="80"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding StatusCar, Converter={StaticResource StatusCarConverter}}" Width="Auto" MinWidth="60"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+    </Grid>
+</UserControl>

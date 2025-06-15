@@ -1,9 +1,10 @@
-﻿// Plik: Admin_Menu.xaml.cs
-// Przeznaczenie: Okno menu administratora. Umożliwia dostęp do funkcji zarządzania flotą, wypożyczeń, raportów i wylogowania.
-
+﻿using Car_Rental.Models;
+using Car_Rental.ViewModels;
+using Car_Rental.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -18,68 +20,70 @@ using System.Windows.Shapes;
 namespace Car_Rental.Views
 {
     /// <summary>
-    /// Klasa Admin_Menu odpowiada za logikę menu administratora.
+    /// Logika interakcji dla klasy Admin_Menu.xaml
     /// </summary>
     public partial class Admin_Menu : Window
     {
-        /// <summary>
-        /// Konstruktor inicjalizujący komponenty okna menu administratora.
-        /// </summary>
+
+        public UserAccountModel CurrentUserAccount { get; set; }
         public Admin_Menu()
         {
             InitializeComponent();
+            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight; // Ustawienie maksymalnej wysokości okna
+
+            CurrentUserAccount = new UserAccountModel
+            {
+                Username = "admin",
+                DisplayName = "Admin"
+            };
+
+            this.DataContext = this;
+            this.DataContext = new MainViewModel();
         }
 
-        /// <summary>
-        /// Otwiera okno z listą samochodów i ukrywa bieżące okno.
-        /// </summary>
-        private void ShowCarsButton_Click(object sender, RoutedEventArgs e)
+        [DllImport("user32.dll")]
+        public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
+
+        private void pnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.Hide();
-            Show_Cars_Window Show_Cars = new Show_Cars_Window();
-            Show_Cars.Show();
+            WindowInteropHelper helper = new WindowInteropHelper(this);
+            SendMessage(helper.Handle, 161, 2, 0);
         }
 
-        /// <summary>
-        /// Obsługuje logikę przycisku "Pick up a car".
-        /// </summary>
-        private void Button_Click2(object sender, RoutedEventArgs e)
+        private void pnlControlBar_MouseEnter(object sender, MouseEventArgs e)
         {
-            // Implementacja logiki dla przycisku "Pick up a car"
+           this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight; // Ustawienie maksymalnej wysokości okna
         }
 
-        /// <summary>
-        /// Obsługuje logikę przycisku "Manage fleet".
-        /// </summary>
-        private void Button_Click3(object sender, RoutedEventArgs e)
+        private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
-            Fleet_Management_Window manageWindow = new Fleet_Management_Window();
-            manageWindow.Show();
+            // Zamknięcie okna
+            Application.Current.Shutdown();
         }
 
-        /// <summary>
-        /// Obsługuje logikę przycisku "Log out".
-        /// </summary>
-        private void Button_Click4(object sender, RoutedEventArgs e)
+        private void btnMaximize_Click(object sender, RoutedEventArgs e)
         {
-            // Implementacja logiki dla przycisku "Log out"
+            if (this.WindowState == WindowState.Normal)
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = WindowState.Normal;
+            }
+            
         }
 
-        /// <summary>
-        /// Obsługuje logikę przycisku "Rent a car".
-        /// </summary>
-        private void Button_Clic5(object sender, RoutedEventArgs e)
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
-            // Implementacja logiki dla przycisku "Rent a car"
+            this.WindowState = WindowState.Minimized;
         }
 
-        /// <summary>
-        /// Obsługuje logikę przycisku "Raport".
-        /// </summary>
-        private void Button_Clic6(object sender, RoutedEventArgs e)
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
-            // Implementacja logiki dla przycisku "Raport"
+            var loginScreen = new MainWindow();
+            loginScreen.Show();
+            this.Close();
         }
     }
 }

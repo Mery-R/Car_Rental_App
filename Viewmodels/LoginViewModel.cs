@@ -4,6 +4,7 @@ using Car_Rental.Views;
 using System;
 using System.Net;
 using System.Security;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -101,9 +102,13 @@ namespace Car_Rental.ViewModels
 
             // Autentykacja użytkownika
             var isValidUser = userRepository.AuthenticateUser(new NetworkCredential(Username, password));
-            
+
             if (isValidUser)
             {
+                // 🔐 Ustawianie tożsamości zalogowanego użytkownika
+                Thread.CurrentPrincipal = new System.Security.Principal.GenericPrincipal(
+                    new System.Security.Principal.GenericIdentity(Username), null);
+
                 // Po zalogowaniu - sprawdzenie uprawnień
                 IsAccess = userRepository.IsAccess(Username);
 
@@ -122,6 +127,7 @@ namespace Car_Rental.ViewModels
                 // Ukryj widok logowania
                 IsViewVisible = false;
             }
+
             else
             {
                 // Wyświetlenie błędu logowania
