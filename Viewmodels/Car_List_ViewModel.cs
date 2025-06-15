@@ -9,34 +9,48 @@ namespace Car_Rental.ViewModels
 {
     public class Car_List_ViewModel
     {
-        public ObservableCollection<CarModel> Cars { get; set; }
-        private CarRepository carRepo;
+        public ObservableCollection<CarModel> Cars { get; private set; }
+        private readonly CarRepository carRepo;
 
         public Car_List_ViewModel()
         {
             carRepo = new CarRepository();
+            LoadCars();
+        }
+
+        private void LoadCars()
+        {
             var carsFromDb = carRepo.GetAllCars();
             Cars = new ObservableCollection<CarModel>(carsFromDb);
         }
 
         public void AddCar()
         {
-            int newId = Cars.Any() ? Cars.Max(c => c.Id) + 1 : 1;
-            var addWindow = new AddCarWindow(newId);
+            var addWindow = new Add_Car_Window();
+
             if (addWindow.ShowDialog() == true)
             {
-                carRepo.AddCar(addWindow.AddedCar);
-                Cars.Add(addWindow.AddedCar);
+                var newCar = addWindow.NewCar;
+
+                if (newCar != null)
+                {
+                    carRepo.AddCar(newCar); // zapis do bazy
+                    LoadCars(); // odświeżenie widoku
+                }
             }
         }
 
+
         public void RemoveCar(int carId)
         {
-            var carToRemove = Cars.FirstOrDefault(c => c.Id == carId);
+            var carToRemove = Cars.FirstOrDefault(c => c.CarId == carId);
             if (carToRemove != null)
             {
-                carRepo.DeleteCar(carId);
-                Cars.Remove(carToRemove);
+                if (MessageBox.Show("Czy na pewno chcesz usunąć ten samochód?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    carRepo.DeleteCar(carId);
+                    Cars.Remove(carToRemove);
+                }
             }
             else
             {
@@ -46,16 +60,12 @@ namespace Car_Rental.ViewModels
 
         public void UpdateCar(CarModel updatedCar)
         {
-            var existingCar = Cars.FirstOrDefault(c => c.Id == updatedCar.Id);
+            var existingCar = Cars.FirstOrDefault(c => c.CarId == updatedCar.CarId);
+
             if (existingCar != null)
             {
-                existingCar.Brand = updatedCar.Brand;
-                existingCar.Model = updatedCar.Model;
-                existingCar.ProductionYear = updatedCar.ProductionYear;
-                existingCar.PlateNumber = updatedCar.PlateNumber;
-                existingCar.Availability = updatedCar.Availability;
-
-                carRepo.UpdateCar(existingCar);
+                carRepo.UpdateCar(updatedCar);
+                LoadCars(); // ponowne załadowanie danych po aktualizacji
             }
             else
             {

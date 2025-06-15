@@ -7,7 +7,7 @@ namespace Car_Rental.Repositories
     public class RepositoryBase
     {
         // Metoda dostępna w klasach dziedziczących
-        protected SQLiteConnection GetConnection()
+        public SQLiteConnection GetConnection()
         {
             // Tworzenie ścieżki bezwzględnej do pliku bazy danych
             string dataFolder = Path.Combine(Directory.GetCurrentDirectory(), "Data");

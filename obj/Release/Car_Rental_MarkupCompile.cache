@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Release\
+C:\Users\Mery\Desktop\Car_Rental\obj\Release\
 Car_Rental
 none
 false
 TRACE
-C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\App\App.xaml
+C:\Users\Mery\Desktop\Car_Rental\App\App.xaml
 12-1082738454
 178374781
-30-1020247082
-38-1077240091
+31-1854933231
+38-314008923
 CustomControls\BindablePasswordBox.xaml;Styles\ButtonStyles.xaml;Styles\UIColor.xaml;Views\Add_Car_Window.xaml;Views\Admin_Menu.xaml;Views\Fleet_Management_Window.xaml;Views\Login_Screen.xaml;Views\Price_List_Control.xaml;Views\ShowCars.xaml;Views\Show_Cars_Control.xaml;Views\User_Management_Window.xaml;Views\User_Menu.xaml;
 
 True

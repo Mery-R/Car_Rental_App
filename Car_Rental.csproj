@@ -135,18 +135,25 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CS\CarDataConverter.cs" />
+    <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\DamageModel.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\CarModel.cs" />
+    <Compile Include="Models\ReservationModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Repositories\CarRepository.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Repositories\DamageRepository.cs" />
     <Compile Include="Repositories\DatabaseInitializer.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Models\UserAccountModel.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Repositories\ReservationRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="ViewModels\Car_List_ViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PricesViewModel.cs" />
@@ -156,14 +163,26 @@
     <Compile Include="Views\Add_Car_Window.xaml.cs">
       <DependentUpon>Add_Car_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Add_Customer_Window.xaml.cs">
+      <DependentUpon>Add_Customer_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Admin_Menu.xaml.cs">
       <DependentUpon>Admin_Menu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Edit_Car_Window.xaml.cs">
+      <DependentUpon>Edit_Car_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Fleet_Management_Window.xaml.cs">
       <DependentUpon>Fleet_Management_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Price_List_Control.xaml.cs">
       <DependentUpon>Price_List_Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Rent_Car_Window.xaml.cs">
+      <DependentUpon>Rent_Car_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Return_Car_Window.xaml.cs">
+      <DependentUpon>Return_Car_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShowCars.xaml.cs">
       <DependentUpon>ShowCars.xaml</DependentUpon>
@@ -194,7 +213,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Add_Customer_Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Admin_Menu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Edit_Car_Window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -217,6 +244,14 @@
     <Page Include="Views\Price_List_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Rent_Car_Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Return_Car_Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ShowCars.xaml">
       <SubType>Designer</SubType>
@@ -265,18 +300,6 @@
     <None Include="App\App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\4.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\1.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\3.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8.1">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.8.1 %28x86 i x64%29</ProductName>
@@ -289,34 +312,21 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\3.png" />
+    <Resource Include="Images\AdminIcon.png" />
+    <Resource Include="Images\back.jpg" />
     <Resource Include="Images\background.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\user_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\key_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\eye_closed.png" />
     <Resource Include="Images\eye_open.png" />
     <Resource Include="Images\flinstones.png" />
-    <Resource Include="Images\price_list.png" />
-    <Resource Include="Images\AdminIcon.png" />
-    <Resource Include="Images\CloseIcon.png" />
-    <Resource Include="Images\HistoryIcon.png" />
-    <Resource Include="Images\LogOutIcon.png" />
-    <Resource Include="Images\ManagementIcon.png" />
-    <Resource Include="Images\MaxIcon.png" />
-    <Resource Include="Images\MinIcon.png" />
-    <Resource Include="Images\PriceIcon.png" />
-    <Resource Include="Images\ShowCarsIcon.png" />
-    <Resource Include="Images\UsersIcon.png" />
+    <Resource Include="Images\front.jpg" />
+    <Resource Include="Images\key_icon.png" />
+    <Resource Include="Images\left.png" />
+    <Resource Include="Images\right.png" />
+    <Resource Include="Images\user_icon.png" />
     <Content Include="schema.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

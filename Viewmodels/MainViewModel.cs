@@ -1,73 +1,64 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using Car_Rental.Models;
+﻿using Car_Rental.Models;
 using Car_Rental.Repositories;
 using FontAwesome.Sharp;
+using System;
+using System.Data.SQLite;
+using System.Diagnostics;
+using System.Security.Principal;
+using System.Threading;
+using System.Windows.Input;
 
 namespace Car_Rental.ViewModels
 {
-    public class MainViewModel : ViewModelBase 
+    public class MainViewModel : ViewModelBase
     {
-        //Fields
- 
-        private UserModel _currentUser;
-
+        // Fields
+        private UserModel _currentUser = new UserModel();
         private ViewModelBase _currentChildView;
         private string _caption;
         private IconChar _icon;
 
-        private IUserRepository userRepository;
+        private readonly IUserRepository userRepository;
+        private readonly SQLiteConnection DatabaseConnection;
 
-      
+        // Commands
+        public ICommand ShowCarViewCommand { get; }
+        public ICommand PricesViewCommand { get; }
 
+        // Properties
         public UserModel CurrentUser
         {
-            get
-            {
-                return _currentUser;
-            }
+            get => _currentUser;
             set
             {
                 _currentUser = value;
                 OnPropertyChanged(nameof(CurrentUser));
             }
         }
+
         public ViewModelBase CurrentChildView
         {
-            get
-            {
-                return _currentChildView;
-            }
+            get => _currentChildView;
             set
             {
                 _currentChildView = value;
                 OnPropertyChanged(nameof(CurrentChildView));
             }
         }
+
         public string Caption
         {
-            get
-            {
-                return _caption;
-            }
+            get => _caption;
             set
             {
                 _caption = value;
                 OnPropertyChanged(nameof(Caption));
             }
         }
+
         public IconChar Icon
         {
-            get
-            {
-                return _icon;
-            }
+            get => _icon;
             set
             {
                 _icon = value;
@@ -75,27 +66,35 @@ namespace Car_Rental.ViewModels
             }
         }
 
-        public ICommand ShowCarViewCommand { get; }
-        public ICommand PricesViewCommand { get; }
-
+        // Constructor
         public MainViewModel()
         {
-            userRepository = new UserRepository();
-            CurrentUser = new UserModel();
+            try
+            {
+                // Inicjalizacja połączenia z bazą danych z RepositoryBase
+                var repositoryBase = new RepositoryBase();
+                DatabaseConnection = repositoryBase.GetConnection();
+                DatabaseConnection.Open();
 
+                // Inicjalizacja UserRepository
+                userRepository = new UserRepository();
+
+                Debug.WriteLine("Połączenie z bazą danych zostało nawiązane.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Błąd podczas łączenia z bazą danych: {ex.Message}");
+            }
+
+            // Inicjalizacja komend
             ShowCarViewCommand = new ViewModelCommand(ExecuteShowCarViewCommand);
             PricesViewCommand = new ViewModelCommand(ExecutePricesViewCommand);
 
+            // Domyślny widok
             ExecuteShowCarViewCommand(null);
 
+            // Załaduj dane użytkownika
             LoadCurrentUserData();
-        }
-
-        private void ExecutePricesViewCommand(object obj)
-        {
-            CurrentChildView = new PricesViewModel();
-            Caption = "Prices";
-            Icon = IconChar.Tags;
         }
 
         private void ExecuteShowCarViewCommand(object obj)
@@ -105,20 +104,40 @@ namespace Car_Rental.ViewModels
             Icon = IconChar.Car;
         }
 
-        private void LoadCurrentUserData()
+        private void ExecutePricesViewCommand(object obj)
         {
-            var identityName = Thread.CurrentPrincipal?.Identity?.Name;
-
-            var user = userRepository.GetByUsername(identityName);
-            if (user != null)
-            {
-                CurrentUser.Username = user.Username;
-            }
-            else
-            {
-                CurrentUser.Username = "Invalid user, not logged in";
-            }
+            CurrentChildView = new PricesViewModel();
+            Caption = "Prices";
+            Icon = IconChar.Tags;
         }
 
+        private void LoadCurrentUserData()
+        {
+            try
+            {
+                var identityName = Thread.CurrentPrincipal?.Identity?.Name;
+
+                if (!string.IsNullOrEmpty(identityName))
+                {
+                    var user = userRepository.GetByUsername(identityName);
+                    if (user != null)
+                    {
+                        CurrentUser = user;
+                    }
+                    else
+                    {
+                        CurrentUser.Username = "Invalid user, not logged in";
+                    }
+                }
+                else
+                {
+                    CurrentUser.Username = "No identity available";
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Błąd przy wczytywaniu danych użytkownika: {ex.Message}");
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Car_Rental.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
@@ -7,6 +8,46 @@ namespace Car_Rental.Repositories
 {
     public class CarRepository : RepositoryBase
     {
+        public CarModel GetCarById(int carId)
+        {
+            // Deklaracja zmiennej connection
+
+
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+
+                var query = "SELECT * FROM Car WHERE CarId = @CarId";
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@CarId", carId);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new CarModel
+                            {
+                                CarId = Convert.ToInt32(reader["CarId"]),
+                                Brand = reader["Brand"].ToString(),
+                                Model = reader["Model"].ToString(),
+                                LicensePlate = reader["LicensePlate"].ToString(),
+                                Mileage = Convert.ToInt32(reader["Mileage"]),
+                                DailyPrice_1_3 = Convert.ToSingle(reader["DailyPrice_1_3"]),
+                                DailyPrice_4_8 = Convert.ToSingle(reader["DailyPrice_4_8"]),
+                                DailyPrice_9_15 = Convert.ToSingle(reader["DailyPrice_9_15"]),
+                                DailyPrice_16_29 = Convert.ToSingle(reader["DailyPrice_16_29"]),
+                                DailyPrice_30plus = Convert.ToSingle(reader["DailyPrice_30plus"]),
+                                WeekendPrice = Convert.ToSingle(reader["WeekendPrice"]),
+                                Deposit = Convert.ToSingle(reader["Deposit"]),
+                                StatusCar = Convert.ToInt32(reader["StatusCar"])
+                            };
+                        }
+                    }
+                }
+            }
+
+            return null; // Zwraca null, jeśli samochód o takim ID nie istnieje
+        }
 
         public List<CarModel> GetAllCars()
         {

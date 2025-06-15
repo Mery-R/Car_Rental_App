@@ -1,0 +1,72 @@
+﻿<Window x:Class="Car_Rental.Views.Return_Car_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Return Car" Height="496" Width="544">
+    <Grid Margin="10">
+        <StackPanel Orientation="Vertical" Margin="10" VerticalAlignment="Top">
+
+            <!-- Dane auta -->
+            <TextBlock Text="Car details:" FontWeight="Bold"/>
+            <TextBlock Name="CarDetailsText" Margin="0,0,0,10"/>
+
+            <!-- Dane klienta -->
+            <TextBlock Text="Customer:" FontWeight="Bold"/>
+            <TextBlock Name="CustomerText" Margin="0,0,0,10"/>
+
+            <!-- Aktualna data i czas -->
+            <TextBlock Text="Return time:" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Name="CurrentDateTimeText" VerticalAlignment="Center"/>
+                <Button Content="⟳" Margin="10,0,0,0" Click="RefreshDateTime_Click"/>
+            </StackPanel>
+
+            <!-- Przebieg -->
+            <TextBlock Text="Mileage (km):" FontWeight="Bold" Margin="0,10,0,0"/>
+            <TextBox Name="MileageTextBox" />
+
+            <!-- Zaznaczanie uszkodzeń (placeholder) -->
+            <TextBlock Text="Damage marking (optional):" FontWeight="Bold" Margin="0,10,0,0"/>
+            <TabControl x:Name="ImageTabs" Margin="10" Height="186">
+                <TabItem Header="Front">
+                    <Canvas x:Name="FrontCanvas">
+                        <Image Source="/Images/front.jpg" MouseLeftButtonDown="Image_MouseLeftButtonDown" Height="157" Width="477"/>
+                    </Canvas>
+                </TabItem>
+                <TabItem Header="Back">
+                    <Canvas x:Name="BackCanvas">
+                        <Image Source="/Images/back.jpg" MouseLeftButtonDown="Image_MouseLeftButtonDown" Height="157" Width="478"/>
+                    </Canvas>
+                </TabItem>
+                <TabItem Header="Left">
+                    <Canvas x:Name="LeftCanvas">
+                        <Image Source="/Images/left.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Height="159" Width="477"/>
+                    </Canvas>
+                </TabItem>
+                <TabItem Header="Right"/>
+                <Canvas x:Name="RightCanvas" Height="111" Width="478">
+                    <Image Source="/Images/right.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Height="117" Width="438" />
+                </Canvas>
+            </TabControl>
+
+            <Popup x:Name="DamagePopup" Placement="Mouse" StaysOpen="False">
+                <Border Background="White" BorderBrush="Gray" BorderThickness="1" Padding="10">
+                    <StackPanel>
+                        <ComboBox Name="DamageTypeComboBox">
+                            <ComboBoxItem Content="Scratch" />
+                            <ComboBoxItem Content="Dent" />
+                            <ComboBoxItem Content="Chip" />
+                            <ComboBoxItem Content="Crack" />
+                            <ComboBoxItem Content="Other" />
+                        </ComboBox>
+
+                        <TextBox x:Name="DamageNoteTextBox" Width="150" Height="50" TextWrapping="Wrap" AcceptsReturn="True"/>
+                        <Button Content="Add" Click="AddDamage_Click"/>
+                    </StackPanel>
+                </Border>
+            </Popup>
+
+            <!-- Przycisk zatwierdzenia -->
+            <Button Content="Confirm return" Click="ConfirmReturn_Click" Margin="0,20,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

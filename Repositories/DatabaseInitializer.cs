@@ -101,6 +101,20 @@ class DatabaseInitializer
                     FOREIGN KEY (CarId) REFERENCES Car(CarId)
                 );
 
+                CREATE TABLE IF NOT EXISTS Damage (
+                DamageId INTEGER PRIMARY KEY AUTOINCREMENT,
+                CarId INTEGER NOT NULL,
+                ReservationId INTEGER,
+                Side TEXT NOT NULL,
+                X REAL NOT NULL,
+                Y REAL NOT NULL,
+                Type TEXT NOT NULL,
+                Note TEXT,
+                FOREIGN KEY (CarId) REFERENCES Car(CarID),
+                FOREIGN KEY (ReservationId) REFERENCES Reservation(ReservationId)
+                );
+
+
                 -- Dodanie domyślnego użytkownika admin
                 INSERT OR IGNORE INTO User (Username, Password, FirstName, LastName, Email, Access)
                 VALUES

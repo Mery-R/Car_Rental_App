@@ -12,32 +12,53 @@ namespace Car_Rental.Views
         {
             InitializeComponent();
 
-            // Skopiuj dane do pól tekstowych
+            // Wype³nij pola danymi z istniej¹cego auta
             BrandTextBox.Text = car.Brand;
             ModelTextBox.Text = car.Model;
             YearTextBox.Text = car.ProductionYear.ToString();
-            PlateTextBox.Text = car.PlateNumber;
-            AvailabilityCheckBox.IsChecked = car.Availability;
+            PlateTextBox.Text = car.LicensePlate;
+            AvailabilityCheckBox.IsChecked = car.StatusCar == 0;
 
-            EditedCar = new CarModel(car.Id, car.Brand, car.Model, car.ProductionYear, car.PlateNumber, car.Availability);
+            // Skopiuj dane do nowego obiektu (opcjonalnie: mo¿esz pracowaæ bezpoœrednio na oryginale)
+            EditedCar = new CarModel
+            {
+                CarId = car.CarId,
+                Brand = car.Brand,
+                Model = car.Model,
+                ProductionYear = car.ProductionYear,
+                LicensePlate = car.LicensePlate,
+                StatusCar = car.StatusCar,
+
+                // Inne w³aœciwoœci przepisz, jeœli s¹ potrzebne
+                VIN = car.VIN,
+                Engine = car.Engine,
+                FuelType = car.FuelType,
+                Gearbox = car.Gearbox,
+                VehicleClass = car.VehicleClass,
+                Color = car.Color,
+                Mileage = car.Mileage,
+                DailyPrice_1_3 = car.DailyPrice_1_3,
+                DailyPrice_4_8 = car.DailyPrice_4_8,
+                DailyPrice_9_15 = car.DailyPrice_9_15,
+                DailyPrice_16_29 = car.DailyPrice_16_29,
+                DailyPrice_30plus = car.DailyPrice_30plus,
+                WeekendPrice = car.WeekendPrice,
+                Deposit = car.Deposit,
+                ImagePath = car.ImagePath
+            };
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            // Zaktualizuj dane na podstawie pól tekstowych
             EditedCar.Brand = BrandTextBox.Text;
             EditedCar.Model = ModelTextBox.Text;
 
-            int year;
-            if (int.TryParse(YearTextBox.Text, out year))
-            {
-                EditedCar.ProductionYear = year;
-            }
-            else
+            if (!int.TryParse(YearTextBox.Text, out int year))
             {
                 MessageBox.Show("Podaj poprawny rok produkcji.", "B³¹d", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+
             if (year < 1886 || year > DateTime.Now.Year)
             {
                 MessageBox.Show($"Rok produkcji musi byæ miêdzy 1886 a {DateTime.Now.Year}.", "B³¹d", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -45,8 +66,8 @@ namespace Car_Rental.Views
             }
 
             EditedCar.ProductionYear = year;
-            EditedCar.PlateNumber = PlateTextBox.Text;
-            EditedCar.Availability = AvailabilityCheckBox.IsChecked ?? false;
+            EditedCar.LicensePlate = PlateTextBox.Text;
+            EditedCar.StatusCar = AvailabilityCheckBox.IsChecked == true ? 0 : 2; // 0 = dostêpny, 2 = niedostêpny
 
             DialogResult = true;
             Close();

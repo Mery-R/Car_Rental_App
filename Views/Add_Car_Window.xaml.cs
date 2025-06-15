@@ -21,6 +21,8 @@ namespace Car_Rental.Views
         {
             InitializeComponent();
         }
+
+
         private void ImageDropZone_Drop(object sender, System.Windows.DragEventArgs e)
         {
             if (e.Data.GetDataPresent(System.Windows.DataFormats.FileDrop))
