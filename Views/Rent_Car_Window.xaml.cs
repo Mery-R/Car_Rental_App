@@ -128,6 +128,7 @@ namespace Car_Rental.Views
                         _car.StatusCar = (int)CarStatus.Reserved; // Samochód jest zarezerwowany na przyszłość
                         _carRepository.UpdateCar(_car);
                         MessageBox.Show("Car has been reserved.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                        
                     }
 
                     DialogResult = true;

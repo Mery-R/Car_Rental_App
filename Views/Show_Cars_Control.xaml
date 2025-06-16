@@ -6,12 +6,18 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:local="clr-namespace:Car_Rental.Views" 
              xmlns:conv="clr-namespace:Car_Rental.Converters"
+             xmlns:vm="clr-namespace:Car_Rental.ViewModels"
              mc:Ignorable="d" 
              MinWidth="750"
              MinHeight="300"
              d:DesignHeight="450" d:DesignWidth="750">
 
+    <UserControl.DataContext>
+        <vm:ShowCarsViewModel />
+    </UserControl.DataContext>
+
     <UserControl.Resources>
+        <conv:EmptyToVisibilityConverter x:Key="EmptyToVisibilityConverter"/>
         <conv:FuelTypeConverter x:Key="FuelTypeConverter" />
         <conv:GearboxConverter x:Key="GearboxConverter" />
         <conv:StatusCarConverter x:Key="StatusCarConverter" />
@@ -25,52 +31,36 @@
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Center"
                         Grid.Column="0">
-                <fa:IconImage Icon="Search" Height="30" Width="30" Foreground="Black"/>
+                <fa:IconImage Icon="Search" Height="30" Width="30" Foreground="{StaticResource plainTextColor3}"/>
 
-                <TextBox Text="Search..."   
-                             FontSize="13"
-                             Height="24"
-                             Width="250"
-                             Background="Transparent"
-                             FontWeight="Medium"
-                             FontFamily="Montserrat"                            
-                             Foreground="Black"
-                             CaretBrush="Black"
-                             BorderBrush="Black"
-                             BorderThickness="0,0,0,1"                             
-                             VerticalContentAlignment="Center"
-                             Margin="5,5,0,0"></TextBox>
+                <TextBox 
+    x:Name="SearchTextBox"
+    Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+    Foreground="Gray"
+                    FontSize="13"
+    Height="24"
+    Width="250"
+    Background="Transparent"
+    FontWeight="Medium"
+    FontFamily="Montserrat"                            
+    CaretBrush="{StaticResource plainTextColor3}"
+    BorderBrush="{StaticResource plainTextColor3}"
+    BorderThickness="0,0,0,1"                             
+    VerticalContentAlignment="Center"
+    Margin="5,5,0,0"
+    GotFocus="SearchTextBox_GotFocus"
+    LostFocus="SearchTextBox_LostFocus" TextChanged="SearchTextBox_TextChanged"
+/>
 
-                <Button Command="{Binding LoginCommand}" Content="Search" FontSize="12" FontFamily="Montserrat" Cursor="Hand"
-                        BorderThickness="0" Foreground="Black" VerticalAlignment="Top" Margin="5,0,0,0">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="#773DFF"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Height="30" Width="100" CornerRadius="15" Background="{TemplateBinding Background}">
-                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
 
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#836EFB"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
+                    
             </StackPanel>
 
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5" >
@@ -116,7 +106,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Content="Reserve" Width="100" Height="30" Click="ReserveCarButton_Click">
+                <Button Content="Rented" Width="100" Height="30" Click="ReturnCarButton_Click" Margin="1,0,15,0">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#773DFF"/>
@@ -137,55 +127,89 @@
                         </Style>
                     </Button.Style>
                 </Button>
+
+                <Button Content="Available" Width="100" Height="30" Click="ReturnCarButton_Click" Margin="5,0,5,0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#773DFF"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Height="30" Width="100" CornerRadius="15" Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#836EFB"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+
+
             </StackPanel>
             
         </Grid>
         <Border Grid.Row="1"
                 Background="#200F53"
                 CornerRadius="10" 
-                Padding="10"
-                >
+                Padding="10">
 
-            <DataGrid ColumnWidth="*"
-                  Background="#200F53"
-                  x:Name="CarDataGrid"
-                  ItemsSource="{Binding}"
-                  SelectionChanged="CarDataGrid_SelectionChanged"
-                  IsReadOnly="True"
-                  SelectionMode="Single"
-                  AutoGenerateColumns="False"
-                  RowBackground ="DarkGray"
-                  AlternatingRowBackground="Gray"
-                  HeadersVisibility="Column"
-                  GridLinesVisibility="None"
-                  BorderThickness="0"
-                  HorizontalAlignment="Stretch"
-                  VerticalAlignment="Stretch"
-                  >
+            <Grid>
+                <DataGrid ColumnWidth="*"
+                      Background="#200F53"
+                      x:Name="CarDataGrid"
+                      ItemsSource="{Binding FilteredCars}"
+                      SelectionChanged="CarDataGrid_SelectionChanged"
+                      IsReadOnly="True"
+                      SelectionMode="Single"
+                      AutoGenerateColumns="False"
+                      RowBackground="DarkGray"
+                      AlternatingRowBackground="Gray"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="None"
+                      BorderThickness="0"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch">
 
-                <DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="Gray"/>
-                        <Setter Property="Padding" Value="0,0,0,0"/>
-                        <Setter Property="FontFamily" Value="Montserrat"/>
-                        <Setter Property="FontSize" Value="15"/>
-                    </Style>
-                </DataGrid.ColumnHeaderStyle>
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="Gray"/>
+                            <Setter Property="Padding" Value="0,0,0,0"/>
+                            <Setter Property="FontFamily" Value="Montserrat"/>
+                            <Setter Property="FontSize" Value="15"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
 
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Class" Binding="{Binding VehicleClass}" Width="Auto" MinWidth="50" />
-                    <DataGridTextColumn Header="Brand" Binding="{Binding Brand}" Width="Auto" MinWidth="60"/>
-                    <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="Auto" MinWidth="60"/>
-                    <DataGridTextColumn Header="Year" Binding="{Binding ProductionYear}" Width="Auto" MinWidth="50"/>
-                    <DataGridTextColumn Header="LicensePlate" Binding="{Binding LicensePlate}" Width="Auto" MinWidth="100"/>
-                    <DataGridTextColumn Header="Fuel Type" Binding="{Binding FuelType, Converter={StaticResource FuelTypeConverter}}" Width="Auto" MinWidth="80"/>
-                    <DataGridTextColumn Header="Gearbox" Binding="{Binding Gearbox, Converter={StaticResource GearboxConverter}}" Width="Auto" MinWidth="100"/>
-                    <DataGridTextColumn Header="Color" Binding="{Binding Color}" Width="Auto" MinWidth="70"/>
-                    <DataGridTextColumn Header="Mileage" Binding="{Binding Mileage}" Width="Auto" MinWidth="80"/>
-                    <DataGridTextColumn Header="Status" Binding="{Binding StatusCar, Converter={StaticResource StatusCarConverter}}" Width="Auto" MinWidth="60"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Class" Binding="{Binding VehicleClass}" Width="Auto" MinWidth="50" />
+                        <DataGridTextColumn Header="Brand" Binding="{Binding Brand}" Width="Auto" MinWidth="60"/>
+                        <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="Auto" MinWidth="60"/>
+                        <DataGridTextColumn Header="Year" Binding="{Binding ProductionYear}" Width="Auto" MinWidth="50"/>
+                        <DataGridTextColumn Header="LicensePlate" Binding="{Binding LicensePlate}" Width="Auto" MinWidth="100"/>
+                        <DataGridTextColumn Header="Fuel Type" Binding="{Binding FuelType, Converter={StaticResource FuelTypeConverter}}" Width="Auto" MinWidth="80"/>
+                        <DataGridTextColumn Header="Gearbox" Binding="{Binding Gearbox, Converter={StaticResource GearboxConverter}}" Width="Auto" MinWidth="100"/>
+                        <DataGridTextColumn Header="Color" Binding="{Binding Color}" Width="Auto" MinWidth="70"/>
+                        <DataGridTextColumn Header="Mileage" Binding="{Binding Mileage}" Width="Auto" MinWidth="80"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding StatusCar, Converter={StaticResource StatusCarConverter}}" Width="Auto" MinWidth="60"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <TextBlock Text="Brak wyników"
+           Foreground="Gray"
+           FontSize="30"
+           FontFamily="Montserrat"
+           HorizontalAlignment="Center"
+           VerticalAlignment="Center"
+           Visibility="{Binding FilteredCars.Count, Converter={StaticResource EmptyToVisibilityConverter}}" />
+
+            </Grid>
         </Border>
 
     </Grid>

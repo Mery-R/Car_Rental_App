@@ -11,11 +11,11 @@ namespace Car_Rental.Converters
             int type = (int)value;
             switch (type)
             {
-                case 0: return "Benzyna";
+                case 0: return "Gasoline";
                 case 1: return "Diesel";
-                case 2: return "Elektryczny";
-                case 3: return "Hybryda";
-                default: return "Nieznany";
+                case 2: return "Electric";
+                case 3: return "Hybrid";
+                default: return "Unknown";
             }
         }
 
@@ -25,10 +25,10 @@ namespace Car_Rental.Converters
             if (str == null) return 0;
             switch (str)
             {
-                case "Benzyna": return 0;
+                case "Gasoline": return 0;
                 case "Diesel": return 1;
-                case "Elektryczny": return 2;
-                case "Hybryda": return 3;
+                case "Electric": return 2;
+                case "Hybrid": return 3;
                 default: return 0;
             }
         }
@@ -39,14 +39,14 @@ namespace Car_Rental.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int gearbox = (int)value;
-            return gearbox == 0 ? "Manualna" : "Automatyczna";
+            return gearbox == 0 ? "Manual" : "Automatic";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string str = value as string;
             if (str == null) return 0;
-            return str == "Automatyczna" ? 1 : 0;
+            return str == "Automatic" ? 1 : 0;
         }
     }
 
@@ -57,11 +57,11 @@ namespace Car_Rental.Converters
             int status = (int)value;
             switch (status)
             {
-                case 0: return "Dostępny";
-                case 1: return "Zarezerwowany";
-                case 2: return "Wypożyczony";
-                case 3: return "Serwis";
-                default: return "Nieznany";
+                case 0: return "Available";
+                case 1: return "Reserved";
+                case 2: return "Rented";
+                case 3: return "Service";
+                default: return "Unknow";
             }
         }
 
@@ -71,10 +71,10 @@ namespace Car_Rental.Converters
             if (str == null) return 0;
             switch (str)
             {
-                case "Dostępny": return 0;
-                case "Zarezerwowany": return 1;
-                case "Wypożyczony": return 2;
-                case "Serwis": return 3;
+                case "Available": return 0;
+                case "Reserved": return 1;
+                case "Rented": return 2;
+                case "Service": return 3;
                 default: return 0;
             }
         }

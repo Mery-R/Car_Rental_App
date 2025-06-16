@@ -30,8 +30,16 @@ namespace Car_Rental.Repositories
                                 CarId = Convert.ToInt32(reader["CarId"]),
                                 Brand = reader["Brand"].ToString(),
                                 Model = reader["Model"].ToString(),
+                                ProductionYear = Convert.ToInt32(reader["ProductionYear"]),
                                 LicensePlate = reader["LicensePlate"].ToString(),
+                                VIN = reader["VIN"]?.ToString(),
+                                Engine = reader["Engine"]?.ToString(),
+                                FuelType = Convert.ToInt32(reader["FuelType"]),
+                                Gearbox = Convert.ToInt32(reader["Gearbox"]),
+                                VehicleClass = reader["VehicleClass"]?.ToString(),
+                                Color = reader["Color"]?.ToString(),
                                 Mileage = Convert.ToInt32(reader["Mileage"]),
+                                StatusCar = Convert.ToInt32(reader["StatusCar"]),
                                 DailyPrice_1_3 = Convert.ToSingle(reader["DailyPrice_1_3"]),
                                 DailyPrice_4_8 = Convert.ToSingle(reader["DailyPrice_4_8"]),
                                 DailyPrice_9_15 = Convert.ToSingle(reader["DailyPrice_9_15"]),
@@ -39,7 +47,8 @@ namespace Car_Rental.Repositories
                                 DailyPrice_30plus = Convert.ToSingle(reader["DailyPrice_30plus"]),
                                 WeekendPrice = Convert.ToSingle(reader["WeekendPrice"]),
                                 Deposit = Convert.ToSingle(reader["Deposit"]),
-                                StatusCar = Convert.ToInt32(reader["StatusCar"])
+                                ImagePath = reader["ImagePath"]?.ToString()
+
                             };
                         }
                     }
@@ -90,7 +99,13 @@ namespace Car_Rental.Repositories
                     }
                 }
             }
+            foreach (var car in cars)
+            {
+                Console.WriteLine($"CarId: {car.CarId}, StatusCar: {car.StatusCar}");
+            }
             return cars;
+            
+
         }
 
         public void AddCar(CarModel car)

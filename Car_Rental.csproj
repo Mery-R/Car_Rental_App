@@ -134,6 +134,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\EmptyToVisibilityConverter.cs" />
     <Compile Include="CS\CarDataConverter.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\DamageModel.cs" />
@@ -324,6 +325,7 @@
     <Resource Include="Images\left.png" />
     <Resource Include="Images\right.png" />
     <Resource Include="Images\user_icon.png" />
+    <Resource Include="Images\PricesImage.jpg" />
     <Content Include="schema.sql" />
   </ItemGroup>
   <ItemGroup />

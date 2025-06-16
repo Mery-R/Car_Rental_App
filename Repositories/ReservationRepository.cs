@@ -9,23 +9,28 @@ namespace Car_Rental.Repositories
     {
         public void AddReservation(ReservationModel reservation)
         {
-            var connection = GetConnection();
-            connection.Open();
+            using (var connection = GetConnection())
+            {
+                connection.Open();
 
-            var query = @"INSERT INTO Reservation (CarID, UserID, CustomerID, StartDate, EndDate, StatusReservation, TotalPrice)
-                          VALUES (@CarID, @UserID, @CustomerID, @StartDate, @EndDate, @StatusReservation, @TotalPrice);";
+                var query = @"INSERT INTO Reservation (CarID, UserID, CustomerID, StartDate, EndDate, StatusReservation, TotalPrice)
+                      VALUES (@CarID, @UserID, @CustomerID, @StartDate, @EndDate, @StatusReservation, @TotalPrice);";
 
-            var command = new SQLiteCommand(query, connection);
-            command.Parameters.AddWithValue("@CarID", reservation.CarId);
-            command.Parameters.AddWithValue("@UserID", reservation.UserId);
-            command.Parameters.AddWithValue("@CustomerID", reservation.CustomerId);
-            command.Parameters.AddWithValue("@StartDate", reservation.StartDate.ToString("yyyy-MM-dd"));
-            command.Parameters.AddWithValue("@EndDate", reservation.EndDate.ToString("yyyy-MM-dd"));
-            command.Parameters.AddWithValue("@StatusReservation", reservation.StatusReservation);
-            command.Parameters.AddWithValue("@TotalPrice", reservation.TotalPrice);
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@CarID", reservation.CarId);
+                    command.Parameters.AddWithValue("@UserID", reservation.UserId);
+                    command.Parameters.AddWithValue("@CustomerID", reservation.CustomerId);
+                    command.Parameters.AddWithValue("@StartDate", reservation.StartDate.ToString("yyyy-MM-dd"));
+                    command.Parameters.AddWithValue("@EndDate", reservation.EndDate.ToString("yyyy-MM-dd"));
+                    command.Parameters.AddWithValue("@StatusReservation", reservation.StatusReservation);
+                    command.Parameters.AddWithValue("@TotalPrice", reservation.TotalPrice);
 
-            command.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
+                }
+            }
         }
+
 
         public List<ReservationModel> GetAllReservations()
         {
@@ -36,27 +41,32 @@ namespace Car_Rental.Repositories
                 connection.Open();
 
                 var query = "SELECT * FROM Reservation";
-                var command = new SQLiteCommand(query, connection);
-                var reader = command.ExecuteReader();
 
-                while (reader.Read())
+                using (var command = new SQLiteCommand(query, connection))
                 {
-                    reservations.Add(new ReservationModel
+                    using (var reader = command.ExecuteReader())
                     {
-                        ReservationId = Convert.ToInt32(reader["ReservationId"]),
-                        CarId = Convert.ToInt32(reader["CarID"]),
-                        UserId = Convert.ToInt32(reader["UserID"]),
-                        CustomerId = Convert.ToInt32(reader["CustomerID"]),
-                        StartDate = DateTime.Parse(reader["StartDate"].ToString()),
-                        EndDate = DateTime.Parse(reader["EndDate"].ToString()),
-                        StatusReservation = Convert.ToInt32(reader["StatusReservation"]),
-                        TotalPrice = float.Parse(reader["TotalPrice"].ToString())
-                    });
+                        while (reader.Read())
+                        {
+                            reservations.Add(new ReservationModel
+                            {
+                                ReservationId = Convert.ToInt32(reader["ReservationId"]),
+                                CarId = Convert.ToInt32(reader["CarID"]),
+                                UserId = Convert.ToInt32(reader["UserID"]),
+                                CustomerId = Convert.ToInt32(reader["CustomerID"]),
+                                StartDate = DateTime.Parse(reader["StartDate"].ToString()),
+                                EndDate = DateTime.Parse(reader["EndDate"].ToString()),
+                                StatusReservation = Convert.ToInt32(reader["StatusReservation"]),
+                                TotalPrice = float.Parse(reader["TotalPrice"].ToString())
+                            });
+                        }
+                    }
                 }
-
-                return reservations;
             }
+
+            return reservations;
         }
+
         public ReservationModel GetActiveReservationByCarId(int carId)
         {
             using (var connection = GetConnection())
