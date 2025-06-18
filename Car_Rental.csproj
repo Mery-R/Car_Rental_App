@@ -134,8 +134,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\AccessToRoleConverter.cs" />
     <Compile Include="Converters\EmptyToVisibilityConverter.cs" />
-    <Compile Include="CS\CarDataConverter.cs" />
+    <Compile Include="Converters\CarDataConverter.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\DamageModel.cs" />
     <Compile Include="Models\Enums.cs" />
@@ -144,6 +145,7 @@
     </Compile>
     <Compile Include="Models\CarModel.cs" />
     <Compile Include="Models\ReservationModel.cs" />
+    <Compile Include="Models\ServiceModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Repositories\CarRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
@@ -153,12 +155,17 @@
     <Compile Include="Models\UserAccountModel.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\ReservationRepository.cs" />
+    <Compile Include="Repositories\ServiceRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="ViewModels\Car_List_ViewModel.cs" />
+    <Compile Include="ViewModels\CustomerManagementViewModel.cs" />
+    <Compile Include="ViewModels\FleetManagementViewModel.cs" />
+    <Compile Include="ViewModels\HistoryViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PricesViewModel.cs" />
     <Compile Include="ViewModels\ShowCarsViewModel.cs" />
+    <Compile Include="ViewModels\UserManagementViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelCommand.cs" />
     <Compile Include="Views\Add_Car_Window.xaml.cs">
@@ -170,11 +177,17 @@
     <Compile Include="Views\Admin_Menu.xaml.cs">
       <DependentUpon>Admin_Menu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Customer_Management_Control.xaml.cs">
+      <DependentUpon>Customer_Management_Control.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Edit_Car_Window.xaml.cs">
       <DependentUpon>Edit_Car_Window.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Fleet_Management_Window.xaml.cs">
-      <DependentUpon>Fleet_Management_Window.xaml</DependentUpon>
+    <Compile Include="Views\Fleet_Management_Control.xaml.cs">
+      <DependentUpon>Fleet_Management_Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\History_Control.xaml.cs">
+      <DependentUpon>History_Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Price_List_Control.xaml.cs">
       <DependentUpon>Price_List_Control.xaml</DependentUpon>
@@ -185,14 +198,14 @@
     <Compile Include="Views\Return_Car_Window.xaml.cs">
       <DependentUpon>Return_Car_Window.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ShowCars.xaml.cs">
-      <DependentUpon>ShowCars.xaml</DependentUpon>
+    <Compile Include="Views\Service_Car_Window.xaml.cs">
+      <DependentUpon>Service_Car_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Show_Cars_Control.xaml.cs">
       <DependentUpon>Show_Cars_Control.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\User_Management_Window.xaml.cs">
-      <DependentUpon>User_Management_Window.xaml</DependentUpon>
+    <Compile Include="Views\User_Management_Control.xaml.cs">
+      <DependentUpon>User_Management_Control.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\User_Menu.xaml.cs">
@@ -222,11 +235,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Customer_Management_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Edit_Car_Window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Fleet_Management_Window.xaml">
+    <Page Include="Views\Fleet_Management_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\History_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -254,7 +275,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ShowCars.xaml">
+    <Page Include="Views\Service_Car_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -262,7 +283,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\User_Management_Window.xaml">
+    <Page Include="Views\User_Management_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
@@ -326,6 +347,14 @@
     <Resource Include="Images\right.png" />
     <Resource Include="Images\user_icon.png" />
     <Resource Include="Images\PricesImage.jpg" />
+    <Resource Include="Images\ford_focus.jpg" />
+    <Resource Include="Images\bmw_m2.jpg" />
+    <Resource Include="Images\bmw_m3.jpg" />
+    <Resource Include="Images\bmw_m4.png" />
+    <Resource Include="Images\diat_doblo.jpg" />
+    <Resource Include="Images\mazda_miata.png" />
+    <Resource Include="Images\toyota_corolla.png" />
+    <Resource Include="Images\default.png" />
     <Content Include="schema.sql" />
   </ItemGroup>
   <ItemGroup />

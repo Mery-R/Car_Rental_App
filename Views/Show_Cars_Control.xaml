@@ -10,7 +10,7 @@
              mc:Ignorable="d" 
              MinWidth="750"
              MinHeight="300"
-             d:DesignHeight="450" d:DesignWidth="750">
+             d:DesignHeight="450"  d:DesignWidth="1000">
 
     <UserControl.DataContext>
         <vm:ShowCarsViewModel />
@@ -21,6 +21,7 @@
         <conv:FuelTypeConverter x:Key="FuelTypeConverter" />
         <conv:GearboxConverter x:Key="GearboxConverter" />
         <conv:StatusCarConverter x:Key="StatusCarConverter" />
+
     </UserControl.Resources>
     
     <Grid>
@@ -30,130 +31,126 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
                         Grid.Column="0">
                 <fa:IconImage Icon="Search" Height="30" Width="30" Foreground="{StaticResource plainTextColor3}"/>
 
                 <TextBox 
-    x:Name="SearchTextBox"
-    Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-    Foreground="Gray"
-                    FontSize="13"
-    Height="24"
-    Width="250"
-    Background="Transparent"
-    FontWeight="Medium"
-    FontFamily="Montserrat"                            
-    CaretBrush="{StaticResource plainTextColor3}"
-    BorderBrush="{StaticResource plainTextColor3}"
-    BorderThickness="0,0,0,1"                             
-    VerticalContentAlignment="Center"
-    Margin="5,5,0,0"
-    GotFocus="SearchTextBox_GotFocus"
-    LostFocus="SearchTextBox_LostFocus" TextChanged="SearchTextBox_TextChanged"
-/>
-
-
-                    
+                    x:Name="SearchTextBox" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    Foreground="Gray" FontSize="13" Height="24" Width="250" Background="Transparent" FontWeight="Medium"
+                    FontFamily="Montserrat" CaretBrush="{StaticResource plainTextColor3}" BorderBrush="{StaticResource plainTextColor3}"
+                    BorderThickness="0,0,0,1" VerticalContentAlignment="Center" Margin="5,5,0,0" GotFocus="SearchTextBox_GotFocus"
+                    LostFocus="SearchTextBox_LostFocus" TextChanged="SearchTextBox_TextChanged"
+                    />
+                <Button Content="Rent" Width="100" Height="30" Click="RentCarButton_Click" Margin="15,0,0,0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#773DFF"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Height="30" Width="100" CornerRadius="15" Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#836EFB"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Content="Return" Width="100" Height="30" Click="ReturnCarButton_Click" Margin="15,0,0,0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#773DFF"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Height="30" Width="100" CornerRadius="15" Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#836EFB"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Content="Service" Width="100" Height="30" Click="ServiceCarButton_Click" Margin="15,0,0,0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#773DFF"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Height="30" Width="100" CornerRadius="15" Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#836EFB"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Content="Rented" Width="100" Height="30" Click="RentedCarButton_Click" Margin="15,0,0,0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#773DFF"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Height="30" Width="100" CornerRadius="15" Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#836EFB"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Content="Available" Width="100" Height="30" Click="AvailableCarButton_Click" Margin="15,0,0,0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#773DFF"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Height="30" Width="100" CornerRadius="15" Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#836EFB"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </StackPanel>
 
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5" >
-                <Button Content="Rent" Width="100" Height="30" Click="RentCarButton_Click">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="#773DFF"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Height="30" Width="100" CornerRadius="15" Background="{TemplateBinding Background}">
-                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#836EFB"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Content="Return" Width="100" Height="30" Click="ReturnCarButton_Click" Margin="15,0,15,0">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="#773DFF"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Height="30" Width="100" CornerRadius="15" Background="{TemplateBinding Background}">
-                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#836EFB"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Content="Rented" Width="100" Height="30" Click="ReturnCarButton_Click" Margin="1,0,15,0">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="#773DFF"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Height="30" Width="100" CornerRadius="15" Background="{TemplateBinding Background}">
-                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#836EFB"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-
-                <Button Content="Available" Width="100" Height="30" Click="ReturnCarButton_Click" Margin="5,0,5,0">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="#773DFF"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Height="30" Width="100" CornerRadius="15" Background="{TemplateBinding Background}">
-                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#836EFB"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-
-
-
-            </StackPanel>
-            
         </Grid>
         <Border Grid.Row="1"
                 Background="#200F53"
@@ -183,11 +180,26 @@
                             <Setter Property="Foreground" Value="Gray"/>
                             <Setter Property="Padding" Value="0,0,0,0"/>
                             <Setter Property="FontFamily" Value="Montserrat"/>
-                            <Setter Property="FontSize" Value="15"/>
+                            <Setter Property="FontSize" Value="18"/>
                         </Style>
                     </DataGrid.ColumnHeaderStyle>
 
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="FontSize" Value="16"/>
+                        </Style>
+                    </DataGrid.CellStyle>
+
                     <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Image" Width="150">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Width="150" Height="100"
+                                           Source="{Binding ImagePath}"
+                                           Stretch="UniformToFill"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Header="Class" Binding="{Binding VehicleClass}" Width="Auto" MinWidth="50" />
                         <DataGridTextColumn Header="Brand" Binding="{Binding Brand}" Width="Auto" MinWidth="60"/>
                         <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="Auto" MinWidth="60"/>

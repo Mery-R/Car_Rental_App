@@ -10,11 +10,11 @@ none
 false
 TRACE
 C:\Users\Mery\Desktop\Car_Rental\App\App.xaml
-12-1082738454
+15-288293601
 178374781
-31-1854933231
+43-2017421031
 38-314008923
-CustomControls\BindablePasswordBox.xaml;Styles\ButtonStyles.xaml;Styles\UIColor.xaml;Views\Add_Car_Window.xaml;Views\Admin_Menu.xaml;Views\Fleet_Management_Window.xaml;Views\Login_Screen.xaml;Views\Price_List_Control.xaml;Views\ShowCars.xaml;Views\Show_Cars_Control.xaml;Views\User_Management_Window.xaml;Views\User_Menu.xaml;
+CustomControls\BindablePasswordBox.xaml;Styles\ButtonStyles.xaml;Styles\UIColor.xaml;Views\Add_Car_Window.xaml;Views\Add_Customer_Window.xaml;Views\Admin_Menu.xaml;Views\Edit_Car_Window.xaml;Views\Fleet_Management_Control.xaml;Views\Login_Screen.xaml;Views\Price_List_Control.xaml;Views\Rent_Car_Window.xaml;Views\Return_Car_Window.xaml;Views\Show_Cars_Control.xaml;Views\User_Management_Window.xaml;Views\User_Menu.xaml;
 
 True
 

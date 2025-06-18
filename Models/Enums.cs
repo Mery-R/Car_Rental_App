@@ -6,14 +6,51 @@
         Available = 0,  // Dostępny
         Reserved = 1,   // Zarezerwowany
         Rented = 2,     // Wypożyczony
-        Maintenance = 3 // W naprawie
+        ServicePlanned = 3, // W naprawie
+        ServiceInProgress = 4 // W trakcie serwisu
     }
-    public enum Color { Red, Blue, Green }
-    public enum FuelType { Petrol, Diesel, Electric }
-    public enum Gearbox { Manual, Automatic }
-    public enum VehicleClass { Economy, Compact, SUV }
-
+    public enum Color 
+    { 
+        Red, 
+        Blue, 
+        Green,
+        Black,
+        White,
+        Yellow,
+    }
+    public enum FuelType 
+    { 
+        Petrol = 0, 
+        Diesel = 1, 
+        Electric = 2,
+        Hybrid = 3
+    }
+    public enum Gearbox 
+    { 
+        Manual = 0, 
+        Automatic = 1,
+        CVT = 2
+    }
+    public enum VehicleClass 
+    { 
+        A, 
+        B, 
+        C,
+        D,
+        E,
+        F,
+        J,
+        M,
+        S
+    }
     public enum ReservationStatus
+    {
+        Planned = 0,
+        Active = 1,
+        Finished = 2,
+        Cancelled = 3
+    }
+    public enum ServiceStatus
     {
         Planned = 0,
         Active = 1,

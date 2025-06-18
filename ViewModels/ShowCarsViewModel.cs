@@ -73,6 +73,7 @@ namespace Car_Rental.ViewModels
             // Usunięto OnPropertyChanged tutaj, bo jest już w setterze FilteredCars
         }
 
+
  
     }
 }

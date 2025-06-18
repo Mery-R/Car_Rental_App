@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:models="clr-namespace:Car_Rental.Models;assembly=Car_Rental"
-        Title="Dodaj samochód" Height="800" Width="400"
+        Title="Dodaj samochód" Height="850" Width="400"
         ResizeMode="NoResize"
         AllowDrop="True">
 
@@ -52,72 +52,64 @@
     <ScrollViewer>
         <StackPanel Margin="10">
 
-            <TextBlock Text="Marka:"/>
+            <TextBlock Text="Brand:"/>
             <ComboBox x:Name="BrandComboBox" ItemsSource="{Binding Source={StaticResource BrandValues}}"/>
 
             <TextBlock Text="Model:"/>
             <TextBox x:Name="ModelTextBox"/>
 
-            <TextBlock Text="Rok produkcji:"/>
-            <ComboBox x:Name="ProductionYearComboBox">
-                <ComboBox.ItemsSource>
-                    <x:Array Type="{x:Type sys:Int32}">
-                        <sys:Int32>2000</sys:Int32>
-                        <!-- Można dodać więcej lat w code-behind -->
-                        <sys:Int32>2025</sys:Int32>
-                    </x:Array>
-                </ComboBox.ItemsSource>
-            </ComboBox>
+            <TextBlock Text="Production year:"/>
+            <ComboBox x:Name="ProductionYearComboBox"/>
 
-            <TextBlock Text="Tablica rejestracyjna:"/>
+            <TextBlock Text="License Plate:"/>
             <TextBox x:Name="LicensePlateTextBox"/>
 
             <TextBlock Text="VIN:"/>
             <TextBox x:Name="VINTextBox"/>
 
-            <TextBlock Text="Silnik:"/>
+            <TextBlock Text="Engine:"/>
             <TextBox x:Name="EngineTextBox"/>
 
-            <TextBlock Text="Rodzaj paliwa:"/>
+            <TextBlock Text="Fuel Type:"/>
             <ComboBox x:Name="FuelTypeComboBox" ItemsSource="{Binding Source={StaticResource FuelTypeValues}}"/>
 
-            <TextBlock Text="Skrzynia biegów:"/>
+            <TextBlock Text="Gearbox:"/>
             <ComboBox x:Name="GearboxComboBox" ItemsSource="{Binding Source={StaticResource GearboxValues}}"/>
 
-            <TextBlock Text="Klasa pojazdu:"/>
+            <TextBlock Text="Vehicle class:"/>
             <ComboBox x:Name="VehicleClassComboBox" ItemsSource="{Binding Source={StaticResource VehicleClassValues}}"/>
 
-            <TextBlock Text="Kolor:"/>
+            <TextBlock Text="Color:"/>
             <ComboBox x:Name="ColorComboBox" ItemsSource="{Binding Source={StaticResource ColorValues}}"/>
 
-            <TextBlock Text="Przebieg:"/>
+            <TextBlock Text="Mileage:"/>
             <TextBox x:Name="MileageTextBox"/>
 
             <TextBlock Text="Status:"/>
             <ComboBox x:Name="StatusComboBox" ItemsSource="{Binding Source={StaticResource CarStatusValues}}"/>
 
-            <TextBlock Text="Cena 1-3 dni:"/>
+            <TextBlock Text="Price 1-3 days:"/>
             <TextBox x:Name="DailyPrice13TextBox"/>
 
-            <TextBlock Text="Cena 4-8 dni:"/>
+            <TextBlock Text="Price 4-8 days:"/>
             <TextBox x:Name="DailyPrice48TextBox"/>
 
-            <TextBlock Text="Cena 9-15 dni:"/>
+            <TextBlock Text="Price 9-15 days:"/>
             <TextBox x:Name="DailyPrice915TextBox"/>
 
-            <TextBlock Text="Cena 16-29 dni:"/>
+            <TextBlock Text="Price 16-29 days:"/>
             <TextBox x:Name="DailyPrice1629TextBox"/>
 
-            <TextBlock Text="Cena 30+ dni:"/>
+            <TextBlock Text="Price 30+ days:"/>
             <TextBox x:Name="DailyPrice30PlusTextBox"/>
 
-            <TextBlock Text="Cena weekendowa:"/>
+            <TextBlock Text="Weekend price:"/>
             <TextBox x:Name="WeekendPriceTextBox"/>
 
-            <TextBlock Text="Kaucja:"/>
+            <TextBlock Text="Deposit:"/>
             <TextBox x:Name="DepositTextBox"/>
 
-            <TextBlock Text="Zdjęcie:"/>
+            <TextBlock Text="Image:"/>
             <StackPanel>
                 <Border x:Name="ImageDropZone" BorderBrush="Gray" BorderThickness="1" Height="80" AllowDrop="True" Drop="ImageDropZone_Drop" Padding="5">
                     <Grid>

@@ -55,7 +55,7 @@ namespace Car_Rental.Views
             }
             else
             {
-                MessageBox.Show("Wybierz samochód do wypożyczenia.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Choose a car to rent.", "Info", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -63,7 +63,9 @@ namespace Car_Rental.Views
         {
             if (CarDataGrid.SelectedItem is CarModel selectedCar)
             {
-                if ((CarStatus)selectedCar.StatusCar != CarStatus.Rented)
+                // Akceptuj zarówno Rented, jak i Service
+                var status = (CarStatus)selectedCar.StatusCar;
+                if (status != CarStatus.Rented)
                 {
                     MessageBox.Show("This car is not currently rented.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
@@ -72,7 +74,7 @@ namespace Car_Rental.Views
                 var reservationRepo = new ReservationRepository();
                 var latestReservation = reservationRepo.GetActiveReservationByCarId(selectedCar.CarId);
 
-                if (latestReservation == null)
+               if (latestReservation == null)
                 {
                     MessageBox.Show("No active reservation found for this car.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
@@ -99,7 +101,30 @@ namespace Car_Rental.Views
             }
         }
 
-        private void RefreshCars()
+        private void ServiceCarButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CarDataGrid.SelectedItem is CarModel selectedCar)
+            {
+                int carId = selectedCar.CarId;
+                // Przekazanie delegata do odświeżenia
+                Service_Car_Window serviceCarWindow = new Service_Car_Window(carId, RefreshCars);
+                serviceCarWindow.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a car to add a service.", "No Car Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void RentedCarButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void AvailableCarButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        public void RefreshCars()
         {
             // Pobierz aktualną listę samochodów z repozytorium
             var cars = _carRepository.GetAllCars();
@@ -113,12 +138,6 @@ namespace Car_Rental.Views
 
             // Zastosuj filtr (w ViewModelu)
             ViewModel.ApplyFilter();
-        }
-
-        private void ReserveCarButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Implementacja logiki obsługi przycisku "Reserve"
-            MessageBox.Show("Rezerwacja samochodu została rozpoczęta.");
         }
 
         private void CarDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

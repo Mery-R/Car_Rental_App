@@ -24,6 +24,11 @@ namespace Car_Rental.ViewModels
         // Commands
         public ICommand ShowCarViewCommand { get; }
         public ICommand PricesViewCommand { get; }
+        public ICommand HistoryViewCommand { get; }
+        public ICommand FleetManagementViewCommand { get; }
+        public ICommand UserManagementViewCommand { get; }
+        public ICommand CustomerManagementViewCommand { get; }
+
 
         // Properties
         public UserModel CurrentUser
@@ -89,6 +94,10 @@ namespace Car_Rental.ViewModels
             // Inicjalizacja komend
             ShowCarViewCommand = new ViewModelCommand(ExecuteShowCarViewCommand);
             PricesViewCommand = new ViewModelCommand(ExecutePricesViewCommand);
+            HistoryViewCommand = new ViewModelCommand(ExecuteHistoryViewCommand);
+            FleetManagementViewCommand = new ViewModelCommand(ExecuteFleetManagementViewCommand);
+            UserManagementViewCommand = new ViewModelCommand(ExecuteUserManagementViewCommand);
+            CustomerManagementViewCommand = new ViewModelCommand(ExecuteCustomerManagementViewCommand);
 
             // Domyślny widok
             ExecuteShowCarViewCommand(null);
@@ -103,12 +112,36 @@ namespace Car_Rental.ViewModels
             Caption = "Show cars";
             Icon = IconChar.Car;
         }
-
         private void ExecutePricesViewCommand(object obj)
         {
             CurrentChildView = new PricesViewModel();
             Caption = "Prices";
             Icon = IconChar.Tags;
+        }
+        private void ExecuteHistoryViewCommand(object obj)
+        {
+            CurrentChildView = new HistoryViewModel();
+            Caption = "History";
+            Icon = IconChar.ClockRotateLeft;
+        }
+        private void ExecuteFleetManagementViewCommand(object obj)
+        {
+            CurrentChildView = new FleetManagementViewModel();
+            Caption = "Fleet management";
+            Icon = IconChar.Gears;
+        }
+        private void ExecuteUserManagementViewCommand(object obj)
+        {
+            CurrentChildView = new UserManagementViewModel();
+            Caption = "User management";
+            Icon = IconChar.Briefcase;
+        }
+
+        private void ExecuteCustomerManagementViewCommand(object obj)
+        {
+            CurrentChildView = new CustomerManagementViewModel();
+            Caption = "Customer management";
+            Icon = IconChar.PeopleRoof;
         }
 
         private void LoadCurrentUserData()

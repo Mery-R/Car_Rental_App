@@ -23,7 +23,23 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type viewModel:PricesViewModel}">
-            <local:ShowCars/>
+            <local:Price_List_Control/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:HistoryViewModel}">
+            <local:History_Control/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:FleetManagementViewModel}">
+            <local:Fleet_Management_Control/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:UserManagementViewModel}">
+            <local:User_Management_Control/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:CustomerManagementViewModel}">
+            <local:Customer_Management_Control/>
         </DataTemplate>
     </Window.Resources>
 
@@ -76,7 +92,7 @@
                         <RadioButton Style="{StaticResource menuButton}"
                                      Tag="{StaticResource color1}"
                                      IsChecked="True"
-                            Command ="{Binding ShowCarViewCommand}">
+                                     Command ="{Binding ShowCarViewCommand}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="Car" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Style="{StaticResource menuButtonText}" Text="Show cars"/>
@@ -84,7 +100,7 @@
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource menuButton}"
-             Tag="{StaticResource color2}"
+                                     Tag="{StaticResource color2}"
                                      Command ="{Binding PricesViewCommand}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="Tags" Style="{StaticResource menuButtonIcon}"/>
@@ -93,7 +109,8 @@
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource menuButton}"
-             Tag="{StaticResource color3}">
+                                     Tag="{StaticResource color3}"
+                                     Command ="{Binding HistoryViewCommand}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="ClockRotateLeft" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Style="{StaticResource menuButtonText}" Text="History"/>
@@ -101,7 +118,8 @@
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource menuButton}"
-                                     Tag="{StaticResource color4}">
+                                     Tag="{StaticResource color4}"
+                                     Command ="{Binding FleetManagementViewCommand}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="Gears" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Style="{StaticResource menuButtonText}" Text="Fleet management"/>
@@ -109,7 +127,8 @@
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource menuButton}"
-             Tag="{StaticResource color5}">
+                                     Tag="{StaticResource color5}"
+                                     Command ="{Binding UserManagementViewCommand}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="Briefcase" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Style="{StaticResource menuButtonText}" Text="Users"/>
@@ -117,7 +136,8 @@
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource menuButton}"
-Tag="{StaticResource color6}">
+                                     Tag="{StaticResource color6}"
+                                     Command ="{Binding CustomerManagementViewCommand}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="PeopleRoof" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Style="{StaticResource menuButtonText}" Text="Customers"/>
@@ -137,18 +157,18 @@ Tag="{StaticResource color6}">
                         <Grid Grid.Row="2"
                             Margin="10,10,10,10"
                             VerticalAlignment="Bottom">
-                            
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="180" />
                                 <ColumnDefinition Width="60" />
                             </Grid.ColumnDefinitions>
 
                             <!-- 📸 Lewa strona: ikona + login -->
-                                <StackPanel Orientation="Horizontal"
+                            <StackPanel Orientation="Horizontal"
                                 VerticalAlignment="Bottom"
                                             
                                 Grid.Column="0">
-                                    
+
                                 <Ellipse Height="50" Width="50"
                                     Stroke="{StaticResource color2}"
                                     StrokeThickness="2"
@@ -159,37 +179,26 @@ Tag="{StaticResource color6}">
                                 </Ellipse>
 
                                 <TextBlock Text="{Binding CurrentUser.Username}"
-           Foreground="{StaticResource titleColor3}"
-           FontFamily="Montserrat"
-           FontSize="17"
-           VerticalAlignment="Center"
-           Opacity="0.8"
-           TextWrapping="Wrap"
-           TextTrimming="CharacterEllipsis"
-           MaxWidth="110"/>
-
+                                           Foreground="{StaticResource titleColor3}"
+                                           FontFamily="Montserrat"
+                                           FontSize="17"
+                                           VerticalAlignment="Center"
+                                           Opacity="0.8"
+                                           TextWrapping="Wrap"
+                                           TextTrimming="CharacterEllipsis"
+                                           MaxWidth="110"/>
                             </StackPanel>
-
+                            
                             <Button Grid.Column="1"
                                 Style="{StaticResource iconButton}"
                                     Tag="{StaticResource color4}"
                                 Click="LogoutButton_Click">
                                 <fa:IconImage Icon="RightFromBracket" Style="{StaticResource iconButtonIcon}"/>
                             </Button>
-
-
                         </Grid>
-
-
-
-
-
-
-
                     </StackPanel>
                 </Grid>
             </Border>
-
 
             <Border CornerRadius="0,10,10,0" Grid.Column="1">
                 <Border.Background>

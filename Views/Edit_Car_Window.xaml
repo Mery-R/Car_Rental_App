@@ -1,22 +1,128 @@
-<Window x:Class="Car_Rental.Views.EditCarWindow"
+<Window x:Class="Car_Rental.Views.Edit_Car_Window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Edytuj samochód" Height="250" Width="300">
-    
-    <StackPanel Margin="10">
-        <TextBlock Text="Marka:" />
-        <TextBox x:Name="BrandTextBox" />
-        <TextBlock Text="Model:" />
-        <TextBox x:Name="ModelTextBox" />
-        <TextBlock Text="Rok produkcji:" />
-        <TextBox x:Name="YearTextBox" />
-        <TextBlock Text="Numer rejestracyjny:" />
-        <TextBox x:Name="PlateTextBox" />
-        <CheckBox x:Name="AvailabilityCheckBox" Content="Dostępny" Margin="0,10,0,0"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-            <Button Content="OK" Width="60" Margin="0,0,10,0" Click="OkButton_Click"/>
-            <Button Content="Anuluj" Width="60" Click="CancelButton_Click"/>
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:models="clr-namespace:Car_Rental.Models;assembly=Car_Rental"
+        Title="Edytuj samochód" Height="850" Width="400"
+        ResizeMode="NoResize"
+        AllowDrop="True">
+
+    <Window.Resources>
+        <ObjectDataProvider x:Key="BrandValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="models:Brand"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="FuelTypeValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="models:FuelType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="GearboxValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="models:Gearbox"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="VehicleClassValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="models:VehicleClass"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="ColorValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="models:Color"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="CarStatusValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="models:CarStatus"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+
+    <ScrollViewer Margin="0,0,0,-49">
+        <StackPanel Margin="10">
+
+            <TextBlock Text="Brand:"/>
+            <ComboBox x:Name="BrandComboBox" ItemsSource="{Binding Source={StaticResource BrandValues}}"/>
+
+            <TextBlock Text="Model:"/>
+            <TextBox x:Name="ModelTextBox"/>
+
+            <TextBlock Text="Production year:"/>
+            <ComboBox x:Name="ProductionYearComboBox"/>
+
+            <TextBlock Text="License Plate:"/>
+            <TextBox x:Name="LicensePlateTextBox"/>
+
+            <TextBlock Text="VIN:"/>
+            <TextBox x:Name="VINTextBox"/>
+
+            <TextBlock Text="Engine:"/>
+            <TextBox x:Name="EngineTextBox"/>
+
+            <TextBlock Text="Fuel Type:"/>
+            <ComboBox x:Name="FuelTypeComboBox" ItemsSource="{Binding Source={StaticResource FuelTypeValues}}"/>
+
+            <TextBlock Text="Gearbox:"/>
+            <ComboBox x:Name="GearboxComboBox" ItemsSource="{Binding Source={StaticResource GearboxValues}}"/>
+
+            <TextBlock Text="Vehicle class:"/>
+            <ComboBox x:Name="VehicleClassComboBox" ItemsSource="{Binding Source={StaticResource VehicleClassValues}}"/>
+
+            <TextBlock Text="Color:"/>
+            <ComboBox x:Name="ColorComboBox" ItemsSource="{Binding Source={StaticResource ColorValues}}"/>
+
+            <TextBlock Text="Mileage:"/>
+            <TextBox x:Name="MileageTextBox"/>
+
+            <TextBlock Text="Status:"/>
+            <ComboBox x:Name="StatusComboBox" ItemsSource="{Binding Source={StaticResource CarStatusValues}}"/>
+
+            <TextBlock Text="Price 1-3 days:"/>
+            <TextBox x:Name="DailyPrice13TextBox"/>
+
+            <TextBlock Text="Price 4-8 days:"/>
+            <TextBox x:Name="DailyPrice48TextBox"/>
+
+            <TextBlock Text="Price 9-15 days:"/>
+            <TextBox x:Name="DailyPrice915TextBox"/>
+
+            <TextBlock Text="Price 16-29 days:"/>
+            <TextBox x:Name="DailyPrice1629TextBox"/>
+
+            <TextBlock Text="Price 30+ days:"/>
+            <TextBox x:Name="DailyPrice30PlusTextBox"/>
+
+            <TextBlock Text="Weekend price:"/>
+            <TextBox x:Name="WeekendPriceTextBox"/>
+
+            <TextBlock Text="Deposit:"/>
+            <TextBox x:Name="DepositTextBox"/>
+
+            <TextBlock Text="Image:"/>
+            <StackPanel>
+                <Border x:Name="ImageDropZone" BorderBrush="Gray" BorderThickness="1" Height="80" AllowDrop="True" Drop="ImageDropZone_Drop" Padding="5">
+                    <Grid>
+                        <Image x:Name="PreviewImage" Stretch="Uniform" Visibility="Collapsed"/>
+                        <TextBlock x:Name="DropHintText" Text="Przeciągnij i upuść zdjęcie tutaj"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Foreground="Gray" />
+                    </Grid>
+                </Border>
+                <TextBlock x:Name="ImageInfoText" Foreground="Green" FontSize="12" Visibility="Collapsed" Text="Zdjęcie załadowane pomyślnie"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
+                <Button Content="Zapisz" Width="80" Click="SaveButton_Click"/>
+                <Button Content="Anuluj" Width="80" Margin="10,0,0,0" Click="CancelButton_Click"/>
+            </StackPanel>
+
         </StackPanel>
-    </StackPanel>
-    
+    </ScrollViewer>
 </Window>
