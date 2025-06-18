@@ -108,6 +108,71 @@ namespace Car_Rental.Repositories
 
         }
 
+        public List<CarModel> GetCarsByFilter(List<int> statusList, string searchText = null)
+        {
+            var cars = new List<CarModel>();
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+
+                // Budujemy zapytanie dynamicznie, bo statusów może być wiele
+                string query = "SELECT * FROM Car WHERE StatusCar IN (" +
+                               string.Join(",", statusList) + ")";
+
+                if (!string.IsNullOrWhiteSpace(searchText))
+                {
+                    query += " AND (" +
+                             "LOWER(Brand) LIKE @search OR " +
+                             "LOWER(Model) LIKE @search OR " +
+                             "LOWER(LicensePlate) LIKE @search OR " +
+                             "LOWER(Color) LIKE @search)";
+                }
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    if (!string.IsNullOrWhiteSpace(searchText))
+                    {
+                        command.Parameters.AddWithValue("@search", "%" + searchText.ToLower() + "%");
+                    }
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var car = new CarModel
+                            {
+                                CarId = reader.GetInt32(reader.GetOrdinal("CarId")),
+                                Brand = reader.GetString(reader.GetOrdinal("Brand")),
+                                Model = reader.GetString(reader.GetOrdinal("Model")),
+                                ProductionYear = reader.GetInt32(reader.GetOrdinal("ProductionYear")),
+                                LicensePlate = reader.GetString(reader.GetOrdinal("LicensePlate")),
+                                VIN = reader["VIN"] as string,
+                                Engine = reader["Engine"] as string,
+                                FuelType = reader.GetInt32(reader.GetOrdinal("FuelType")),
+                                Gearbox = reader.GetInt32(reader.GetOrdinal("Gearbox")),
+                                VehicleClass = reader["VehicleClass"] as string,
+                                Color = reader["Color"] as string,
+                                Mileage = reader.GetInt32(reader.GetOrdinal("Mileage")),
+                                StatusCar = reader.GetInt32(reader.GetOrdinal("StatusCar")),
+                                DailyPrice_1_3 = reader.GetFloat(reader.GetOrdinal("DailyPrice_1_3")),
+                                DailyPrice_4_8 = reader.GetFloat(reader.GetOrdinal("DailyPrice_4_8")),
+                                DailyPrice_9_15 = reader.GetFloat(reader.GetOrdinal("DailyPrice_9_15")),
+                                DailyPrice_16_29 = reader.GetFloat(reader.GetOrdinal("DailyPrice_16_29")),
+                                DailyPrice_30plus = reader.GetFloat(reader.GetOrdinal("DailyPrice_30plus")),
+                                WeekendPrice = reader.GetFloat(reader.GetOrdinal("WeekendPrice")),
+                                Deposit = reader.GetFloat(reader.GetOrdinal("Deposit")),
+                                ImagePath = reader["ImagePath"] as string
+                            };
+
+                            cars.Add(car);
+                        }
+                    }
+                }
+            }
+            return cars;
+        }
+
+
         public void AddCar(CarModel car)
         {
             using (var connection = GetConnection())

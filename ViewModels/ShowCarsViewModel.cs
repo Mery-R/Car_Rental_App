@@ -12,6 +12,9 @@ namespace Car_Rental.ViewModels
         public ObservableCollection<CarModel> AllCars { get; set; }
 
         private ObservableCollection<CarModel> filteredCars;
+
+        
+
         public ObservableCollection<CarModel> FilteredCars
         {
             get => filteredCars;
@@ -54,26 +57,107 @@ namespace Car_Rental.ViewModels
 
         public void ApplyFilter()
         {
-            if (string.IsNullOrWhiteSpace(SearchText))
-            {
-                FilteredCars = new ObservableCollection<CarModel>(AllCars);
-            }
-            else
-            {
-                var lower = SearchText.ToLower();
-                var filtered = AllCars.Where(car =>
-                    (car.Brand?.ToLower().Contains(lower) ?? false) ||
-                    (car.Model?.ToLower().Contains(lower) ?? false) ||
-                    (car.LicensePlate?.ToLower().Contains(lower) ?? false) ||
-                    (car.Color?.ToLower().Contains(lower) ?? false)
+            var selectedStatuses = new List<int>();
+            if (IsAvailableChecked) selectedStatuses.Add((int)CarStatus.Available);
+            if (IsReservedChecked) selectedStatuses.Add((int)CarStatus.Reserved);
+            if (IsRentedChecked) selectedStatuses.Add((int)CarStatus.Rented);
+            if (IsInServiceChecked) selectedStatuses.Add((int)CarStatus.ServiceInProgress);
+            //if (IsMaintenanceChecked) selectedStatuses.Add((int)CarStatus.Maintenance);
+
+            var lower = SearchText?.ToLower() ?? "";
+
+            var filtered = AllCars
+                .Where(car =>
+                    selectedStatuses.Contains((int)car.Status) &&
+                    (
+                        string.IsNullOrWhiteSpace(lower) ||
+                        (car.Brand?.ToLower().Contains(lower) ?? false) ||
+                        (car.Model?.ToLower().Contains(lower) ?? false) ||
+                        (car.LicensePlate?.ToLower().Contains(lower) ?? false) ||
+                        (car.Color?.ToLower().Contains(lower) ?? false)
+                    )
                 ).ToList();
 
-                FilteredCars = new ObservableCollection<CarModel>(filtered);
+            FilteredCars = new ObservableCollection<CarModel>(filtered);
+        }
+
+        private bool isAvailableChecked = true;
+        public bool IsAvailableChecked
+        {
+            get => isAvailableChecked;
+            set
+            {
+                if (isAvailableChecked != value)
+                {
+                    isAvailableChecked = value;
+                    OnPropertyChanged(nameof(IsAvailableChecked));
+                    ApplyFilter();
+                }
             }
-            // Usunięto OnPropertyChanged tutaj, bo jest już w setterze FilteredCars
+        }
+
+        private bool isReservedChecked = true;
+        public bool IsReservedChecked
+        {
+            get => isReservedChecked;
+            set
+            {
+                if (isReservedChecked != value)
+                {
+                    isReservedChecked = value;
+                    OnPropertyChanged(nameof(IsReservedChecked));
+                    ApplyFilter();
+                }
+            }
+        }
+
+        private bool isRentedChecked = true;
+        public bool IsRentedChecked
+        {
+            get => isRentedChecked;
+            set
+            {
+                if (isRentedChecked != value)
+                {
+                    isRentedChecked = value;
+                    OnPropertyChanged(nameof(IsRentedChecked));
+                    ApplyFilter();
+                }
+            }
+        }
+
+        /*private bool isMaintenanceChecked = true;
+        public bool IsMaintenanceChecked
+        {
+            get => isMaintenanceChecked;
+            set
+            {
+                if (isMaintenanceChecked != value)
+                {
+                    isMaintenanceChecked = value;
+                    OnPropertyChanged(nameof(IsMaintenanceChecked));
+                    ApplyFilter();
+                }
+            }
+        }
+        */
+
+        private bool isInServiceChecked = true;
+        public bool IsInServiceChecked
+        {
+            get => isInServiceChecked;
+            set
+            {
+                if (isInServiceChecked != value)
+                {
+                    isInServiceChecked = value;
+                    OnPropertyChanged(nameof(IsInServiceChecked));
+                    ApplyFilter();
+                }
+            }
         }
 
 
- 
+
     }
 }

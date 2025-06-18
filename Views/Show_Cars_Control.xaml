@@ -10,7 +10,8 @@
              mc:Ignorable="d" 
              MinWidth="750"
              MinHeight="300"
-             d:DesignHeight="450"  d:DesignWidth="1000">
+             d:DesignHeight="450"  d:DesignWidth="1000"
+             MouseDown="Window_MouseDown">
 
     <UserControl.DataContext>
         <vm:ShowCarsViewModel />
@@ -23,6 +24,8 @@
         <conv:StatusCarConverter x:Key="StatusCarConverter" />
 
     </UserControl.Resources>
+    
+    
     
     <Grid>
         <Grid.RowDefinitions>
@@ -39,7 +42,7 @@
 
                 <TextBox 
                     x:Name="SearchTextBox" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    Foreground="Gray" FontSize="13" Height="24" Width="250" Background="Transparent" FontWeight="Medium"
+                    Foreground="Gray" FontSize="13" Height="24" Width="150" Background="Transparent" FontWeight="Medium"
                     FontFamily="Montserrat" CaretBrush="{StaticResource plainTextColor3}" BorderBrush="{StaticResource plainTextColor3}"
                     BorderThickness="0,0,0,1" VerticalContentAlignment="Center" Margin="5,5,0,0" GotFocus="SearchTextBox_GotFocus"
                     LostFocus="SearchTextBox_LostFocus" TextChanged="SearchTextBox_TextChanged"
@@ -107,7 +110,8 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Content="Rented" Width="100" Height="30" Click="RentedCarButton_Click" Margin="15,0,0,0">
+
+                <Button x:Name="FiltersButton" Content="Filters" Width="100" Height="30" PreviewMouseLeftButtonUp="FiltersButton_Click" Margin="15,0,0,0">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#773DFF"/>
@@ -128,27 +132,26 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Content="Available" Width="100" Height="30" Click="AvailableCarButton_Click" Margin="15,0,0,0">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="#773DFF"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Height="30" Width="100" CornerRadius="15" Background="{TemplateBinding Background}">
-                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#836EFB"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
+
+                <!-- Lista filtrów pojawiająca się pod przyciskiem -->
+                <Popup x:Name="FiltersPopup"
+                        PlacementTarget="{Binding ElementName=FiltersButton}"
+                        Placement="Bottom"
+                        AllowsTransparency="True"
+                        StaysOpen="True">
+                    <Border Background="White" BorderBrush="Gray" BorderThickness="1" Padding="10">
+                        <StackPanel Orientation="Vertical" >
+                            <CheckBox Content="Available" IsChecked="{Binding IsAvailableChecked, Mode=TwoWay}" Margin="0,0,0,5"/>
+                            <CheckBox Content="Reserved" IsChecked="{Binding IsReservedChecked, Mode=TwoWay}" Margin="0,0,0,5"/>
+                            <CheckBox Content="Rented" IsChecked="{Binding IsRentedChecked, Mode=TwoWay}" Margin="0,0,0,5"/>
+                            <CheckBox Content="Maintenance" IsChecked="{Binding IsMaintenanceChecked, Mode=TwoWay}" Margin="0,0,0,5" />
+                            <CheckBox Content="In service" IsChecked="{Binding IsInServiceChecked, Mode=TwoWay}" Margin="0,0,0,5"/>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+
+
+
             </StackPanel>
 
         </Grid>

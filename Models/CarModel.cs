@@ -158,5 +158,20 @@ namespace Car_Rental.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public CarStatus Status
+        {
+            get => (CarStatus)statusCar;
+            set
+            {
+                if (statusCar != (int)value)
+                {
+                    statusCar = (int)value;
+                    OnPropertyChanged(nameof(Status));
+                    OnPropertyChanged(nameof(StatusCar)); // opcjonalnie
+                }
+            }
+        }
+
     }
 }

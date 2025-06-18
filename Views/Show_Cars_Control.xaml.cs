@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
-using Car_Rental.Models;
+﻿using Car_Rental.Models;
 using Car_Rental.Repositories;
 using Car_Rental.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace Car_Rental.Views
 {
@@ -14,6 +17,8 @@ namespace Car_Rental.Views
     {
         private readonly CarRepository _carRepository = new CarRepository();
         public ShowCarsViewModel ViewModel { get; set; }
+
+        public Popup FiltersPopupPublic => FiltersPopup;
 
         public Show_Cars_Control()
         {
@@ -26,19 +31,10 @@ namespace Car_Rental.Views
 
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (SearchTextBox.Text == "Search...")
-            {
-                SearchTextBox.Text = "";
-
-            }
         }
 
         private void SearchTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(SearchTextBox.Text))
-            {
-                SearchTextBox.Text = "Search...";
-            }
         }
 
         private void RentCarButton_Click(object sender, RoutedEventArgs e)
@@ -149,5 +145,56 @@ namespace Car_Rental.Views
         {
 
         }
+
+        private void FiltersButton_Click(object sender, RoutedEventArgs e)
+        {
+            FiltersPopup.IsOpen = !FiltersPopup.IsOpen;
+        }
+
+
+        private void FilterCheckBox_Changed(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox cb && Enum.TryParse<CarStatus>(cb.Content.ToString(), out var status))
+            {
+                switch (status)
+                {
+                    case CarStatus.Available:
+                        ViewModel.IsAvailableChecked = cb.IsChecked == true;
+                        break;
+                    case CarStatus.Reserved:
+                        ViewModel.IsReservedChecked = cb.IsChecked == true;
+                        break;
+                    case CarStatus.Rented:
+                        ViewModel.IsRentedChecked = cb.IsChecked == true;
+                        break;
+                    case CarStatus.ServiceInProgress:
+                        ViewModel.IsInServiceChecked = cb.IsChecked == true;
+                        break;
+                        // itd. jeśli masz Maintenance
+                }
+            }
+        }
+
+
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (FiltersPopup.IsOpen && !IsClickInsidePopup(e))
+            {
+                FiltersPopup.IsOpen = false;
+            }
+        }
+
+        private bool IsClickInsidePopup(MouseButtonEventArgs e)
+        {
+            if (FiltersPopup.Child is UIElement popupContent)
+            {
+                Point clickPos = e.GetPosition(popupContent);
+                Rect bounds = new Rect(0, 0, popupContent.RenderSize.Width, popupContent.RenderSize.Height);
+                return bounds.Contains(clickPos);
+            }
+            return false;
+        }
+        
     }
 }

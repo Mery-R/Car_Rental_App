@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -187,5 +188,7 @@ namespace Car_Rental.Views
             GetCursorPos(out POINT pt);
             return new Point(pt.X, pt.Y);
         }
+
+
     }
 }

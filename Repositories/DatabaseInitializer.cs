@@ -131,7 +131,10 @@ class DatabaseInitializer
                 INSERT OR IGNORE INTO Car (Brand, Model, ProductionYear, LicensePlate, VIN, Engine, FuelType, Gearbox, VehicleClass, Color, Mileage, StatusCar, DailyPrice_1_3, DailyPrice_4_8, DailyPrice_9_15, DailyPrice_16_29, DailyPrice_30plus, WeekendPrice, Deposit, ImagePath)
                 VALUES
                 ('Toyota', 'Corolla', 2020, 'ABC123', '1HGBH41JXMN109186', '1.8L', 0, 1, 'C', 'Biały', 15000, 0, 50.0, 45.0, 40.0, 35.0, 30.0, 60.0, 500.0, '/images/toyota_corolla.jpg'),
-                ('Ford', 'Focus', 2019, 'XYZ789', '1FABP3AN9BM154121', '2.0L', 1, 0, 'C', 'Czerwony', 20000, 0, 55.0, 50.0, 45.0, 40.0, 35.0, 65.0, 500.0, '/images/ford_focus.jpg');
+                ('Ford', 'Focus', 2019, 'XYZ789', '1FABP3AN9BM154121', '2.0L', 1, 0, 'C', 'Czerwony', 20000, 4, 55.0, 50.0, 45.0, 40.0, 35.0, 65.0, 500.0, '/images/ford_focus.jpg'),
+                ('Volkswagen', 'Golf', 2018, 'DEF456', 'WVWZZZ1KZBW000001', '1.4L', 0, 1, 'C', 'Srebrny', 25000, 1, 52.0, 47.0, 43.0, 38.0, 34.0, 62.0, 500.0, '/images/vw_golf.jpg'),
+                ('BMW', '3 Series', 2021, 'GHI789', 'WBA8E9G52GNU12345', '2.0L', 0, 1, 'D', 'Czarny', 10000, 2, 80.0, 75.0, 70.0, 65.0, 60.0, 90.0, 1000.0, '/images/bmw_3series.jpg'),
+                ('Honda', 'Civic', 2022, 'JKL012', '2HGFC2F69KH512345', '1.5L', 0, 1, 'C', 'Niebieski', 5000, 0, 60.0, 55.0, 50.0, 45.0, 40.0, 70.0, 600.0, '/images/honda_civic.jpg');
 
                 -- Dodanie przykładowej rezerwacji
                 INSERT OR IGNORE INTO Reservation (CarID, UserID, CustomerID, StartDate, EndDate, StatusReservation, TotalPrice)
