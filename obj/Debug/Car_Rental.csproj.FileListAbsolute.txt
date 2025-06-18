@@ -99,14 +99,11 @@ C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\bin\Deb
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Car_Rental.csproj.AssemblyReference.cache
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Car_Rental.exe.config
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Add_Car_Window.baml
-C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\User_Management_Window.baml
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\CustomControls\BindablePasswordBox.g.cs
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Add_Car_Window.g.cs
-C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Fleet_Management_Window.g.cs
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Login_Screen.g.cs
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Admin_Menu.g.cs
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Price_List_Control.g.cs
-C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\User_Management_Window.g.cs
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\User_Menu.g.cs
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\App\App.g.cs
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Car_Rental_Content.g.cs
@@ -114,7 +111,6 @@ C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Deb
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Car_Rental_MarkupCompile.cache
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Car_Rental_MarkupCompile.lref
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\CustomControls\BindablePasswordBox.baml
-C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Fleet_Management_Window.baml
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Login_Screen.baml
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Admin_Menu.baml
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Price_List_Control.baml
@@ -129,8 +125,6 @@ C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Deb
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Styles\ButtonStyles.baml
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Styles\UIColor.baml
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\App\App.baml
-C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\ShowCars.g.cs
-C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\ShowCars.baml
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\bin\Debug\FontAwesome.Sharp.dll
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Show_Cars_Control.g.cs
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Show_Cars_Control.baml
@@ -166,3 +160,13 @@ C:\Users\Mery\Desktop\Car_Rental\obj\Debug\Views\User_Management_Control.g.cs
 C:\Users\Mery\Desktop\Car_Rental\obj\Debug\Views\User_Management_Control.baml
 C:\Users\Mery\Desktop\Car_Rental\obj\Debug\Views\Service_Car_Window.baml
 C:\Users\Mery\Desktop\Car_Rental\obj\Debug\Views\Service_Car_Window.g.cs
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Service_Car_Window.baml
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Customer_Management_Control.g.cs
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Fleet_Management_Control.g.cs
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\History_Control.g.cs
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Service_Car_Window.g.cs
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\User_Management_Control.g.cs
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Customer_Management_Control.baml
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Fleet_Management_Control.baml
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\History_Control.baml
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\User_Management_Control.baml

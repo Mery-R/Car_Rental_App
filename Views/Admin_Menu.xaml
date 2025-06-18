@@ -8,6 +8,8 @@
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
         Title="MainWindowView" Height="700" Width="1300"
+        MinWidth="500"
+        MinHeight="600"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Background="Transparent"
@@ -74,7 +76,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <!-- Logo -->
-                        <RowDefinition Height="430"/>
+                        <RowDefinition Height="330"/>
                         <!-- Menu -->
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
