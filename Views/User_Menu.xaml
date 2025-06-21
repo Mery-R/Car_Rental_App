@@ -3,41 +3,199 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Car_Rental" 
-        xmlns:customcontrols="clr-namespace:Car_Rental.CustomControls"
-        xmlns:viewModel="clr-namespace:Car_Rental.ViewModels"
+        xmlns:local="clr-namespace:Car_Rental.Views"
+        xmlns:viewModel="clr-namespace:Car_Rental.ViewModels" 
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
-        Background="Transparent"
-        AllowsTransparency="True"
+        Title="User_Menu" Height="700" Width="1300"
+        MinWidth="500" MinHeight="600"
+        WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Title="User Menu" Height="350" Width="525">
+        Background="Transparent"
+        AllowsTransparency="True">
 
-    <Grid MinWidth="200" MinHeight="300">
-        <Border CornerRadius="10" BorderThickness="5">
-            <Border.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="BlueViolet" Offset="1.5"/>
-                </LinearGradientBrush>
-            </Border.Background>
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
 
-            <Border.BorderBrush>
-                <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
-                    <GradientStop Color="Violet" Offset="0.2"/>
-                    <GradientStop Color="Blue" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.BorderBrush>
-        </Border>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:ShowCarsViewModel}">
+            <local:Show_Cars_User_Control/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:HistoryViewModel}">
+            <local:History_Control/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:CustomerManagementViewModel}">
+            <local:Customer_Management_Control/>
+        </DataTemplate>
+    </Window.Resources>
 
-        <Border CornerRadius="10" BorderThickness="5" Opacity="0.5">
-            <Border.Background>
-                <ImageBrush ImageSource="/Images/flinstones.png"/>
-            </Border.Background>
-        </Border>
-        <Label Content="User Menu" Background="{x:Null}" HorizontalAlignment="Center" FontSize="48" Margin="0,20,0,0" FontWeight="Bold" VerticalAlignment="Top" Foreground="White"/>
-        <Button Content="Show Vehicles" HorizontalAlignment="Center" Height="50" Margin="0,150,0,0" VerticalAlignment="Top" Width="160" Opacity="0.8" FontSize="20" Background="{x:Null}" Foreground="White" BorderBrush="White" Click="ShowVehicles_Click"/>
-        <Button Content="History" HorizontalAlignment="Center" Height="50" Margin="0,215,0,0" VerticalAlignment="Top" Width="160" Opacity="0.8" FontSize="20" Background="{x:Null}" Foreground="White" BorderBrush="White" Click="History_Click"/>
-        <Button Content="Log Out" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="15" Height="30"  Background="{x:Null}" Foreground="White" BorderBrush="White" Margin="0,290,0,0" Width="130" Opacity="0.8" Click="LogOut_Click"/>
-        
-    </Grid>
+    <Border CornerRadius="10" BorderThickness="5">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="{StaticResource winBorderColor1}" Offset="0"/>
+                <GradientStop Color="{StaticResource winBorderColor2}" Offset="0.5"/>
+                <GradientStop Color="{StaticResource winBorderColor3}" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left Navigation -->
+            <Border CornerRadius="10,0,0,10" Grid.Column="0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
+                        <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
+                        <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="330"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Logo -->
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Height="100" Margin="40,30,0,40">
+                        <Image Source="/Images/3.png" Height="100"/>
+                    </StackPanel>
+
+                    <!-- Menu -->
+                    <StackPanel Grid.Row="1">
+                        <RadioButton Style="{StaticResource menuButton}"
+                                     Tag="{StaticResource color1}"
+                                     IsChecked="True"
+                                     Command="{Binding ShowCarViewCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="Car" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Style="{StaticResource menuButtonText}" Text="Show cars"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton Style="{StaticResource menuButton}"
+                                     Tag="{StaticResource color3}"
+                                     Command="{Binding HistoryViewCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="ClockRotateLeft" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Style="{StaticResource menuButtonText}" Text="History"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton Style="{StaticResource menuButton}"
+                                     Tag="{StaticResource color6}"
+                                     Command="{Binding CustomerManagementViewCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="PeopleRoof" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Style="{StaticResource menuButtonText}" Text="Customers"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+
+                    <!-- Bottom panel -->
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,0,10">
+                        <Grid Margin="10,10,10,10" VerticalAlignment="Bottom">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="60"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Bottom">
+                                <Ellipse Height="50" Width="50" Stroke="{StaticResource color2}" StrokeThickness="2" Margin="10,0,10,0">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="/Images/AdminIcon.png"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <TextBlock Text="{Binding CurrentUser.Username}"
+                                           Foreground="{StaticResource titleColor3}"
+                                           FontFamily="Montserrat"
+                                           FontSize="17"
+                                           VerticalAlignment="Center"
+                                           Opacity="0.8"
+                                           TextWrapping="Wrap"
+                                           TextTrimming="CharacterEllipsis"
+                                           MaxWidth="110"/>
+                            </StackPanel>
+
+                            <Button Grid.Column="1"
+                                    Style="{StaticResource iconButton}"
+                                    Tag="{StaticResource color4}"
+                                    Click="LogoutButton_Click">
+                                <fa:IconImage Icon="RightFromBracket" Style="{StaticResource iconButtonIcon}"/>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Main Content -->
+            <Border CornerRadius="0,10,10,0" Grid.Column="1">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
+                        <GradientStop Color="{StaticResource primaryBackColor1}" Offset="0"/>
+                        <GradientStop Color="{StaticResource primaryBackColor2}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Control Bar -->
+                    <StackPanel x:Name="pnlControlBar"
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                Background="Transparent"
+                                Margin="0,0,5,0"
+                                MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown"
+                                MouseEnter="pnlControlBar_MouseEnter"
+                                Height="35"
+                                VerticalAlignment="Bottom">
+
+                        <Button x:Name="btnClose"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color4}"
+                                Click="btnClose_Click">
+                            <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+                        <Button x:Name="btnMaximize"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color6}"
+                                Click="btnMaximize_Click">
+                            <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+                        <Button x:Name="btnMinimize"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color8}"
+                                Click="btnMinimize_Click">
+                            <fa:IconImage Icon="WindowMinimize" Width="12" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+                    </StackPanel>
+
+                    <!-- Page Title -->
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
+                        <fa:IconImage Icon="{Binding Icon}" Height="30" Width="30" Foreground="{StaticResource titleColor2}" Margin="35,0,10,0"/>
+                        <TextBlock Text="{Binding Caption}"
+                                   Foreground="{StaticResource titleColor2}"
+                                   FontSize="17"
+                                   FontFamily="Montserrat"
+                                   FontWeight="Medium"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Main Content -->
+                    <ContentControl Content="{Binding CurrentChildView}" Grid.Row="2" Margin="25"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
 </Window>
