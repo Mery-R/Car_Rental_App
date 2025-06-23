@@ -118,7 +118,7 @@ namespace Car_Rental.Repositories
                     {
                         users.Add(new UserModel()
                         {
-                            UserId = reader["UserId"].ToString(),
+                            UserId = Convert.ToInt32(reader["UserId"]),
                             Username = reader["Username"].ToString(),
                             Password = string.Empty, // Hasło nie jest wyświetlane
                             Name = reader["FirstName"].ToString(),
@@ -151,8 +151,7 @@ namespace Car_Rental.Repositories
                     {
                         user = new UserModel()
                         {
-                            UserId = reader["UserId"]?.ToString(),
-
+                            UserId = Convert.ToInt32(reader["UserId"]),
                             Username = reader["Username"].ToString(),
                             Password = string.Empty, // Hasło nie jest wyświetlane
                             Name = reader["FirstName"].ToString(),
@@ -185,7 +184,7 @@ namespace Car_Rental.Repositories
                     {
                         user = new UserModel()
                         {
-                            UserId = reader["UserId"]?.ToString(),
+                            UserId = Convert.ToInt32(reader["UserId"]),
                             Username = reader["Username"].ToString(),
                             Password = string.Empty, // Hasło nie jest wyświetlane
                             Name = reader["FirstName"].ToString(),

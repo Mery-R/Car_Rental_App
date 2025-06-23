@@ -164,6 +164,7 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PricesViewModel.cs" />
+    <Compile Include="ViewModels\ShowCarsUserViewModel.cs" />
     <Compile Include="ViewModels\ShowCarsViewModel.cs" />
     <Compile Include="ViewModels\UserManagementViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -203,6 +204,9 @@
     </Compile>
     <Compile Include="Views\Show_Cars_Control.xaml.cs">
       <DependentUpon>Show_Cars_Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Show_Cars_User_Control.xaml.cs">
+      <DependentUpon>Show_Cars_User_Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\User_Management_Control.xaml.cs">
       <DependentUpon>User_Management_Control.xaml</DependentUpon>
@@ -283,6 +287,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Show_Cars_User_Control.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\User_Management_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
@@ -351,10 +359,13 @@
     <Resource Include="Images\bmw_m2.jpg" />
     <Resource Include="Images\bmw_m3.jpg" />
     <Resource Include="Images\bmw_m4.png" />
-    <Resource Include="Images\diat_doblo.jpg" />
     <Resource Include="Images\mazda_miata.png" />
     <Resource Include="Images\toyota_corolla.png" />
     <Resource Include="Images\default.png" />
+    <Resource Include="Images\honda_civic.jpg" />
+    <Resource Include="Images\toyota.jpg" />
+    <Resource Include="Images\vw_golf.jpg" />
+    <Resource Include="Images\fiat_doblo.jpg" />
     <Content Include="schema.sql" />
   </ItemGroup>
   <ItemGroup />

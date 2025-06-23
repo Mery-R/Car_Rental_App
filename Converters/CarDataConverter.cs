@@ -80,4 +80,33 @@ namespace Car_Rental.Converters
             }
         }
     }
+    public class StatusReservationConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int status = (int)value;
+            switch (status)
+            {
+                case 0: return "Planned";
+                case 1: return "Active";
+                case 2: return "Finished";
+                case 3: return "Cancelled";
+                default: return "Unknow";
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string str = value as string;
+            if (str == null) return 0;
+            switch (str)
+            {
+                case "Planned": return 0;
+                case "Active": return 1;
+                case "Finished": return 2;
+                case "Cancelled": return 3;
+                default: return 0;
+            }
+        }
+    }
 }

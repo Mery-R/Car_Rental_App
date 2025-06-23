@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\
+C:\Users\Mery\Desktop\Car_Rental\obj\Debug\
 Car_Rental
 none
 false
 DEBUG;TRACE
-C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\App\App.xaml
-182023920571
+C:\Users\Mery\Desktop\Car_Rental\App\App.xaml
+19-280187364
 178374781
-51-551620421
-38-1077240091
-CustomControls\BindablePasswordBox.xaml;Styles\ButtonStyles.xaml;Styles\UIColor.xaml;Views\Add_Car_Window.xaml;Views\Add_Customer_Window.xaml;Views\Admin_Menu.xaml;Views\Customer_Management_Control.xaml;Views\Edit_Car_Window.xaml;Views\Fleet_Management_Control.xaml;Views\History_Control.xaml;Views\Login_Screen.xaml;Views\Price_List_Control.xaml;Views\Rent_Car_Window.xaml;Views\Return_Car_Window.xaml;Views\Service_Car_Window.xaml;Views\Show_Cars_Control.xaml;Views\User_Management_Control.xaml;Views\User_Menu.xaml;
+53-668562782
+38-314008923
+CustomControls\BindablePasswordBox.xaml;Styles\ButtonStyles.xaml;Styles\UIColor.xaml;Views\Add_Car_Window.xaml;Views\Add_Customer_Window.xaml;Views\Admin_Menu.xaml;Views\Customer_Management_Control.xaml;Views\Edit_Car_Window.xaml;Views\Fleet_Management_Control.xaml;Views\History_Control.xaml;Views\Login_Screen.xaml;Views\Price_List_Control.xaml;Views\Rent_Car_Window.xaml;Views\Return_Car_Window.xaml;Views\Service_Car_Window.xaml;Views\Show_Cars_Control.xaml;Views\Show_Cars_User_Control.xaml;Views\User_Management_Control.xaml;Views\User_Menu.xaml;
 
 False
 

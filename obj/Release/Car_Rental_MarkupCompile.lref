@@ -1,4 +1,4 @@
-﻿C:\Users\Mery\Desktop\Car_Rental\obj\Release\GeneratedInternalTypeHelper.g.cs
+﻿
 FC:\Users\Mery\Desktop\Car_Rental\App\App.xaml;;
 FC:\Users\Mery\Desktop\Car_Rental\CustomControls\BindablePasswordBox.xaml;;
 FC:\Users\Mery\Desktop\Car_Rental\Views\Admin_Menu.xaml;;
@@ -8,4 +8,8 @@ FC:\Users\Mery\Desktop\Car_Rental\Views\Price_List_Control.xaml;;
 FC:\Users\Mery\Desktop\Car_Rental\Views\Rent_Car_Window.xaml;;
 FC:\Users\Mery\Desktop\Car_Rental\Views\Show_Cars_Control.xaml;;
 FC:\Users\Mery\Desktop\Car_Rental\Views\User_Menu.xaml;;
+FC:\Users\Mery\Desktop\Car_Rental\Views\Customer_Management_Control.xaml;;
+FC:\Users\Mery\Desktop\Car_Rental\Views\History_Control.xaml;;
+FC:\Users\Mery\Desktop\Car_Rental\Views\Show_Cars_User_Control.xaml;;
+FC:\Users\Mery\Desktop\Car_Rental\Views\User_Management_Control.xaml;;
 

@@ -199,7 +199,9 @@
                                 <DataTemplate>
                                     <Image Width="150" Height="100"
                                            Source="{Binding ImagePath}"
-                                           Stretch="UniformToFill"/>
+                                           Stretch="UniformToFill"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -217,12 +219,12 @@
                 </DataGrid>
 
                 <TextBlock Text="Brak wyników"
-           Foreground="Gray"
-           FontSize="30"
-           FontFamily="Montserrat"
-           HorizontalAlignment="Center"
-           VerticalAlignment="Center"
-           Visibility="{Binding FilteredCars.Count, Converter={StaticResource EmptyToVisibilityConverter}}" />
+                           Foreground="Gray"
+                           FontSize="30"
+                           FontFamily="Montserrat"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Visibility="{Binding FilteredCars.Count, Converter={StaticResource EmptyToVisibilityConverter}}" />
 
             </Grid>
         </Border>

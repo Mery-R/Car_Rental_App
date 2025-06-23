@@ -168,7 +168,7 @@
                            FontFamily="Montserrat"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
-                           Visibility="{Binding FilteredCustomers.Count, Converter={StaticResource EmptyToVisibilityConverter}}" />
+                           Visibility="{Binding Customers.Count, Converter={StaticResource EmptyToVisibilityConverter}}" />
 
             </Grid>
         </Border>

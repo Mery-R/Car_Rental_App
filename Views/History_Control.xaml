@@ -21,6 +21,7 @@
         <conv:FuelTypeConverter x:Key="FuelTypeConverter" />
         <conv:GearboxConverter x:Key="GearboxConverter" />
         <conv:StatusCarConverter x:Key="StatusCarConverter" />
+        <conv:StatusReservationConverter x:Key="StatusReservationConverter" />
 
     </UserControl.Resources>
 
@@ -134,38 +135,95 @@
             </StackPanel>
 
         </Grid>
-        <Grid Grid.Row="1">
-            <!-- Content for reservations -->
-            <StackPanel x:Name="ReservationsContent" Visibility="Visible">
-                <DataGrid x:Name="ReservationsDataGrid" AutoGenerateColumns="False" Height="300" Margin="5" 
-                          HorizontalAlignment="Stretch" VerticalAlignment="Top" ItemsSource="{Binding Reservations}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Reservation ID" Binding="{Binding ReservationId}" Width="*"/>
-                        <DataGridTextColumn Header="Car ID" Binding="{Binding CarID}" Width="*"/>
-                        <DataGridTextColumn Header="User ID" Binding="{Binding UserID}" Width="*"/>
-                        <DataGridTextColumn Header="Customer ID" Binding="{Binding CustomerID}" Width="*"/>
-                        <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}" Width="*"/>
-                        <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}" Width="*"/>
-                        <DataGridTextColumn Header="Status" Binding="{Binding StatusReservation}" Width="*"/>
-                        <DataGridTextColumn Header="Total Price" Binding="{Binding TotalPrice}" Width="*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </StackPanel>
+        <Border Grid.Row="1" Background="#200F53" CornerRadius="10" Padding="10">
+            <Grid>
+                <!-- Content for reservations -->
+                <StackPanel x:Name="ReservationsContent" Visibility="Visible">
+                    <DataGrid x:Name="ReservationsDataGrid" AutoGenerateColumns="False" Height="300" Margin="5" 
+                              HorizontalAlignment="Stretch" VerticalAlignment="Top" ItemsSource="{Binding Reservations}"
+                              Background="#200F53" IsReadOnly="True" SelectionMode="Single" HeadersVisibility="Column"
+                                GridLinesVisibility="None" BorderThickness="0" RowBackground="DarkGray" AlternatingRowBackground="Gray">
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="Gray"/>
+                                <Setter Property="Padding" Value="0,0,0,0"/>
+                                <Setter Property="FontFamily" Value="Montserrat"/>
+                                <Setter Property="FontSize" Value="18"/>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
 
-            <!-- Content for services -->
-            <StackPanel x:Name="ServicesContent" Visibility="Collapsed">
-                <DataGrid x:Name="ServicesDataGrid" AutoGenerateColumns="False" Height="300" Margin="5" 
-                          HorizontalAlignment="Stretch" VerticalAlignment="Top" ItemsSource="{Binding Services}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Service ID" Binding="{Binding ServiceId}" Width="*"/>
-                        <DataGridTextColumn Header="Car ID" Binding="{Binding CarID}" Width="*"/>
-                        <DataGridTextColumn Header="Service Date" Binding="{Binding ServiceDate}" Width="*"/>
-                        <DataGridTextColumn Header="Description" Binding="{Binding ServiceDescription}" Width="*"/>
-                        <DataGridTextColumn Header="Cost" Binding="{Binding ServiceCost}" Width="*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </StackPanel>
-        </Grid>
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGrid.CellStyle>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding ReservationId}" Width="0.3*"/>
+                            <DataGridTextColumn Header="Plate" Binding="{Binding LicensePlate}" Width="*" MinWidth="80"/>
+                            <DataGridTextColumn Header="User" Binding="{Binding UserName}" Width="*" MinWidth="90"/>
+                            <DataGridTextColumn Header="Customer" Binding="{Binding CustomerFullName}" Width="1.1*" MinWidth="100"/>
+                            <DataGridTextColumn Header="PESEL" Binding="{Binding CustomerPESEL}" Width="1.5*" MinWidth="100"/>
+                            <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}" Width="2*" MinWidth="170"/>
+                            <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}" Width="2*" MinWidth="170"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding StatusReservation, Converter={StaticResource StatusReservationConverter}}" Width="*"/>
+                            <DataGridTextColumn Header="Total Price" Binding="{Binding TotalPrice}" Width="*" MinWidth="90"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBlock Text="Brak wyników"
+                               Foreground="Gray"
+                               FontSize="30"
+                               FontFamily="Montserrat"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Visibility="{Binding Reservations.Count, Converter={StaticResource EmptyToVisibilityConverter}}" />
+                </StackPanel>
+
+                <!-- Content for services -->
+                <StackPanel x:Name="ServicesContent" Visibility="Collapsed">
+                    <DataGrid x:Name="ServicesDataGrid" AutoGenerateColumns="False" Height="300" Margin="5" 
+                              HorizontalAlignment="Stretch" VerticalAlignment="Top" ItemsSource="{Binding Services}"
+                              Background="#200F53" IsReadOnly="True" SelectionMode="Single" HeadersVisibility="Column"
+                                GridLinesVisibility="None" BorderThickness="0" RowBackground="DarkGray" AlternatingRowBackground="Gray">
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="Gray"/>
+                                <Setter Property="Padding" Value="0,0,0,0"/>
+                                <Setter Property="FontFamily" Value="Montserrat"/>
+                                <Setter Property="FontSize" Value="18"/>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGrid.CellStyle>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding ServiceId}" Width="0.3*"/>
+                            <DataGridTextColumn Header="Plate" Binding="{Binding LicensePlate}" Width="*"/>
+                            <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}" Width="2*"/>
+                            <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}" Width="2*"/>
+                            <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="4*"/>
+                            <DataGridTextColumn Header="Cost" Binding="{Binding ServiceCost}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBlock Text="Brak wyników"
+                               Foreground="Gray"
+                               FontSize="30"
+                               FontFamily="Montserrat"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Visibility="{Binding Services.Count, Converter={StaticResource EmptyToVisibilityConverter}}" />
+                </StackPanel>
+                
+                
+                
+            </Grid>
+        </Border>
 
     </Grid>
 </UserControl>

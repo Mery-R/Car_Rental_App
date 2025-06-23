@@ -1,6 +1,46 @@
 ﻿namespace Car_Rental.Models
 {
-    public enum Brand { Toyota, Ford, BMW }
+    public enum Brand
+    {
+        AlfaRomeo,
+        Audi,
+        BMW,
+        Chevrolet,
+        Chrysler,
+        Dodge,
+        Fiat,
+        Ford,
+        Genesis,
+        GMC,
+        Honda,
+        Hyundai,
+        Infiniti,
+        Jaguar,
+        Jeep,
+        Kia,
+        LandRover,
+        Lexus,
+        Lincoln,
+        Maserati,
+        Mazda,
+        Mercedes,
+        Mini,
+        Mitsubishi,
+        Nissan,
+        Pagani,
+        Peugeot,
+        Porsche,
+        RAM,
+        Renault,
+        Saab,
+        Subaru,
+        Suzuki,
+        Tesla,
+        Toyota,
+        Volkswagen,
+        Volvo
+    }
+
     public enum CarStatus
     {
         Available = 0,  // Dostępny
@@ -9,15 +49,51 @@
         ServicePlanned = 3, // W naprawie
         ServiceInProgress = 4 // W trakcie serwisu
     }
-    public enum Color 
-    { 
-        Red, 
-        Blue, 
-        Green,
+    public enum Color
+    {
         Black,
+        Blue,
+        Brown,
+        Gray,
+        Green,
+        Orange,
+        Pink,
+        Purple,
+        Red,
+        Silver,
         White,
         Yellow,
+        Beige,
+        Burgundy,
+        Champagne,
+        Charcoal,
+        Coral,
+        Cream,
+        ElectricBlue,
+        Gold,
+        Indigo,
+        Lavender,
+        Lime,
+        Mint,
+        NavyBlue,
+        Olive,
+        Peach,
+        Platinum,
+        Rose,
+        Sapphire,
+        Teal,
+        Turquoise,
+        Violet,
+        SkyBlue,
+        Aqua,
+        Emerald,
+        Mahogany,
+        Tan,
+        Mustard,
+        Onyx,
+        Ruby
     }
+
     public enum FuelType 
     { 
         Petrol = 0, 
