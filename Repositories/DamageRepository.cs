@@ -20,16 +20,19 @@ public class DamageRepository : RepositoryBase
 
                 var command = connection.CreateCommand();
                 command.CommandText = @"
-                INSERT INTO Damage (CarId, Side, X, Y, Type, Note)
-                VALUES (@CarId, @Side, @X, @Y, @DamageType, @Note);
-            ";
+                INSERT INTO Damage (CarId, Side, X, Y, Type, Note, ReservationId)
+                VALUES (@CarId, @Side, @X, @Y, @DamageType, @Note, @ReservationId);
+                ";
 
                 command.Parameters.AddWithValue("@CarId", damage.CarId);
                 command.Parameters.AddWithValue("@Side", damage.Side);
                 command.Parameters.AddWithValue("@X", damage.X);
                 command.Parameters.AddWithValue("@Y", damage.Y);
-                command.Parameters.AddWithValue("@DamageType", (int)damage.Type); // Zapisz jako numer typu
+                command.Parameters.AddWithValue("@DamageType", (int)damage.Type); // Zapisujemy typ uszkodzenia
                 command.Parameters.AddWithValue("@Note", damage.Note);
+
+                // Dodajemy sprawdzenie, czy ReservationId jest null
+                command.Parameters.AddWithValue("@ReservationId", (object)damage.ReservationId ?? DBNull.Value);
 
                 command.ExecuteNonQuery();
             }
@@ -39,6 +42,7 @@ public class DamageRepository : RepositoryBase
             }
         }
     }
+
 
 
     // Metoda pobierająca uszkodzenia z bazy na podstawie CarId
@@ -62,13 +66,14 @@ public class DamageRepository : RepositoryBase
                     {
                         var damage = new DamageModel
                         {
-                            DamageId = reader.GetInt32(0),
-                            CarId = reader.GetInt32(1),
-                            Side = reader.GetString(2),
-                            X = reader.GetDouble(3),
-                            Y = reader.GetDouble(4),
-                            Type = (DamageType)reader.GetInt32(5), // Odczytujemy typ jako DamageType enum
-                            Note = reader.GetString(6)
+                            DamageId = reader.GetInt32(reader.GetOrdinal("DamageId")),
+                            CarId = reader.GetInt32(reader.GetOrdinal("CarId")),
+                            ReservationId = reader.IsDBNull(reader.GetOrdinal("ReservationId")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("ReservationId")),
+                            Side = reader.GetInt32(reader.GetOrdinal("Side")),
+                            X = reader.GetDouble(reader.GetOrdinal("X")),
+                            Y = reader.GetDouble(reader.GetOrdinal("Y")),
+                            Type = (DamageType)Enum.Parse(typeof(DamageType), reader.GetString(reader.GetOrdinal("Type"))),
+                            Note = reader.GetString(reader.GetOrdinal("Note"))
                         };
                         damages.Add(damage);
                     }
@@ -82,42 +87,4 @@ public class DamageRepository : RepositoryBase
 
         return damages;
     }
-
-
-    // Metoda, która wczytuje uszkodzenia i dodaje markery na canvasie
-    public void LoadCarDamages(Canvas canvas, int carId)
-    {
-        var damages = GetDamagesByCarId(carId);
-
-        foreach (var damage in damages)
-        {
-            var marker = new Ellipse
-            {
-                Width = 10,
-                Height = 10,
-                Fill = GetColorByDamageType(damage.Type),
-                Stroke = Brushes.Black,
-                StrokeThickness = 1,
-                ToolTip = $"{damage.Type}: {damage.Note}"
-            };
-
-            Canvas.SetLeft(marker, damage.X - 5);
-            Canvas.SetTop(marker, damage.Y - 5);
-            canvas.Children.Add(marker);
-        }
-    }
-
-    // Metoda pomocnicza do pobrania koloru na podstawie typu uszkodzenia
-    public Brush GetColorByDamageType(DamageType type)
-    {
-        switch (type)
-        {
-            case DamageType.Scratch: return Brushes.Orange;
-            case DamageType.Dent: return Brushes.Red;
-            case DamageType.Chip: return Brushes.Purple;
-            case DamageType.Crack: return Brushes.Blue;
-            default: return Brushes.Gray;
-        }
-    }
-
 }

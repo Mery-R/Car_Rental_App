@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace Car_Rental.Views
 {
@@ -16,42 +16,53 @@ namespace Car_Rental.Views
     {
         private readonly CarModel _car;
         private readonly CustomerModel _customer;
-
-        private List<DamageModel> damages = new List<DamageModel>();
-
-        private Canvas currentCanvas;
-        private string currentSide;
-        private Point lastClickPosition;
-
-        private readonly ReservationRepository _reservationRepository = new ReservationRepository();
-        private List<ReservationModel> _reservations = new List<ReservationModel>();
-        private int _carId; // ustawiane z zewnątrz!
         private ReservationModel _reservation;
 
+        private readonly DamageRepository _damageRepository;
+        private readonly List<DamageModel> _allDamages;
+        private List<ReservationModel> _reservations = new List<ReservationModel>();
 
+        private readonly ReservationRepository _reservationRepository = new ReservationRepository();
+
+        private int _carId; // ustawiane z zewnątrz!
+
+        private Point _lastClickPosition;
+        private int _currentSide;
 
         public Return_Car_Window(CarModel car, CustomerModel customer, ReservationModel reservation)
         {
             InitializeComponent();
+            // ustawienie domyślnego indeksu zakładki na 0 (przód samochodu)
+            ImageTabs.SelectedIndex = 0;
+
             _car = car;
             _customer = customer;
             _reservation = reservation;
 
+            // initialize repository and load damages
+            _damageRepository = new DamageRepository();
+            _allDamages = _damageRepository.GetDamagesByCarId(_car.CarId);
 
+            LoadCarDamages(FrontCanvas, _allDamages, 0);
+            LoadCarDamages(BackCanvas, _allDamages, 1);
+            LoadCarDamages(LeftCanvas, _allDamages, 2);
+            LoadCarDamages(RightCanvas, _allDamages, 3);
+
+            // setup UI
             CarDetailsText.Text = $"{car.Brand} {car.Model} | {car.LicensePlate}";
             CustomerText.Text = $"{customer.FullName}";
             MileageTextBox.Text = car.Mileage.ToString();
-
             RefreshDateTime();
 
-            // Załaduj uszkodzenia z bazy i dodaj je do canvasu
-            var damageRepo = new DamageRepository();
-            damageRepo.LoadCarDamages(currentCanvas, car.CarId);
+            ImageTabs.SelectionChanged += ImageTabs_SelectionChanged;
 
             var resRepo = new ReservationRepository();
             _reservations = resRepo.GetActiveReservationsByCarId(car.CarId);
 
             ReservationComboBox.ItemsSource = _reservations;
+            Console.WriteLine("CarID: " + car.CarId);
+
+            System.Diagnostics.Debug.WriteLine($"Found {_reservations.Count} active reservations");
 
             if (_reservations.Count > 0)
             {
@@ -59,145 +70,149 @@ namespace Car_Rental.Views
                 ShowReservationDetails(_reservations[0]); // wyświetl szczegóły od razu
             }
         }
+        // Metoda, która wczytuje uszkodzenia i dodaje markery na canvasie
+        public void LoadCarDamages(Canvas canvas, List<DamageModel> damages, int side)
+        {
 
+            foreach (var damage in damages)
+            {
+                if (damage.Side != side)
+                    continue;
 
+                var marker = new Ellipse
+                {
+                    Width = 10,
+                    Height = 10,
+                    Fill = GetColorByDamageType(damage.Type),
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1,
+                    ToolTip = $"{damage.Type}: {damage.Note}"
+                };
+
+                Canvas.SetLeft(marker, damage.X - 5);
+                Canvas.SetTop(marker, damage.Y - 5);
+                canvas.Children.Add(marker);
+            }
+        }
+        // Metoda pomocnicza do pobrania koloru na podstawie typu uszkodzenia
+        public Brush GetColorByDamageType(DamageType type)
+        {
+            switch (type)
+            {
+                case DamageType.Scratch: return Brushes.Orange;
+                case DamageType.Dent: return Brushes.Red;
+                case DamageType.Chip: return Brushes.Purple;
+                case DamageType.Crack: return Brushes.Blue;
+                default: return Brushes.Gray;
+            }
+        }
+        private void ImageTabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            var tab = ImageTabs.SelectedIndex;
+            DisplayDamagesForSide(tab);
+        }
+
+        private void DisplayDamagesForSide(int tab)
+        {
+            Canvas canvas = null;
+            if (tab == 0) canvas = FrontCanvas;
+            else if (tab == 1) canvas = BackCanvas;
+            else if (tab == 2) canvas = LeftCanvas;
+            else if (tab == 3) canvas = RightCanvas;
+
+            if (canvas == null) return;
+
+            foreach (var damage in _allDamages)
+            {
+                System.Diagnostics.Debug.WriteLine($"Damage: Side={damage.Side}, X={damage.X}, Y={damage.Y}");
+                if (damage.Side != tab) continue;
+
+                var marker = new Ellipse
+                {
+                    Width = 10,
+                    Height = 10,
+                    Fill = GetColorByDamageType(damage.Type),
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1,
+                    ToolTip = string.Format("{0}: {1}", damage.Type, damage.Note)
+                };
+                Canvas.SetLeft(marker, damage.X - 5);
+                Canvas.SetTop(marker, damage.Y - 5);
+                canvas.Children.Add(marker);
+            }
+        }
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var image = sender as Image;
-            currentCanvas = image.Parent as Canvas;
+            var canvas = image?.Parent as Canvas;
+            if (canvas == null) return;
 
-            // Pobierz klikniętą stronę
-            currentSide = ((TabItem)((TabControl)ImageTabs).SelectedItem).Header.ToString();
-            lastClickPosition = e.GetPosition(currentCanvas);
+            _lastClickPosition = e.GetPosition(canvas);
+            _currentSide = ImageTabs.SelectedIndex;
 
             DamageTypeComboBox.SelectedIndex = 0;
-            DamageNoteTextBox.Text = "";
+            DamageNoteTextBox.Clear();
             DamagePopup.IsOpen = true;
         }
 
         private void AddDamage_Click(object sender, RoutedEventArgs e)
         {
-            if (DamageTypeComboBox.SelectedItem is ComboBoxItem selectedItem)
+            if (!(DamageTypeComboBox.SelectedItem is ComboBoxItem item)) return;
+            if (!Enum.TryParse<DamageType>(item.Content.ToString(), out var type))
             {
-                // Sprawdzamy, czy udało się sparsować typ uszkodzenia
-                var damageTypeString = selectedItem.Content.ToString();
-
-                if (Enum.TryParse<DamageType>(damageTypeString, out var parsedType))
-                {
-                    var damage = new DamageModel
-                    {
-                        CarId = _car.CarId,
-                        Side = currentSide,
-                        X = lastClickPosition.X,
-                        Y = lastClickPosition.Y,
-                        Type = parsedType,
-                        Note = DamageNoteTextBox.Text
-                    };
-
-                    // Dodajemy uszkodzenie do listy
-                    damages.Add(damage);
-
-                    // Dodajemy marker na canvas
-                    AddMarkerToCanvas(currentCanvas, damage);
-
-                    // Zapisujemy uszkodzenie w bazie
-                    var damageRepo = new DamageRepository();
-                    damageRepo.AddDamage(damage);
-
-                    DamagePopup.IsOpen = false;
-                }
-                else
-                {
-                    MessageBox.Show("Unknown damage type selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                MessageBox.Show("Unknown damage type.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
-        }
 
-
-
-
-
-        private void AddMarkerToCanvas(Canvas canvas, DamageModel damage)
-        {
-            var damageRepo = new DamageRepository();
-            var marker = new Ellipse
+            var newDamage = new DamageModel
             {
-                Width = 10,
-                Height = 10,
-                Fill = damageRepo.GetColorByDamageType(damage.Type),
-                Stroke = Brushes.Black,
-                StrokeThickness = 1,
-                ToolTip = $"{damage.Type}: {damage.Note}"
+                CarId = _car.CarId,
+                ReservationId = _reservation?.ReservationId,
+                Side = _currentSide,
+                X = _lastClickPosition.X,
+                Y = _lastClickPosition.Y,
+                Type = type,
+                Note = DamageNoteTextBox.Text
             };
-
-            Canvas.SetLeft(marker, damage.X - 5);
-            Canvas.SetTop(marker, damage.Y - 5);
-            canvas.Children.Add(marker);
-        }
-
-
-
-        private void RefreshDateTime()
-        {
-            CurrentDateTimeText.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-        }
-
-        private void RefreshDateTime_Click(object sender, RoutedEventArgs e)
-        {
-            RefreshDateTime();
+            _damageRepository.AddDamage(newDamage);
+            _allDamages.Add(newDamage);
+            DisplayDamagesForSide(_currentSide);
+            DamagePopup.IsOpen = false;
         }
 
         private void ConfirmReturn_Click(object sender, RoutedEventArgs e)
         {
             if (_reservation == null)
             {
-                MessageBox.Show("No reservation selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("No reservation selected.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-
-            if (!int.TryParse(MileageTextBox.Text, out int newMileage) || newMileage < _car.Mileage)
+            if (!int.TryParse(MileageTextBox.Text, out var newMileage) || newMileage < _car.Mileage)
             {
-                MessageBox.Show("Invalid mileage value.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Invalid mileage.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            // Aktualizacja przebiegu
             _car.Mileage = newMileage;
-
-            // Oznacz wybraną rezerwację jako zakończoną
             _reservation.StatusReservation = (int)ReservationStatus.Finished;
+            new ReservationRepository().UpdateReservation(_reservation);
 
-            var resRepo = new ReservationRepository();
-            resRepo.UpdateReservation(_reservation);
+            var active = new ReservationRepository()
+                .GetActiveReservationsByCarId(_car.CarId)
+                .Where(r => r.StatusReservation != (int)ReservationStatus.Finished);
 
-            // Sprawdź, czy są jeszcze inne aktywne rezerwacje (o statusie Reserved lub Rented)
-            var activeReservations = resRepo.GetActiveReservationsByCarId(_car.CarId)
-                                            .Where(r => r.StatusReservation != (int)ReservationStatus.Finished)
-                                            .ToList();
+            _car.StatusCar = !active.Any()
+                ? (int)CarStatus.Available
+                : active.Any(r => r.StatusReservation == (int)ReservationStatus.Active)
+                    ? (int)CarStatus.Rented
+                    : (int)CarStatus.Reserved;
+            new CarRepository().UpdateCar(_car);
 
-            // Ustaw status auta na podstawie tego, czy są inne aktywne rezerwacje
-            if (activeReservations.Count == 0)
-            {
-                _car.StatusCar = (int)CarStatus.Available;
-            }
-            else
-            {
-                // Sprawdź, czy któraś z rezerwacji jest aktualnie wypożyczona
-                bool isRented = activeReservations.Any(r => r.StatusReservation == (int)ReservationStatus.Active);
-                _car.StatusCar = isRented ? (int)CarStatus.Rented : (int)CarStatus.Reserved;
-            }
-
-            var carRepo = new CarRepository();
-            carRepo.UpdateCar(_car);
-
-            MessageBox.Show("Car returned successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             DialogResult = true;
             Close();
         }
-
-
-
 
         private void ReservationComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -223,7 +238,14 @@ namespace Car_Rental.Views
             CustomerText.Text = $"Klient: {selectedReservation.CustomerFullName}\nPESEL: {selectedReservation.CustomerPESEL}";
 
         }
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;  // zwracasz false do kodu wywołującego
+            Close();               // zamykasz okno
+        }
 
 
+        private void RefreshDateTime_Click(object sender, RoutedEventArgs e) => RefreshDateTime();
+        private void RefreshDateTime() => CurrentDateTimeText.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
     }
 }
