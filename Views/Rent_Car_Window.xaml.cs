@@ -188,7 +188,7 @@ namespace Car_Rental.Views
         private void GeneratePdfAgreement(string customerName, string carDetails, string rentalPeriod, float totalPrice, float deposit)
         {
             // Ustal ścieżkę zapisu
-            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Invoices");
+            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Invoices_Rent");
             Directory.CreateDirectory(folderPath); // Tworzy folder jeśli nie istnieje
 
             string fileName = $"Agreement_{customerName.Replace(" ", "_")}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";

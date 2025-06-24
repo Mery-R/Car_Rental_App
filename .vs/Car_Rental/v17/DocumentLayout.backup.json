@@ -3,11 +3,27 @@
   "WorkspaceRootPath": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|c:\\users\\pucad\\desktop\\programowanie obiektowe\\projekt v3\\car_rental_app\\repositories\\reservationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|c:\\users\\pucad\\desktop\\programowanie obiektowe\\projekt v3\\car_rental_app\\views\\rent_car_window.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|solutionrelative:views\\rent_car_window.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|c:\\users\\pucad\\desktop\\programowanie obiektowe\\projekt v3\\car_rental_app\\views\\rent_car_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|solutionrelative:views\\rent_car_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|c:\\users\\pucad\\desktop\\programowanie obiektowe\\projekt v3\\car_rental_app\\converters\\cardataconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|solutionrelative:converters\\cardataconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\schema.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
+      "RelativeMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|solutionrelative:schema.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\repositories\\reservationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|solutionrelative:repositories\\reservationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|c:\\users\\pucad\\desktop\\programowanie obiektowe\\projekt v3\\car_rental_app\\views\\history_control.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\views\\history_control.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|solutionrelative:views\\history_control.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -19,7 +35,7 @@
       "RelativeMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|solutionrelative:views\\user_management_control.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|c:\\users\\pucad\\desktop\\programowanie obiektowe\\projekt v3\\car_rental_app\\views\\customer_management_control.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\views\\customer_management_control.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{4722E9CA-02EB-4DCF-9E74-00713F5C3E26}|Car_Rental.csproj|solutionrelative:views\\customer_management_control.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
@@ -95,44 +111,90 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ReservationRepository.cs",
-              "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Repositories\\ReservationRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\ReservationRepository.cs",
-              "ToolTip": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Repositories\\ReservationRepository.cs*",
-              "RelativeToolTip": "Repositories\\ReservationRepository.cs*",
-              "ViewState": "AgIAANQAAAAAAAAAAAAmwO4AAAABAAAAAAAAAA==",
+              "Title": "Rent_Car_Window.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\Rent_Car_Window.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\Rent_Car_Window.xaml.cs",
+              "ToolTip": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\Rent_Car_Window.xaml.cs",
+              "RelativeToolTip": "Views\\Rent_Car_Window.xaml.cs",
+              "ViewState": "AgIAALgAAAAAAAAAAAAcwL4AAABiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T21:49:45.442Z",
+              "WhenOpened": "2025-06-24T23:25:50.973Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "History_Control.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\History_Control.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\History_Control.xaml.cs",
-              "ToolTip": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\History_Control.xaml.cs*",
-              "RelativeToolTip": "Views\\History_Control.xaml.cs*",
-              "ViewState": "AgIAAGoAAAAAAAAAAAA/wIgAAAAJAAAAAAAAAA==",
+              "Title": "Rent_Car_Window.xaml",
+              "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\Rent_Car_Window.xaml",
+              "RelativeDocumentMoniker": "Views\\Rent_Car_Window.xaml",
+              "ToolTip": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\Rent_Car_Window.xaml*",
+              "RelativeToolTip": "Views\\Rent_Car_Window.xaml*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-24T23:25:38.734Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CarDataConverter.cs",
+              "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Converters\\CarDataConverter.cs",
+              "RelativeDocumentMoniker": "Converters\\CarDataConverter.cs",
+              "ToolTip": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Converters\\CarDataConverter.cs",
+              "RelativeToolTip": "Converters\\CarDataConverter.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAwwD0AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T21:47:55.234Z",
+              "WhenOpened": "2025-06-24T23:13:19.782Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "schema.sql ",
+              "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\schema.sql",
+              "RelativeDocumentMoniker": "schema.sql",
+              "ToolTip": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\schema.sql",
+              "RelativeToolTip": "schema.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-06-24T23:08:51.381Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ReservationRepository.cs",
+              "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Repositories\\ReservationRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\ReservationRepository.cs",
+              "ToolTip": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Repositories\\ReservationRepository.cs",
+              "RelativeToolTip": "Repositories\\ReservationRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAO4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T21:49:45.442Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "History_Control.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\History_Control.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\History_Control.xaml.cs",
+              "ToolTip": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\History_Control.xaml.cs",
+              "RelativeToolTip": "Views\\History_Control.xaml.cs",
+              "ViewState": "AgIAAGoAAAAAAAAAAAA/wIgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T21:47:55.234Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "User_Management_Control.xaml",
               "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\User_Management_Control.xaml",
               "RelativeDocumentMoniker": "Views\\User_Management_Control.xaml",
               "ToolTip": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\User_Management_Control.xaml",
               "RelativeToolTip": "Views\\User_Management_Control.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-06-24T21:11:28.303Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-24T21:11:28.303Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "App.xaml",
               "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\App\\App.xaml",
               "RelativeDocumentMoniker": "App\\App.xaml",
@@ -144,7 +206,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "Show_Cars_Control.xaml",
               "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\Show_Cars_Control.xaml",
               "RelativeDocumentMoniker": "Views\\Show_Cars_Control.xaml",
@@ -155,7 +217,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "Return_Car_Window.xaml",
               "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\Return_Car_Window.xaml",
               "RelativeDocumentMoniker": "Views\\Return_Car_Window.xaml",
@@ -166,7 +228,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "Customer_Management_Control.xaml",
               "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\Customer_Management_Control.xaml",
               "RelativeDocumentMoniker": "Views\\Customer_Management_Control.xaml",
@@ -178,19 +240,18 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "History_Control.xaml",
               "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\History_Control.xaml",
               "RelativeDocumentMoniker": "Views\\History_Control.xaml",
               "ToolTip": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\History_Control.xaml",
               "RelativeToolTip": "Views\\History_Control.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-06-24T20:50:15.336Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-24T20:50:15.336Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "Fleet_Management_Control.xaml",
               "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\Fleet_Management_Control.xaml",
               "RelativeDocumentMoniker": "Views\\Fleet_Management_Control.xaml",
@@ -201,7 +262,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "CustomerRepository.cs",
               "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Repositories\\CustomerRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\CustomerRepository.cs",
@@ -213,7 +274,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "Return_Car_Window.xaml.cs",
               "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\Return_Car_Window.xaml.cs",
               "RelativeDocumentMoniker": "Views\\Return_Car_Window.xaml.cs",
@@ -225,7 +286,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "Admin_Menu.xaml",
               "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\Admin_Menu.xaml",
               "RelativeDocumentMoniker": "Views\\Admin_Menu.xaml",
@@ -236,7 +297,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "DatabaseInitializer.cs",
               "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Repositories\\DatabaseInitializer.cs",
               "RelativeDocumentMoniker": "Repositories\\DatabaseInitializer.cs",
@@ -248,7 +309,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "Add_Customer_Window.xaml",
               "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\Add_Customer_Window.xaml",
               "RelativeDocumentMoniker": "Views\\Add_Customer_Window.xaml",
@@ -259,7 +320,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "User_Menu.xaml",
               "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\User_Menu.xaml",
               "RelativeDocumentMoniker": "Views\\User_Menu.xaml",
@@ -270,7 +331,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "Views\\Customer_Management_Control.xaml.cs",
               "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\Customer_Management_Control.xaml.cs",
               "RelativeDocumentMoniker": "Views\\Customer_Management_Control.xaml.cs",
@@ -282,7 +343,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 20,
               "Title": "Edit_Customer_Window.xaml",
               "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\Edit_Customer_Window.xaml",
               "RelativeDocumentMoniker": "Views\\Edit_Customer_Window.xaml",
@@ -293,7 +354,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 21,
               "Title": "Edit_Customer_Window.xaml.cs",
               "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\Views\\Edit_Customer_Window.xaml.cs",
               "RelativeDocumentMoniker": "Views\\Edit_Customer_Window.xaml.cs",
@@ -305,7 +366,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 22,
               "Title": "HistoryViewModel.cs",
               "DocumentMoniker": "C:\\Users\\pucad\\Desktop\\Programowanie obiektowe\\Projekt V3\\Car_Rental_App\\ViewModels\\HistoryViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\HistoryViewModel.cs",
