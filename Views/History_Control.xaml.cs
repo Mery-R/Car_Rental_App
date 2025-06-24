@@ -86,5 +86,10 @@ namespace Car_Rental.Views
         {
 
         }
+
+        private void ReservationsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

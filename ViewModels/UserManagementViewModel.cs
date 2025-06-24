@@ -18,10 +18,19 @@ namespace Car_Rental.ViewModels
             set { _users = value; OnPropertyChanged(nameof(Users)); }
         }
 
+        // Dodaj to pole, aby mieć dostęp do repozytorium
+        private readonly UserRepository _userRepository;
+
         public UserManagementViewModel()
         {
-            var repo = new UserRepository();
-            Users = new ObservableCollection<UserModel>(repo.GetByAll());
+            _userRepository = new UserRepository();  // inicjalizacja repozytorium
+            Users = new ObservableCollection<UserModel>(_userRepository.GetByAll());
+        }
+
+        public void AddUser(UserModel newUser)
+        {
+            _userRepository.Add(newUser);
+            Users.Add(newUser);
         }
     }
 }

@@ -4,7 +4,8 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:models="clr-namespace:Car_Rental.Models;assembly=Car_Rental"
         Title="Dodaj samochód" Height="850" Width="400"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
+        WindowStyle="SingleBorderWindow"
         AllowDrop="True">
 
     <Window.Resources>

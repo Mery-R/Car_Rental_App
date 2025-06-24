@@ -9,7 +9,7 @@
              xmlns:vm="clr-namespace:Car_Rental.ViewModels"
              mc:Ignorable="d" 
              MinWidth="750"
-             MinHeight="300"
+             MinHeight="500"
              d:DesignHeight="450"  d:DesignWidth="1000">
 
     <UserControl.DataContext>
@@ -139,10 +139,10 @@
             <Grid>
                 <!-- Content for reservations -->
                 <StackPanel x:Name="ReservationsContent" Visibility="Visible">
-                    <DataGrid x:Name="ReservationsDataGrid" AutoGenerateColumns="False" Height="300" Margin="5" 
+                    <DataGrid x:Name="ReservationsDataGrid" AutoGenerateColumns="False" Height="500" Margin="5" 
                               HorizontalAlignment="Stretch" VerticalAlignment="Top" ItemsSource="{Binding Reservations}"
                               Background="#200F53" IsReadOnly="True" SelectionMode="Single" HeadersVisibility="Column"
-                                GridLinesVisibility="None" BorderThickness="0" RowBackground="DarkGray" AlternatingRowBackground="Gray">
+                                GridLinesVisibility="None" BorderThickness="0" RowBackground="DarkGray" AlternatingRowBackground="Gray" SelectionChanged="ReservationsDataGrid_SelectionChanged">
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="Background" Value="Transparent"/>

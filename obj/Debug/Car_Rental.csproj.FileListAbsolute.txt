@@ -225,3 +225,7 @@ C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\bin\Deb
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\bin\Debug\PdfSharp.WPFonts.xml
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\bin\Debug\System.Diagnostics.DiagnosticSource.xml
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\bin\Debug\System.Security.Cryptography.Pkcs.xml
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Add_User_Window.baml
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Add_User_Window.g.cs
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Edit_User_Window.baml
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Edit_User_Window.g.cs

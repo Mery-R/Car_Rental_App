@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace Car_Rental.Views
 {
@@ -15,6 +16,9 @@ namespace Car_Rental.Views
     {
         private readonly CarRepository _carRepository = new CarRepository();
         public ShowCarsViewModel ViewModel { get; set; }
+
+        private readonly CarRepository carRepository = new CarRepository();
+
 
         public Fleet_Management_Control()
         {
@@ -105,19 +109,54 @@ namespace Car_Rental.Views
         }
 
         private void ServiceCarButton_Click(object sender, RoutedEventArgs e)
+{
+    if (CarDataGrid.SelectedItem is CarModel selectedCar)
+    {
+        // Przełączanie statusu pomiędzy Maintenance i Available
+        if (selectedCar.Status == CarStatus.ServiceInProgress)
         {
-            if (CarDataGrid.SelectedItem is CarModel selectedCar)
+            selectedCar.Status = CarStatus.Available;
+            MessageBox.Show("Samochód został oznaczony jako dostępny.", "Status zmieniony", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        else if (selectedCar.Status == CarStatus.Available)
+        {
+                    int carId = selectedCar.CarId;
+                    Service_Car_Window serviceCarWindow = new Service_Car_Window(carId, RefreshCars);
+                    serviceCarWindow.ShowDialog();
+                    selectedCar.Status = CarStatus.ServiceInProgress;
+            MessageBox.Show("Samochód został wysłany do serwisu.", "Status zmieniony", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        else
+        {
+            MessageBox.Show("Tylko samochody dostępne lub w serwisie mogą być przełączane.", "Nieprawidłowy status", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+
+        // Zaktualizuj dane w źródle (np. bazie danych) — jeśli masz repozytorium lub serwis do aktualizacji:
+        UpdateCarStatus(selectedCar.CarId, selectedCar.Status);
+
+        // Odświeżenie widoku, jeśli potrzebne
+        RefreshCars();
+    }
+    else
+    {
+        MessageBox.Show("Proszę zaznaczyć samochód.", "Brak zaznaczenia", MessageBoxButton.OK, MessageBoxImage.Warning);
+    }
+
+
+}
+        private void UpdateCarStatus(int carId, CarStatus newStatus)
+        {
+            // Tu zależnie od twojej logiki — przykładowo:
+            var car = carRepository.GetCarById(carId);
+            if (car != null)
             {
-                int carId = selectedCar.CarId;
-                // Przekazanie delegata do odświeżenia
-                Service_Car_Window serviceCarWindow = new Service_Car_Window(carId, RefreshCars);
-                serviceCarWindow.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Please select a car to add a service.", "No Car Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
+                car.Status = newStatus;
+                carRepository.UpdateCar(car);
             }
         }
+
+
 
         private void RefreshCars()
         {

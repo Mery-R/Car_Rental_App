@@ -232,7 +232,19 @@ namespace Car_Rental.Repositories
             }
         }
 
-
+        public void UpdatePassword(int userId, string newPassword)
+        {
+            using (var connection = GetConnection())
+            using (var command = new SQLiteCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "UPDATE User SET Password = @password WHERE UserId = @UserId";
+                command.Parameters.AddWithValue("@password", newPassword);
+                command.Parameters.AddWithValue("@UserId", userId);
+                command.ExecuteNonQuery();
+            }
+        }
 
     }
 }
