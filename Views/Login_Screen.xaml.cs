@@ -16,6 +16,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Car_Rental.Repositories;
+using Car_Rental.Models;
+
 
 namespace Car_Rental
 {
@@ -59,6 +62,11 @@ namespace Car_Rental
         private void Close_Button_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown(); 
+        }
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

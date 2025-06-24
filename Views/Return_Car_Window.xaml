@@ -1,16 +1,20 @@
 ﻿<Window x:Class="Car_Rental.Views.Return_Car_Window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Return Car" Height="496" Width="544">
+        Title="Return Car" Height="600" Width="544">
     <Grid Margin="10">
         <StackPanel Orientation="Vertical" Margin="10" VerticalAlignment="Top">
 
+            <!-- Wybór rezerwacji -->
+            <TextBlock Text="Choose reservation to return:" FontWeight="Bold" Margin="0,10,0,0"/>
+            <ComboBox Name="ReservationComboBox" DisplayMemberPath="DisplayInfo" SelectedValuePath="ReservationId" SelectionChanged="ReservationComboBox_SelectionChanged"/>
+
             <!-- Dane auta -->
-            <TextBlock Text="Car details:" FontWeight="Bold"/>
+            <TextBlock Text="Car details:" FontWeight="Bold" Margin="10,10,0,0"/>
             <TextBlock Name="CarDetailsText" Margin="0,0,0,10"/>
 
             <!-- Dane klienta -->
-            <TextBlock Text="Customer:" FontWeight="Bold"/>
+            <TextBlock Text="Customer:" FontWeight="Bold" Margin="10,10,0,0"/>
             <TextBlock Name="CustomerText" Margin="0,0,0,10"/>
 
             <!-- Aktualna data i czas -->
@@ -64,6 +68,8 @@
                     </StackPanel>
                 </Border>
             </Popup>
+
+            
 
             <!-- Przycisk zatwierdzenia -->
             <Button Content="Confirm return" Click="ConfirmReturn_Click" Margin="0,20,0,0"/>

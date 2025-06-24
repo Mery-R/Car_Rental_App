@@ -124,7 +124,7 @@
 
                 <TextBlock Text="{Binding ErrorMessage}" HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="12" Foreground="Red" TextWrapping="Wrap"/>
 
-                <Button x:Name="Login" Command="{Binding LoginCommand}" Content="LOG IN" HorizontalAlignment="Center" Margin="0,10,0,0" Height="35" Width="150" FontSize="20" FontWeight="Bold" Foreground="LightGray" Background="{x:Null}" BorderBrush="White" IsDefault="True"/>
+                <Button x:Name="Login" Command="{Binding LoginCommand}" Content="LOG IN" HorizontalAlignment="Center" Margin="0,10,0,0" Height="35" Width="150" FontSize="20" FontWeight="Bold" Foreground="LightGray" Background="{x:Null}" BorderBrush="White" IsDefault="True" Click="Login_Click"/>
             </StackPanel>
 
         </Grid> 

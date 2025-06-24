@@ -20,5 +20,21 @@ namespace Car_Rental.Models
         public string CustomerFullName { get; set; }   // Imię i nazwisko klienta
         public string CustomerPESEL { get; set; }   // Imię i nazwisko klienta
         public string UserName { get; set; }      // Imię i nazwisko pracownika
+
+
+        public string CarBrand { get; set; }
+        public string CarModel { get; set; }
+        public int CarYear { get; set; }
+
+
+
+        public string DisplayInfo
+        {
+            get
+            {
+                return $"#{ReservationId} | {StartDate:dd.MM.yyyy} → {EndDate:dd.MM.yyyy} | {CustomerFullName} | {LicensePlate}";
+            }
+        }
+
     }
 }

@@ -172,3 +172,5 @@ C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Deb
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\User_Management_Control.baml
 C:\Users\Mery\Desktop\Car_Rental\obj\Debug\Views\Show_Cars_User_Control.g.cs
 C:\Users\Mery\Desktop\Car_Rental\obj\Debug\Views\Show_Cars_User_Control.baml
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Show_Cars_User_Control.g.cs
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Show_Cars_User_Control.baml

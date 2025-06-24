@@ -41,6 +41,13 @@ namespace Car_Rental.Views
         {
             if (CarDataGrid.SelectedItem is CarModel selectedCar)
             {
+                // Sprawdzenie, czy status to ServiceInProgress (czyli serwis)
+                if ((CarStatus)selectedCar.StatusCar == CarStatus.ServiceInProgress)
+                {
+                    MessageBox.Show("This car is currently in service and cannot be rented.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
                 var rentWindow = new Rent_Car_Window(selectedCar.CarId);
                 bool? result = rentWindow.ShowDialog();
 
@@ -55,13 +62,15 @@ namespace Car_Rental.Views
             }
         }
 
+
+
         private void ReturnCarButton_Click(object sender, RoutedEventArgs e)
         {
             if (CarDataGrid.SelectedItem is CarModel selectedCar)
             {
                 // Akceptuj zarówno Rented, jak i Service
                 var status = (CarStatus)selectedCar.StatusCar;
-                if (status != CarStatus.Rented)
+                if (status != CarStatus.Rented && status != CarStatus.Reserved)
                 {
                     MessageBox.Show("This car is not currently rented.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
@@ -97,20 +106,7 @@ namespace Car_Rental.Views
             }
         }
 
-        private void ServiceCarButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (CarDataGrid.SelectedItem is CarModel selectedCar)
-            {
-                int carId = selectedCar.CarId;
-                // Przekazanie delegata do odświeżenia
-                Service_Car_Window serviceCarWindow = new Service_Car_Window(carId, RefreshCars);
-                serviceCarWindow.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Please select a car to add a service.", "No Car Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
+        
 
         private void RentedCarButton_Click(object sender, RoutedEventArgs e)
         {

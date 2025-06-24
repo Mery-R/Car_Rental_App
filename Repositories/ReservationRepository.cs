@@ -106,18 +106,128 @@ namespace Car_Rental.Repositories
             using (var connection = GetConnection())
             {
                 connection.Open();
-                var query = @"UPDATE Reservation 
-                      SET StatusReservation = @status 
-                      WHERE ReservationId = @id";
+
+                var query = @"
+            UPDATE Reservation SET 
+                StatusReservation = @StatusReservation
+            WHERE ReservationId = @ReservationId";
 
                 using (var command = new SQLiteCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@status", reservation.StatusReservation);
-                    command.Parameters.AddWithValue("@id", reservation.ReservationId);
+                    command.Parameters.AddWithValue("@StatusReservation", reservation.StatusReservation);
+                    command.Parameters.AddWithValue("@ReservationId", reservation.ReservationId);
+
                     command.ExecuteNonQuery();
                 }
             }
         }
+
+
+
+        public List<ReservationModel> GetActiveReservationsByCarId(int carId)
+        {
+            var reservations = new List<ReservationModel>();
+
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+
+                var query = @"
+    SELECT r.*, 
+           c.LicensePlate, 
+           c.Brand AS CarBrand,
+           c.Model AS CarModel,
+           c.ProductionYear AS CarYear,
+           cust.FirstName || ' ' || cust.LastName AS CustomerFullName,
+           cust.PESEL AS CustomerPESEL,
+           u.FirstName || ' ' || u.LastName AS UserName
+    FROM Reservation r
+    JOIN Car c ON r.CarID = c.CarID
+    JOIN Customer cust ON r.CustomerID = cust.CustomerID
+    JOIN User u ON r.UserID = u.UserID
+    WHERE r.CarID = @CarID 
+      AND (r.StatusReservation = @Status1 OR r.StatusReservation = @Status2)";
+
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@CarID", carId);
+                    command.Parameters.AddWithValue("@Status1", (int)ReservationStatus.Planned);
+                    command.Parameters.AddWithValue("@Status2", (int)ReservationStatus.Active);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            reservations.Add(new ReservationModel
+                            {
+                                ReservationId = Convert.ToInt32(reader["ReservationId"]),
+                                CarId = Convert.ToInt32(reader["CarID"]),
+                                UserId = Convert.ToInt32(reader["UserID"]),
+                                CustomerId = Convert.ToInt32(reader["CustomerID"]),
+                                StartDate = DateTime.Parse(reader["StartDate"].ToString()),
+                                EndDate = DateTime.Parse(reader["EndDate"].ToString()),
+                                StatusReservation = Convert.ToInt32(reader["StatusReservation"]),
+                                TotalPrice = float.Parse(reader["TotalPrice"].ToString()),
+
+                                LicensePlate = reader["LicensePlate"].ToString(),
+                                CarBrand = reader["CarBrand"].ToString(),
+                                CarModel = reader["CarModel"].ToString(),
+                                CarYear = Convert.ToInt32(reader["CarYear"]),
+
+                                CustomerFullName = reader["CustomerFullName"].ToString(),
+                                CustomerPESEL = reader["CustomerPESEL"].ToString(),
+                                UserName = reader["UserName"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+
+            return reservations;
+        }
+
+
+
+        public List<ReservationModel> GetReservationsByCarId(int carId)
+        {
+            var reservations = new List<ReservationModel>();
+
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+
+                var query = "SELECT * FROM Reservation WHERE CarID = @CarID";
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@CarID", carId);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            reservations.Add(new ReservationModel
+                            {
+                                ReservationId = Convert.ToInt32(reader["ReservationId"]),
+                                CarId = Convert.ToInt32(reader["CarID"]),
+                                UserId = Convert.ToInt32(reader["UserID"]),
+                                CustomerId = Convert.ToInt32(reader["CustomerID"]),
+                                StartDate = DateTime.Parse(reader["StartDate"].ToString()),
+                                EndDate = DateTime.Parse(reader["EndDate"].ToString()),
+                                StatusReservation = Convert.ToInt32(reader["StatusReservation"]),
+                                TotalPrice = float.Parse(reader["TotalPrice"].ToString())
+                            });
+                        }
+                    }
+                }
+            }
+
+            return reservations;
+        }
+
+
+
 
     }
 }

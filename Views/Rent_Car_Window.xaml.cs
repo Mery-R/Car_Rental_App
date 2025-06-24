@@ -100,6 +100,20 @@ namespace Car_Rental.Views
                     return;
                 }
 
+                var existingReservations = _reservationRepository.GetReservationsByCarId(_carId);
+
+                bool overlaps = existingReservations.Any(r =>
+                    r.StatusReservation == (int)ReservationStatus.Active &&
+                    !(end < r.StartDate || start > r.EndDate)
+                );
+
+                if (overlaps)
+                {
+                    MessageBox.Show("This car is already reserved or rented in the selected date range.", "Conflict", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+
                 // Tworzenie nowej rezerwacji
                 Reservation = new ReservationModel
                 {

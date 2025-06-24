@@ -1,11 +1,7 @@
-﻿// Plik: App.xaml.cs
-// Przeznaczenie: Główny plik klasy aplikacji WPF. Odpowiada za inicjalizację aplikacji Car_Rental, w tym za startowe przygotowanie bazy danych użytkowników.
-// Autor: (uzupełnij według potrzeb)
-// Data utworzenia: (uzupełnij według potrzeb)
-
-using Car_Rental.Repositories;
+﻿using Car_Rental.Repositories;
 using System;
 using System.Windows;
+using Car_Rental.Models;
 
 namespace Car_Rental
 {
@@ -14,6 +10,11 @@ namespace Car_Rental
     /// </summary>
     public partial class App : Application
     {
+        /// <summary>
+        /// Statyczna właściwość przechowująca aktualnie zalogowanego użytkownika.
+        /// </summary>
+        public static UserModel CurrentUser { get; set; }
+
         /// <summary>
         /// Konstruktor aplikacji. Inicjalizuje bazę danych użytkowników przy starcie aplikacji.
         /// </summary>

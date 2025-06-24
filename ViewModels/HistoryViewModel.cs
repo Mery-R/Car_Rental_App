@@ -13,6 +13,9 @@ namespace Car_Rental.ViewModels
         public ObservableCollection<CarModel> Cars { get; set; }
         public ObservableCollection<object> FilteredItems { get; set; }
 
+        public UserModel CurrentUser { get; set; }
+
+
         private string _searchText;
         public string SearchText
         {
@@ -39,21 +42,24 @@ namespace Car_Rental.ViewModels
 
         public HistoryViewModel()
         {
+            // Przypisanie aktualnie zalogowanego użytkownika
+            CurrentUser = App.CurrentUser;
+
+            CurrentUser = App.CurrentUser ?? new UserModel { Username = "Unknown" };
+
             var reservationRepo = new ReservationRepository();
             var serviceRepo = new ServiceRepository();
             var carRepo = new CarRepository();
-            var customerRepo = new CustomerRepository(); // Dodajemy repozytorium klientów
-            var userRepo = new UserRepository(); // Dodajemy repozytorium pracowników
+            var customerRepo = new CustomerRepository();
+            var userRepo = new UserRepository();
 
             Reservations = new ObservableCollection<ReservationModel>(reservationRepo.GetAllReservations());
             Services = new ObservableCollection<ServiceModel>(serviceRepo.GetAllServices());
             Cars = new ObservableCollection<CarModel>(carRepo.GetAllCars());
 
-            // Pobieramy dane klientów i pracowników
             var customers = customerRepo.GetAllCustomers();
             var users = userRepo.GetByAll();
 
-            // Tworzymy mapy dla klientów i pracowników
             var customerNameDict = customers.ToDictionary(
                 c => c.CustomerId,
                 c => $"{c.FirstName} {c.LastName}"
@@ -64,34 +70,28 @@ namespace Car_Rental.ViewModels
                 c => c.PESEL
             );
 
-            var userDict = users.ToDictionary(u => u.UserId, u => $"{u.Name} {u.LastName}");
+            var userDict = users.ToDictionary(u => u.UserId, u => u.Username);
 
-            // Uzupełniamy LicensePlate, CustomerFullName i UserName
-            var carDict = Cars.ToDictionary(c => c.CarId, c => c.LicensePlate); // Mapa CarId -> LicensePlate
+            var carDict = Cars.ToDictionary(c => c.CarId, c => c.LicensePlate);
 
             foreach (var reservation in Reservations)
             {
-                // Przypisanie LicensePlate
                 reservation.LicensePlate = carDict.ContainsKey(reservation.CarId) ? carDict[reservation.CarId] : "Unknown";
-
-                // Przypisanie pełnego imienia i nazwiska klienta
                 reservation.CustomerFullName = customerNameDict.ContainsKey(reservation.CustomerId) ? customerNameDict[reservation.CustomerId] : "Unknown";
-
-                // Przypisanie pesela klienta
                 reservation.CustomerPESEL = customerPESELDict.ContainsKey(reservation.CustomerId) ? customerPESELDict[reservation.CustomerId] : "Unknown";
-
-                // Przypisanie pełnego imienia i nazwiska pracownika
-                reservation.UserName = userDict.ContainsKey(reservation.UserId) ? userDict[reservation.UserId] : "Unknown";
+                reservation.UserName = userDict.ContainsKey(reservation.UserId) ? userDict[reservation.UserId] : "Unknown";  // <-- login teraz
             }
+
+
             foreach (var service in Services)
             {
-                // Przypisanie LicensePlate
                 service.LicensePlate = carDict.ContainsKey(service.CarId) ? carDict[service.CarId] : "Unknown";
             }
 
             FilteredItems = new ObservableCollection<object>();
             ApplyFilter();
         }
+
 
 
         private void ApplyFilter()

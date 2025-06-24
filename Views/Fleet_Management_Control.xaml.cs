@@ -100,6 +100,23 @@ namespace Car_Rental.Views
             {
                 MessageBox.Show("Wybierz samochód do usunięcia.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+
+
+        }
+
+        private void ServiceCarButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CarDataGrid.SelectedItem is CarModel selectedCar)
+            {
+                int carId = selectedCar.CarId;
+                // Przekazanie delegata do odświeżenia
+                Service_Car_Window serviceCarWindow = new Service_Car_Window(carId, RefreshCars);
+                serviceCarWindow.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a car to add a service.", "No Car Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void RefreshCars()

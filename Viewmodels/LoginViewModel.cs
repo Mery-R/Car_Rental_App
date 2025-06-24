@@ -97,22 +97,21 @@ namespace Car_Rental.ViewModels
         // Logic to execute the login command
         private void ExecuteLoginCommand(object obj)
         {
-            // Konwersja SecureString do string
             var password = Password;
 
-            // Autentykacja użytkownika
             var isValidUser = userRepository.AuthenticateUser(new NetworkCredential(Username, password));
 
             if (isValidUser)
             {
-                // 🔐 Ustawianie tożsamości zalogowanego użytkownika
+                // Ustawienie aktualnego użytkownika
+                App.CurrentUser = userRepository.GetByUsername(Username);
+
+                // Ustawienie tożsamości
                 Thread.CurrentPrincipal = new System.Security.Principal.GenericPrincipal(
                     new System.Security.Principal.GenericIdentity(Username), null);
 
-                // Po zalogowaniu - sprawdzenie uprawnień
-                IsAccess = userRepository.IsAccess(Username);
+                IsAccess = App.CurrentUser?.Access ?? false;
 
-                // Otwórz odpowiednie menu
                 if (IsAccess)
                 {
                     var adminMenu = new Admin_Menu();
@@ -124,21 +123,22 @@ namespace Car_Rental.ViewModels
                     userMenu.Show();
                 }
 
-                // Ukryj widok logowania
                 IsViewVisible = false;
             }
 
             else
             {
-                // Wyświetlenie błędu logowania
                 ErrorMessage = "* Invalid username or password";
             }
         }
+
 
         // Logic for password recovery
         private void ExecuteRecoverPassCommand(string username, string email)
         {
             throw new NotImplementedException();
         }
+
+
     }
 }
