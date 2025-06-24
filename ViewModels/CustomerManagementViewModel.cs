@@ -1,11 +1,6 @@
 ﻿using Car_Rental.Models;
 using Car_Rental.Repositories;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Car_Rental.ViewModels
 {
@@ -18,10 +13,27 @@ namespace Car_Rental.ViewModels
             set { _customers = value; OnPropertyChanged(nameof(Customers)); }
         }
 
+        private readonly CustomerRepository _repository;
+
         public CustomerManagementViewModel()
         {
-            var repo = new CustomerRepository();
-            Customers = new ObservableCollection<CustomerModel>(repo.GetAllCustomers());
+            _repository = new CustomerRepository();
+            LoadCustomers();
         }
+
+        public void LoadCustomers()
+        {
+            Customers = new ObservableCollection<CustomerModel>(_repository.GetAllCustomers());
+        }
+
+        public void RemoveCustomer(CustomerModel customer)
+        {
+            if (customer == null) return;
+
+            _repository.DeleteCustomer(customer.CustomerId);
+            LoadCustomers(); // odświeżenie listy po usunięciu
+        }
+
+
     }
 }

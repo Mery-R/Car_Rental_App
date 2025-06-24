@@ -1,5 +1,6 @@
 ﻿using Car_Rental.Models;
 using Car_Rental.Repositories;
+using Car_Rental.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,8 +42,14 @@ namespace Car_Rental.Views
         // Dodawanie nowego samochodu
         private void AddCustomerButton_Click(object sender, RoutedEventArgs e)
         {
+            var addCustomerWindow = new Add_Customer_Window();
+            addCustomerWindow.ShowDialog();
 
+            // Opcjonalnie: odśwież listę klientów po dodaniu
+            var viewModel = DataContext as CustomerManagementViewModel;
+            viewModel?.LoadCustomers(); // Załóżmy, że masz taką metodę
         }
+
 
         // Edycja istniejącego samochodu
         private void EditCustomerButton_Click(object sender, RoutedEventArgs e)
@@ -52,8 +59,28 @@ namespace Car_Rental.Views
 
         private void RemoveCustomerButton_Click(object sender, RoutedEventArgs e)
         {
- 
+            if (CarDataGrid.SelectedItem is CustomerModel selectedCustomer)
+            {
+                var result = MessageBox.Show(
+                    $"Are you sure you want to delete {selectedCustomer.FirstName} {selectedCustomer.LastName}?",
+                    "Confirm Delete",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    if (DataContext is CustomerManagementViewModel vm)
+                    {
+                        vm.RemoveCustomer(selectedCustomer);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a customer to delete.", "No selection", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
+
 
         private void RefreshCustomers()
         {

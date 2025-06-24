@@ -189,44 +189,7 @@ namespace Car_Rental.Repositories
 
 
 
-        public List<ReservationModel> GetReservationsByCarId(int carId)
-        {
-            var reservations = new List<ReservationModel>();
-
-            using (var connection = GetConnection())
-            {
-                connection.Open();
-
-                var query = "SELECT * FROM Reservation WHERE CarID = @CarID";
-
-                using (var command = new SQLiteCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@CarID", carId);
-
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            reservations.Add(new ReservationModel
-                            {
-                                ReservationId = Convert.ToInt32(reader["ReservationId"]),
-                                CarId = Convert.ToInt32(reader["CarID"]),
-                                UserId = Convert.ToInt32(reader["UserID"]),
-                                CustomerId = Convert.ToInt32(reader["CustomerID"]),
-                                StartDate = DateTime.Parse(reader["StartDate"].ToString()),
-                                EndDate = DateTime.Parse(reader["EndDate"].ToString()),
-                                StatusReservation = Convert.ToInt32(reader["StatusReservation"]),
-                                TotalPrice = float.Parse(reader["TotalPrice"].ToString())
-                            });
-                        }
-                    }
-                }
-            }
-
-            return reservations;
-        }
-
-
+       
 
 
     }

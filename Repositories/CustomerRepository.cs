@@ -102,6 +102,21 @@ namespace Car_Rental.Repositories
             return null;
         }
 
+        public void DeleteCustomer(int customerId)
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                var query = "DELETE FROM Customer WHERE CustomerId = @CustomerId";
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@CustomerId", customerId);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+
     }
 
 }
