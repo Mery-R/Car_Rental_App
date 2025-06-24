@@ -106,6 +106,11 @@ namespace Car_Rental.ViewModels
                 // Ustawienie aktualnego użytkownika
                 App.CurrentUser = userRepository.GetByUsername(Username);
 
+                // Ustawienie danych sesji
+                UserSession.Username = App.CurrentUser.Username;
+                UserSession.UserId = App.CurrentUser.UserId;
+
+
                 // Ustawienie tożsamości
                 Thread.CurrentPrincipal = new System.Security.Principal.GenericPrincipal(
                     new System.Security.Principal.GenericIdentity(Username), null);

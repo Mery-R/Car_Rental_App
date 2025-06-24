@@ -1,16 +1,23 @@
 ﻿using Car_Rental.Models;
 using Car_Rental.Repositories;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using PdfSharp.Pdf;
+using PdfSharp.Drawing;
+using System.IO;
 
 namespace Car_Rental.Views
 {
     public partial class Rent_Car_Window : Window
     {
         private readonly int _carId;
+        private readonly int _userId;
         private readonly CarRepository _carRepository = new CarRepository();
         private readonly CustomerRepository _customerRepository = new CustomerRepository();
         private readonly ReservationRepository _reservationRepository = new ReservationRepository();
@@ -46,6 +53,7 @@ namespace Car_Rental.Views
             CustomerComboBox.SelectedValuePath = "CustomerId";
         }
 
+        private float _calculatedPrice = 0;
         private void CalculatePrice()
         {
             if (StartDatePicker.SelectedDate is DateTime start &&
@@ -58,8 +66,8 @@ namespace Car_Rental.Views
                 }
 
                 double days = (end - start).TotalDays;
-                float price = CalculateTotalPrice(days);
-                TotalPriceText.Text = $"{price} PLN";  // Upewnij się, że wyświetlamy cenę
+                _calculatedPrice = CalculateTotalPrice(days);
+                TotalPriceText.Text = $"{_calculatedPrice} PLN";
             }
         }
         private float CalculateTotalPrice(double days)
@@ -100,17 +108,16 @@ namespace Car_Rental.Views
                     return;
                 }
 
-                var existingReservations = _reservationRepository.GetReservationsByCarId(_carId);
-
-                bool overlaps = existingReservations.Any(r =>
-                    r.StatusReservation == (int)ReservationStatus.Active &&
-                    !(end < r.StartDate || start > r.EndDate)
-                );
-
-                if (overlaps)
+                if (GeneratePdfCheckBox.IsChecked == true)
                 {
-                    MessageBox.Show("This car is already reserved or rented in the selected date range.", "Conflict", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
+                    string customerName = ((CustomerModel)CustomerComboBox.SelectedItem)?.FullName ?? "Unknown";
+                    string carDetails = CarDetailsText.Text;
+                    string rentalPeriod = $"{StartDatePicker.SelectedDate:yyyy-MM-dd} to {EndDatePicker.SelectedDate:yyyy-MM-dd}";
+                    float totalPrice = _calculatedPrice;
+                    float deposit = _car.Deposit;
+
+
+                    GeneratePdfAgreement(customerName, carDetails, rentalPeriod, totalPrice, deposit);
                 }
 
 
@@ -119,7 +126,7 @@ namespace Car_Rental.Views
                 {
                     CarId = _carId,
                     CustomerId = customerId,
-                    UserId = 1, // lub dynamicznie – w zależności od zalogowanego użytkownika
+                    UserId = UserSession.UserId,
                     StartDate = start,
                     EndDate = end,
                     StatusReservation = (int)ReservationStatus.Active,
@@ -142,7 +149,7 @@ namespace Car_Rental.Views
                         _car.StatusCar = (int)CarStatus.Reserved; // Samochód jest zarezerwowany na przyszłość
                         _carRepository.UpdateCar(_car);
                         MessageBox.Show("Car has been reserved.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                        
+
                     }
 
                     DialogResult = true;
@@ -178,5 +185,39 @@ namespace Car_Rental.Views
             }
         }
 
+        private void GeneratePdfAgreement(string customerName, string carDetails, string rentalPeriod, float totalPrice, float deposit)
+        {
+            // Ustal ścieżkę zapisu
+            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Invoices");
+            Directory.CreateDirectory(folderPath); // Tworzy folder jeśli nie istnieje
+
+            string fileName = $"Agreement_{customerName.Replace(" ", "_")}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+            string filePath = Path.Combine(folderPath, fileName);
+
+            // Tworzenie dokumentu
+            PdfDocument document = new PdfDocument();
+            document.Info.Title = "Rental Agreement";
+
+            PdfPage page = document.AddPage();
+            XGraphics gfx = XGraphics.FromPdfPage(page);
+            XFont headerFont = new XFont("Arial", 18); // 1 = Bold
+            XFont contentFont = new XFont("Arial", 12); // 0 = Regular
+
+            double y = 40;
+
+            gfx.DrawString("Rental Agreement", headerFont, XBrushes.Black, new XRect(0, y, page.Width.Point, page.Height.Point), XStringFormats.TopCenter);
+            y += 60;
+
+            gfx.DrawString("Rental Company: Borcelle Car Rental", contentFont, XBrushes.Black, 40, y); y += 30;
+            gfx.DrawString($"Customer: {customerName}", contentFont, XBrushes.Black, 40, y); y += 30;
+            gfx.DrawString($"Car: {carDetails}", contentFont, XBrushes.Black, 40, y); y += 30;
+            gfx.DrawString($"Rental Period: {rentalPeriod}", contentFont, XBrushes.Black, 40, y); y += 30;
+            gfx.DrawString($"Total Price: {totalPrice:C}", contentFont, XBrushes.Black, 40, y); y += 30;
+            gfx.DrawString($"Deposit: {deposit:C}", contentFont, XBrushes.Black, 40, y); y += 30;
+
+            gfx.DrawString("Signature: ____________________", contentFont, XBrushes.Black, 40, y + 50);
+
+            document.Save(filePath);
+        }
     }
 }
