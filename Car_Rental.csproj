@@ -253,6 +253,9 @@
     <Compile Include="Views\Edit_Customer_Window.xaml.cs">
       <DependentUpon>Edit_Customer_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Edit_Reservation_Window.xaml.cs">
+      <DependentUpon>Edit_Reservation_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Edit_User_Window.xaml.cs">
       <DependentUpon>Edit_User_Window.xaml</DependentUpon>
     </Compile>
@@ -326,6 +329,10 @@
     <Page Include="Views\Edit_Customer_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Edit_Reservation_Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Edit_User_Window.xaml">
       <SubType>Designer</SubType>

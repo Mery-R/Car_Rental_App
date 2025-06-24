@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\App\App.xaml
-221583311335
+23-1475636251
 178374781
-58-528731903
+591159815131
 60-1048426161
-CustomControls\BindablePasswordBox.xaml;Styles\ButtonStyles.xaml;Styles\UIColor.xaml;Views\Add_Car_Window.xaml;Views\Add_Customer_Window.xaml;Views\Add_User_Window.xaml;Views\Admin_Menu.xaml;Views\Customer_Management_Control.xaml;Views\Edit_Car_Window.xaml;Views\Edit_Customer_Window.xaml;Views\Edit_User_Window.xaml;Views\Fleet_Management_Control.xaml;Views\History_Control.xaml;Views\Login_Screen.xaml;Views\Price_List_Control.xaml;Views\Rent_Car_Window.xaml;Views\Return_Car_Window.xaml;Views\Service_Car_Window.xaml;Views\Show_Cars_Control.xaml;Views\Show_Cars_User_Control.xaml;Views\User_Management_Control.xaml;Views\User_Menu.xaml;
+CustomControls\BindablePasswordBox.xaml;Styles\ButtonStyles.xaml;Styles\UIColor.xaml;Views\Add_Car_Window.xaml;Views\Add_Customer_Window.xaml;Views\Add_User_Window.xaml;Views\Admin_Menu.xaml;Views\Customer_Management_Control.xaml;Views\Edit_Car_Window.xaml;Views\Edit_Customer_Window.xaml;Views\Edit_Reservation_Window.xaml;Views\Edit_User_Window.xaml;Views\Fleet_Management_Control.xaml;Views\History_Control.xaml;Views\Login_Screen.xaml;Views\Price_List_Control.xaml;Views\Rent_Car_Window.xaml;Views\Return_Car_Window.xaml;Views\Service_Car_Window.xaml;Views\Show_Cars_Control.xaml;Views\Show_Cars_User_Control.xaml;Views\User_Management_Control.xaml;Views\User_Menu.xaml;
 
 False
 
