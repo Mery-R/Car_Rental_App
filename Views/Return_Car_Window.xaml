@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Return Car"
-        Height="700" Width="700"
+        Height="710" Width="700"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Background="#F0F2F5">
@@ -12,7 +12,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="70"/>
-            <RowDefinition Height="110"/>
+            <RowDefinition Height="120"/>
             <RowDefinition Height="320"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -164,6 +164,7 @@
             </Border>
         </Popup>
 
+        <CheckBox x:Name="GeneratePdfCheckBox" Content="Generate PDF Agreement" IsChecked="True" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,70"/>
         <!-- FOOTER BUTTONS -->
         <StackPanel Grid.Row="5"
                     Orientation="Horizontal"

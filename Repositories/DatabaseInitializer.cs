@@ -33,7 +33,7 @@ class DatabaseInitializer
                     FirstName TEXT NOT NULL,
                     LastName TEXT NOT NULL,
                     Email TEXT,
-                    Access INTEGER NOT NULL DEFAULT 0 -- 1 = admin, 0 = zwykły pracownik
+                    Access INTEGER NOT NULL DEFAULT 0
                 );
 
                 -- Tworzenie tabeli Customer (klienci końcowi)
@@ -60,12 +60,12 @@ class DatabaseInitializer
                     LicensePlate TEXT NOT NULL UNIQUE,
                     VIN TEXT UNIQUE,
                     Engine TEXT,
-                    FuelType INTEGER, -- 0 = benzyna, 1 = diesel, 2 = hybryda, 3 = elektryk
-                    Gearbox INTEGER,  -- 0 = manual, 1 = automat
-                    VehicleClass TEXT,-- np. B, C, D
+                    FuelType INTEGER,
+                    Gearbox INTEGER,
+                    VehicleClass TEXT,
                     Color TEXT,
                     Mileage INTEGER,
-                    StatusCar INTEGER NOT NULL DEFAULT 0, -- 0 = dostępny, 1 = zarezerwowany, 2 = wypożyczony, 3 = serwis
+                    StatusCar INTEGER NOT NULL DEFAULT 0,
                     DailyPrice_1_3 REAL,
                     DailyPrice_4_8 REAL,
                     DailyPrice_9_15 REAL,
@@ -98,6 +98,7 @@ class DatabaseInitializer
                     StartDate TEXT NOT NULL,
                     EndDate TEXT NOT NULL,
                     [Description] TEXT,
+                    StatusService INTEGER NOT NULL DEFAULT 0,
                     FOREIGN KEY (CarId) REFERENCES Car(CarId)
                 );
 
@@ -105,7 +106,7 @@ class DatabaseInitializer
                 DamageId INTEGER PRIMARY KEY AUTOINCREMENT,
                 CarId INTEGER NOT NULL,
                 ReservationId INTEGER,
-                Side TEXT NOT NULL,
+                Side INTEGER NOT NULL,
                 X REAL NOT NULL,
                 Y REAL NOT NULL,
                 Type TEXT NOT NULL,
@@ -130,23 +131,10 @@ class DatabaseInitializer
                 -- Dodanie przykładowych aut
                 INSERT OR IGNORE INTO Car (Brand, Model, ProductionYear, LicensePlate, VIN, Engine, FuelType, Gearbox, VehicleClass, Color, Mileage, StatusCar, DailyPrice_1_3, DailyPrice_4_8, DailyPrice_9_15, DailyPrice_16_29, DailyPrice_30plus, WeekendPrice, Deposit, ImagePath)
                 VALUES
-                ('Toyota', 'Corolla', 2020, 'ABC123', '1HGBH41JXMN109186', '1.8L', 0, 1, 'C', 'Biały', 15000, 0, 50.0, 45.0, 40.0, 35.0, 30.0, 60.0, 500.0, '/images/toyota_corolla.jpg'),
-                ('Ford', 'Focus', 2019, 'XYZ789', '1FABP3AN9BM154121', '2.0L', 1, 0, 'C', 'Czerwony', 20000, 4, 55.0, 50.0, 45.0, 40.0, 35.0, 65.0, 500.0, '/images/ford_focus.jpg'),
-                ('Volkswagen', 'Golf', 2018, 'DEF456', 'WVWZZZ1KZBW000001', '1.4L', 0, 1, 'C', 'Srebrny', 25000, 1, 52.0, 47.0, 43.0, 38.0, 34.0, 62.0, 500.0, '/images/vw_golf.jpg'),
-                ('BMW', '3 Series', 2021, 'GHI789', 'WBA8E9G52GNU12345', '2.0L', 0, 1, 'D', 'Czarny', 10000, 2, 80.0, 75.0, 70.0, 65.0, 60.0, 90.0, 1000.0, '/images/bmw_3series.jpg'),
-                ('Honda', 'Civic', 2022, 'JKL012', '2HGFC2F69KH512345', '1.5L', 0, 1, 'C', 'Niebieski', 5000, 0, 60.0, 55.0, 50.0, 45.0, 40.0, 70.0, 600.0, '/images/honda_civic.jpg');
+                ('Ford', 'Focus', 2019, 'XYZ789', '1FABP3AN9BM154121', '2.0L', 1, 0, 'C', 'Blue', 20000, 4, 55.0, 50.0, 45.0, 40.0, 35.0, 65.0, 500.0, '/images/ford_focus.jpg'),
+                ('Volkswagen', 'Golf', 2018, 'DEF456', 'WVWZZZ1KZBW000001', '1.4L', 0, 1, 'C', 'White', 25000, 1, 52.0, 47.0, 43.0, 38.0, 34.0, 62.0, 500.0, '/images/vw_golf.jpg'),
+                ('Honda', 'Civic', 2022, 'JKL012', '2HGFC2F69KH512345', '1.5L', 0, 1, 'C', 'Red', 5000, 0, 60.0, 55.0, 50.0, 45.0, 40.0, 70.0, 600.0, '/images/honda_civic.jpg');
 
-                -- Dodanie przykładowej rezerwacji
-                INSERT OR IGNORE INTO Reservation (CarID, UserID, CustomerID, StartDate, EndDate, StatusReservation, TotalPrice)
-                VALUES
-                (1, 1, 1, '2025-06-15', '2025-06-20', 0, 250.0),  -- rezerwacja dla Toyoty przez Jana Kowalskiego
-                (2, 2, 2, '2025-06-18', '2025-06-25', 0, 275.0);  -- rezerwacja dla Forda przez Annę Nowak
-
-                -- Dodanie przykładowego serwisu
-                INSERT OR IGNORE INTO Service (CarId, StartDate, EndDate, Description)
-                VALUES
-                (1, '2025-06-01', '2025-06-05', 'Przegląd techniczny'),
-                (2, '2025-06-10', '2025-06-12', 'Wymiana oleju');
             ";
 
             // Połączenie z bazą danych i wykonanie skryptu SQL

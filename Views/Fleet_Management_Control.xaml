@@ -145,8 +145,8 @@
                       IsReadOnly="True"
                       SelectionMode="Single"
                       AutoGenerateColumns="False"
-                      RowBackground="DarkGray"
-                      AlternatingRowBackground="Gray"
+                      RowBackground="#36257E"
+                      AlternatingRowBackground="#2B1A69"
                       HeadersVisibility="Column"
                       GridLinesVisibility="None"
                       BorderThickness="0"
@@ -156,7 +156,7 @@
                     <DataGrid.ColumnHeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="Gray"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Padding" Value="0,0,0,0"/>
                             <Setter Property="FontFamily" Value="Montserrat"/>
                             <Setter Property="FontSize" Value="18"/>
@@ -166,6 +166,7 @@
                     <DataGrid.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="Foreground" Value="LightGray"/>
                         </Style>
                     </DataGrid.CellStyle>
 

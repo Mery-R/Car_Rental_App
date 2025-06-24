@@ -1,7 +1,11 @@
 ﻿using Car_Rental.Models;
 using Car_Rental.Repositories;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using PdfSharp.Snippets.Drawing;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -194,6 +198,31 @@ namespace Car_Rental.Views
                 MessageBox.Show("Invalid mileage.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if (GeneratePdfCheckBox.IsChecked == true)
+            {
+                // Pobieramy dane klienta i rezerwacji z pola _reservation
+                string customerName = _reservation.CustomerFullName;
+
+                // Szczegóły auta z pola _car (lub z pola tekstowego, jeśli wolisz)
+                string carDetails = $"{_car.Brand} {_car.Model} | Reg: {_car.LicensePlate}";
+
+                // Okres wypożyczenia: od daty rozpoczęcia rezerwacji do momentu zwrotu
+                string rentalPeriod = string.Format(
+                    "{0:yyyy-MM-dd} to {1:yyyy-MM-dd}",
+                    _reservation.StartDate,
+                    DateTime.Now);
+
+                // Całkowita cena z rezerwacji
+                float totalPrice = _reservation.TotalPrice;
+
+                // Wpłacona kaucja z modelu auta
+                float deposit = _car.Deposit;
+
+                GeneratePdfAgreement(customerName, carDetails, rentalPeriod, totalPrice, deposit);
+            }
+
+
+
 
             _car.Mileage = newMileage;
             _reservation.StatusReservation = (int)ReservationStatus.Finished;
@@ -247,5 +276,135 @@ namespace Car_Rental.Views
 
         private void RefreshDateTime_Click(object sender, RoutedEventArgs e) => RefreshDateTime();
         private void RefreshDateTime() => CurrentDateTimeText.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+        private void GeneratePdfAgreement(
+    string customerName,
+    string carDetails,
+    string rentalPeriod,
+    float totalPrice,
+    float deposit)
+        {
+            // 1) Przygotowanie katalogu i nazwy pliku
+            string folder = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Invoices_Return");
+            Directory.CreateDirectory(folder);
+
+            string fileName = $"Return_{customerName.Replace(" ", "_")}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+            string filePath = System.IO.Path.Combine(folder, fileName);
+
+            // 2) Utworzenie dokumentu i strony A4
+            var document = new PdfDocument();
+            var page = document.AddPage();
+            page.Width = 595;  // szerokość A4 w punktach
+            page.Height = 842;  // wysokość A4
+            var gfx = XGraphics.FromPdfPage(page);
+
+            // 3) Czcionki
+            var headerFont = new XFont("Verdana", 16);
+            var font = new XFont("Verdana", 12);
+
+            // 4) Rysowanie nagłówka i informacji tekstowych
+            double y = 40;
+            gfx.DrawString("Car Return Report", headerFont, XBrushes.Black, 40, y); y += 30;
+            gfx.DrawString($"Customer: {customerName}", font, XBrushes.Black, 40, y); y += 20;
+            gfx.DrawString($"Car: {carDetails}", font, XBrushes.Black, 40, y); y += 20;
+            gfx.DrawString($"Period: {rentalPeriod}", font, XBrushes.Black, 40, y); y += 20;
+            gfx.DrawString($"Total Price: {totalPrice:C}", font, XBrushes.Black, 40, y); y += 20;
+            gfx.DrawString($"Deposit: {deposit:C}", font, XBrushes.Black, 40, y); y += 30;
+
+            // 5) Definicje obrazków i ich rozmiarów
+            var sides = new[] { "front.jpg", "back.jpg", "left.png", "right.png" };
+            var sizes = new (double W, double H)[]
+            {
+            (200, 180), // front
+            (160, 160), // back
+            (250, 150), // left
+            (250, 150)  // right
+            };
+            // offset kropek per side
+            var offsets = new (double X, double Y)[]
+            {
+            (  0, -5),   // front
+            (  0,  5),   // back
+            (  0,-15),   // left
+            (  0,-15)    // right
+            };
+
+            double startX = 40;
+            double startY = y;
+
+            // 6) Rysowanie każdego obrazka + kropek
+            for (int i = 0; i < sides.Length; i++)
+            {
+                string imgFile = System.IO.Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory, "Images", sides[i]);
+                if (!File.Exists(imgFile))
+                    continue;  // pomiń jeżeli brak pliku
+
+                // wymiary dla tego boku
+                double imgW = sizes[i].W;
+                double imgH = sizes[i].H;
+
+                // pozycja w układzie 2×2 (możesz dostosować grid)
+                double xPos = startX + (i % 2) * (imgW + 20);
+                double yPos = startY + (i / 2) * (imgH + 40);
+
+                // wczytanie i narysowanie obrazka
+                var img = XImage.FromFile(imgFile);
+                gfx.DrawImage(img, xPos, yPos, imgW, imgH);
+
+                // rysowanie kropek
+                var damagesForSide = _allDamages.Where(d => d.Side == i);
+                foreach (var d in damagesForSide)
+                {
+                    // wybór koloru wg typu
+                    XColor dotColor;
+                    switch (d.Type)
+                    {
+                        case DamageType.Scratch: dotColor = XColors.Orange; break;
+                        case DamageType.Dent: dotColor = XColors.Red; break;
+                        case DamageType.Chip: dotColor = XColors.Purple; break;
+                        case DamageType.Crack: dotColor = XColors.Blue; break;
+                        default: dotColor = XColors.Gray; break;
+                    }
+
+                    // 2) Podstawowe relX/relY ze skalowania Canvas→PDF
+                    double relX = xPos + (d.X / FrontCanvas.ActualWidth) * imgW;
+                    double relY = yPos + (d.Y / FrontCanvas.ActualHeight) * imgH;
+
+                    // 3) Oblicz środek obrazka:
+                    double centerX = xPos + imgW / 2;
+                    double centerY = yPos + imgH / 2;
+
+                    // 4) Wyciągnij wektor od środka:
+                    double dx = relX - centerX;
+                    double dy = relY - centerY;
+
+                    // 5) Rozsunięcie wzdłuż promienia:
+                    double spread = 1.0;          // 1.0 = bez zmiany, >1 = odsunięcie od środka
+                    relX = centerX + dx * spread;
+                    relY = centerY + dy * spread;
+
+                    // 6) (opcjonalnie) offset per side dalej:
+                    relX += offsets[i].X;
+                    relY += offsets[i].Y;
+
+                    // rysowanie kropki (dotSize stałe)
+                    double dotSize = 8;
+                    var brush = new XSolidBrush(dotColor);
+                    var pen = new XPen(dotColor, 1);
+                    gfx.DrawEllipse(
+                        pen, brush,
+                        relX - dotSize / 2,
+                        relY - dotSize / 2,
+                        dotSize,
+                        dotSize);
+                }
+            }
+
+            // 7) Zapis pliku
+            document.Save(filePath);
+        }
+
+
     }
 }

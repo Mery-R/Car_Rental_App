@@ -24,9 +24,9 @@
         <conv:StatusCarConverter x:Key="StatusCarConverter" />
 
     </UserControl.Resources>
-    
-    
-    
+
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -89,7 +89,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                
+
 
                 <Button x:Name="FiltersButton" Content="Filters" Width="100" Height="30" PreviewMouseLeftButtonUp="FiltersButton_Click" Margin="15,0,0,0">
                     <Button.Style>
@@ -149,8 +149,8 @@
                       IsReadOnly="True"
                       SelectionMode="Single"
                       AutoGenerateColumns="False"
-                      RowBackground="DarkGray"
-                      AlternatingRowBackground="Gray"
+                      RowBackground="#36257E"
+                      AlternatingRowBackground="#2B1A69"
                       HeadersVisibility="Column"
                       GridLinesVisibility="None"
                       BorderThickness="0"
@@ -160,39 +160,42 @@
                     <DataGrid.ColumnHeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="Gray"/>
+                            <Setter Property="Foreground" Value="LightGray"/>
                             <Setter Property="Padding" Value="0,0,0,0"/>
                             <Setter Property="FontFamily" Value="Montserrat"/>
                             <Setter Property="FontSize" Value="18"/>
+                            <Setter Property="FontWeight" Value="SemiBold"/>
                         </Style>
                     </DataGrid.ColumnHeaderStyle>
 
                     <DataGrid.CellStyle>
                         <Style TargetType="DataGridCell">
+                            <Setter Property="Foreground" Value="LightGray"/>
                             <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
                         </Style>
                     </DataGrid.CellStyle>
 
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Image" Width="150">
+                        <DataGridTemplateColumn Header="Image" Width="160">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Image Width="150" Height="100"
                                            Source="{Binding ImagePath}"
                                            Stretch="UniformToFill"
-                                           HorizontalAlignment="Center"
+                                           HorizontalAlignment="Left"
                                            VerticalAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTextColumn Header="Class" Binding="{Binding VehicleClass}" Width="Auto" MinWidth="50" />
-                        <DataGridTextColumn Header="Brand" Binding="{Binding Brand}" Width="Auto" MinWidth="60"/>
-                        <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="Auto" MinWidth="60"/>
+                        <DataGridTextColumn Header="Brand" Binding="{Binding Brand}" Width="Auto" MinWidth="100"/>
+                        <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="Auto" MinWidth="70"/>
                         <DataGridTextColumn Header="Year" Binding="{Binding ProductionYear}" Width="Auto" MinWidth="50"/>
-                        <DataGridTextColumn Header="LicensePlate" Binding="{Binding LicensePlate}" Width="Auto" MinWidth="100"/>
-                        <DataGridTextColumn Header="Fuel Type" Binding="{Binding FuelType, Converter={StaticResource FuelTypeConverter}}" Width="Auto" MinWidth="80"/>
+                        <DataGridTextColumn Header="LicensePlate" Binding="{Binding LicensePlate}" Width="Auto" MinWidth="110"/>
+                        <DataGridTextColumn Header="Fuel Type" Binding="{Binding FuelType, Converter={StaticResource FuelTypeConverter}}" Width="Auto" MinWidth="90"/>
                         <DataGridTextColumn Header="Gearbox" Binding="{Binding Gearbox, Converter={StaticResource GearboxConverter}}" Width="Auto" MinWidth="100"/>
-                        <DataGridTextColumn Header="Color" Binding="{Binding Color}" Width="Auto" MinWidth="70"/>
+                        <DataGridTextColumn Header="Color" Binding="{Binding Color}" Width="Auto" MinWidth="90"/>
                         <DataGridTextColumn Header="Mileage" Binding="{Binding Mileage}" Width="Auto" MinWidth="80"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding StatusCar, Converter={StaticResource StatusCarConverter}}" Width="Auto" MinWidth="60"/>
                     </DataGrid.Columns>
