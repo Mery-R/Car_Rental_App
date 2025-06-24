@@ -116,6 +116,43 @@ namespace Car_Rental.Repositories
             }
         }
 
+        public void UpdateCustomer(CustomerModel customer)
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                var query = @"UPDATE Customer SET 
+                        FirstName = @FirstName,
+                        LastName = @LastName,
+                        Email = @Email,
+                        Phone = @Phone,
+                        PESEL = @PESEL,
+                        DriverLicenseNumber = @DriverLicenseNumber,
+                        DateOfBirth = @DateOfBirth,
+                        Street = @Street,
+                        City = @City,
+                        PostalCode = @PostalCode
+                      WHERE CustomerId = @CustomerId";
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@FirstName", customer.FirstName);
+                    command.Parameters.AddWithValue("@LastName", customer.LastName);
+                    command.Parameters.AddWithValue("@Email", customer.Email);
+                    command.Parameters.AddWithValue("@Phone", customer.Phone);
+                    command.Parameters.AddWithValue("@PESEL", customer.PESEL);
+                    command.Parameters.AddWithValue("@DriverLicenseNumber", customer.DriverLicenseNumber);
+                    command.Parameters.AddWithValue("@DateOfBirth", customer.DateOfBirth);
+                    command.Parameters.AddWithValue("@Street", customer.Street);
+                    command.Parameters.AddWithValue("@City", customer.City);
+                    command.Parameters.AddWithValue("@PostalCode", customer.PostalCode);
+                    command.Parameters.AddWithValue("@CustomerId", customer.CustomerId);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
 
     }
 

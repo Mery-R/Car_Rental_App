@@ -22,6 +22,9 @@
         <DataTemplate DataType="{x:Type viewModel:ShowCarsViewModel}">
             <local:Show_Cars_User_Control/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:PricesViewModel}">
+            <local:Price_List_Control/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:HistoryViewModel}">
             <local:History_Control/>
         </DataTemplate>
@@ -75,6 +78,15 @@
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="Car" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Style="{StaticResource menuButtonText}" Text="Show cars"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton Style="{StaticResource menuButton}"
+                                Tag="{StaticResource color2}"
+                                Command ="{Binding PricesViewCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="Tags" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Style="{StaticResource menuButtonText}" Text="Prices"/>
                             </StackPanel>
                         </RadioButton>
 

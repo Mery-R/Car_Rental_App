@@ -229,3 +229,5 @@ C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Deb
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Add_User_Window.g.cs
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Edit_User_Window.baml
 C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Edit_User_Window.g.cs
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Edit_Customer_Window.baml
+C:\Users\pucad\Desktop\Programowanie obiektowe\Projekt V3\Car_Rental_App\obj\Debug\Views\Edit_Customer_Window.g.cs

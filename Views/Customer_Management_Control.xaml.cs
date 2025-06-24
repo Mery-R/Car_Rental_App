@@ -54,14 +54,26 @@ namespace Car_Rental.Views
         // Edycja istniejącego samochodu
         private void EditCustomerButton_Click(object sender, RoutedEventArgs e)
         {
+            var viewModel = DataContext as CustomerManagementViewModel;
+            var selectedCustomer = CustomerDataGrid.SelectedItem as CustomerModel;
+
+            if (selectedCustomer != null)
+            {
+                var editWindow = new Edit_Customer_Window(selectedCustomer);
+                if (editWindow.ShowDialog() == true)
+                {
+                    viewModel?.LoadCustomers(); // odświeżenie danych po edycji
+                }
+            }
 
         }
 
         private void RemoveCustomerButton_Click(object sender, RoutedEventArgs e)
         {
-            if (CarDataGrid.SelectedItem is CustomerModel selectedCustomer)
-            {
-                var result = MessageBox.Show(
+            if(CustomerDataGrid.SelectedItem is CustomerModel selectedCustomer)
+
+                {
+                    var result = MessageBox.Show(
                     $"Are you sure you want to delete {selectedCustomer.FirstName} {selectedCustomer.LastName}?",
                     "Confirm Delete",
                     MessageBoxButton.YesNo,
