@@ -28,27 +28,69 @@ Car_Rental_App/
 ├── Car_Rental_App.sln  
 ├── Car_Rental_App/  
 │   ├── Models/  
-│   │   ├── UserModel.cs  
 │   │   ├── CarModel.cs  
-│   │   ├── ClientModel.cs  
-│   │   └── RentalHistoryModel.cs  
+│   │   ├── CustomerModel.cs  
+│   │   ├── DamageModel.cs  
+│   │   ├── Enums.cs  
+│   │   ├── ReservationModel.cs  
+│   │   ├── ServiceModel.cs  
+│   │   ├── UserAccountModel.cs  
+│   │   ├── UserModel.cs  
+│   │   └── UserSessionModel.cs  
 │   ├── ViewModels/  
+│   │   ├── AddUserViewModel.cs  
+│   │   ├── Car_List_ViewModel.cs  
+│   │   ├── CustomerManagementViewModel.cs  
+│   │   ├── FleetManagementViewModel.cs  
+│   │   ├── HistoryViewModel.cs  
 │   │   ├── LoginViewModel.cs  
-│   │   ├── CarsViewModel.cs  
-│   │   ├── ClientsViewModel.cs  
-│   │   └── RentalsViewModel.cs  
+│   │   ├── MainViewModel.cs  
+│   │   ├── PricesViewModel.cs  
+│   │   ├── ShowCarsUserViewModel.cs  
+│   │   ├── ShowCarsViewModel.cs  
+│   │   ├── UserManagementViewModel.cs  
+│   │   ├── ViewModelBase.cs  
+│   │   └── ViewModelCommand.cs  
 │   ├── Views/  
-│   │   ├── LoginView.xaml  
-│   │   ├── CarsView.xaml  
-│   │   ├── ClientsView.xaml  
-│   │   └── RentalsView.xaml  
+│   │   ├── Add_Car_Window.xaml  
+│   │   ├── Add_Customer_Window.xaml  
+│   │   ├── Add_User_Window.xaml  
+│   │   ├── Admin_Menu.xaml  
+│   │   ├── Customer_Management_Control.xaml  
+│   │   ├── Edit_Car_Window.xaml  
+│   │   ├── Edit_Customer_Window.xaml  
+│   │   ├── Edit_Reservation_Window.xaml  
+│   │   ├── Edit_User_Window.xaml  
+│   │   ├── Fleet_Management_Control.xaml  
+│   │   ├── History_Control.xaml  
+│   │   ├── Login_Screen.xaml  
+│   │   ├── Price_List_Control.xaml  
+│   │   ├── Rent_Car_Window.xaml  
+│   │   ├── Return_Car_Window.xaml  
+│   │   ├── Service_Car_Window.xaml  
+│   │   ├── Show_Cars_Control.xaml  
+│   │   ├── Show_Cars_User_Control.xaml  
+│   │   ├── User_Management_Control.xaml  
+│   │   └── User_Menu.xaml  
 │   ├── Repositories/  
-│   │   ├── UserRepository.cs  
 │   │   ├── CarRepository.cs  
-│   │   ├── ClientRepository.cs  
-│   │   └── RentalRepository.cs  
-│   ├── Services/  
+│   │   ├── CustomerRepository.cs  
+│   │   ├── DamageRepository.cs  
+│   │   ├── DatabaseInitializer.cs  
+│   │   ├── IUserRepository.cs  
+│   │   ├── RepositoryBase.cs  
+│   │   ├── ReservationRepository.cs  
+│   │   ├── ServiceRepository.cs  
+│   │   └── UserRepository.cs  
+│   ├── Styles/  
+|   |   ├── ButtonStyles.xaml  
+|   |   ├── UIColor.xaml  
 │   ├── Converters/  
+|   |   ├── AccessToRoleConverter.cs  
+|   |   ├── CarDataConverter.cs  
+|   |   ├── EmptyToVisibilityConverter.cs  
+│   ├── CustomControls/  
+|   |   ├── BindablePasswordBox.cs  
 │   └── App.xaml  
 └── README.md (ten plik)  
 
@@ -148,9 +190,9 @@ Poniżej znajduje się szczegółowy przewodnik krok po kroku po głównych funk
 
 ## Autorzy
 
-* Mery-R – główny deweloper
+* Mery-R – deweloper
 * Pucu03 - deweloper
-* 
+* agataskalska - deweloper
 
 ## Licencja
 
